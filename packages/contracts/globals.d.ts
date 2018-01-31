@@ -36,3 +36,5 @@ declare module 'ethereumjs-abi' {
 // Truffle injects the following into the global scope
 declare var artifacts: any;
 declare var contract: any;
+declare var describe: any;
+declare var it: any;

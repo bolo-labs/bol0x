@@ -3,7 +3,7 @@ import chaiAsPromised = require('chai-as-promised');
 import ChaiBigNumber = require('chai-bignumber');
 import * as dirtyChai from 'dirty-chai';
 
-export const chaiSetup = {
+export default {
     configure() {
         chai.config.includeStack = true;
         chai.use(ChaiBigNumber());

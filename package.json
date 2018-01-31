@@ -1,0 +1,13 @@
+{
+	"private": true,
+	"name": "bol0x",
+	"workspaces": ["packages/*"],
+	"scripts": {
+		"lerna:run": "lerna run",
+		"lerna:rebuild": "lerna run clean; lerna run build",
+		"lerna:publish": "yarn install; lerna run clean; lerna run build; lerna publish --registry=https://registry.npmjs.org/"
+	},
+	"devDependencies": {
+		"lerna": "^2.8.0"
+	}
+}

@@ -8,10 +8,10 @@
         "test": "test"
     },
     "scripts": {
-        "build": "cross-env rm -rf ./lib; cross-env copyfiles ./build/**/* ./deploy/solc/solc_bin/* ./deploy/test/fixtures/contracts/**/* ./deploy/test/fixtures/contracts/* ./lib; tsc;",
-        "test": "npm run build; corss-env node ../../node_modules/truffle/build/cli.bundled.js test",
-        "compile:comment": "Yarn workspaces do not link binaries correctly so we need to reference them directly https://github.com/yarnpkg/yarn/issues/3846",
+        "build": "cross-env rm -rf ./lib; cross-env copyfiles ./build/**/* ./deploy/solc/solc_bin/* ./deploy/test/fixtures/contracts/**/* ./deploy/test/fixtures/contracts/* ./lib; cross-env ../../node_modules/typescript/bin/tsc;",
         "compile": "cross-env node ../../node_modules/truffle/build/cli.bundled.js compile",
+        "test": "yarn build && cross-env node ../../node_modules/truffle/build/cli.bundled.js test",
+        "compile:comment": "Yarn workspaces do not link binaries correctly so we need to reference them directly https://github.com/yarnpkg/yarn/issues/3846",
         "clean": "cross-env rm -rf ./lib; cross-env rm -rf ./build",
         "migrate": "cross-env node ../../node_modules/truffle/build/cli.bundled.js migrate",
         "lint": "cross-env tslint --project . 'migrations/**/*.ts' 'test/**/*.ts' 'util/**/*.ts' 'deploy/**/*.ts'",

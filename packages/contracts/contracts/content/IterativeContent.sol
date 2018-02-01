@@ -18,4 +18,11 @@ contract IterativeContent is UpdatableContent {
         super.changeContent(_contentAddress);
         iterations.push(_contentAddress);
     }
+
+    /**
+     * @dev A view function that tells how many total iterations are there
+     */
+    function getTotalIterations() external view returns(uint256) {
+        return iterations.length;
+    }
 }

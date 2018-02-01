@@ -1,13 +1,12 @@
 pragma solidity ^0.4.18;
 
 import './Content.sol';
-import '../utils/Ownable.sol';
 
 /**
  * @title Updatable Content
  * @dev The UpdateableContent contract allows the offchain content address to be updated in case of content change
  */
-contract UpdatableContent is Content, Ownable {
+contract UpdatableContent is Content {
     event ContentChanged(string newContent);
 
     function UpdatableContent(string _contentAddress) Content(_contentAddress) Ownable() public {

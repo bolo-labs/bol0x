@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 
 /**
  * @title Content
- * @dev The content contract keeps track of content address that is published offchain
+ * @dev The Content contract keeps track of content address that is published offchain
  */
 contract Content {
     string public contentAddress;

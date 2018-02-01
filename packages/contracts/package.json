@@ -8,12 +8,12 @@
         "test": "test"
     },
     "scripts": {
-        "build": "rm -rf ./lib; copyfiles ./build/**/* ./deploy/solc/solc_bin/* ./deploy/test/fixtures/contracts/**/* ./deploy/test/fixtures/contracts/* ./lib; tsc;",
-        "compile": "truffle compile",
-        "test": "yarn build ; truffle test ;",
+        "build": "cross-env rm -rf ./lib && cross-env copyfiles ./build/**/* ./lib && tsc",
+        "compile": "cross-env rm -rf ./build && ./node_modules/.bin/truffle compile",
+        "test": "yarn compile && yarn build && ./node_modules/.bin/truffle test",
         "compile:comment": "Yarn workspaces do not link binaries correctly so we need to reference them directly https://github.com/yarnpkg/yarn/issues/3846",
-        "clean": "cross-env rm -rf ./lib; cross-env rm -rf ./build",
-        "migrate": "cross-env truffle migrate",
+        "clean": "cross-env rm -rf ./lib && cross-env rm -rf ./build",
+        "migrate": "./node_modules/.bin/truffle migrate",
         "lint": "cross-env tslint --project . 'migrations/**/*.ts' 'test/**/*.ts' 'util/**/*.ts' 'deploy/**/*.ts'",
         "test:circleci": "yarn test"
     },
@@ -60,6 +60,7 @@
         "isomorphic-fetch": "^2.2.1",
         "lodash": "^4.17.4",
         "request": "^2.81.0",
+        "truffle-contract": "^3.0.3",
         "web3": "^0.20.0",
         "web3-eth-abi": "^1.0.0-beta.24"
     }

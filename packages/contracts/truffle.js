@@ -6,6 +6,7 @@ module.exports = {
           host: "localhost",
           port: 7545,
           network_id: "*", // Match any network id
+          gas: 4612388,
       },
       kovan: {
           host: "localhost",

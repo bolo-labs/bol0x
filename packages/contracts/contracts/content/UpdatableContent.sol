@@ -7,9 +7,13 @@ import './Content.sol';
  * @dev The UpdateableContent contract allows the offchain content address to be updated in case of content change
  */
 contract UpdatableContent is Content {
+
+    uint256 public contentUpdateTime;
+
     event ContentChanged(string newContent);
 
     function UpdatableContent(string _contentAddress) Content(_contentAddress) Ownable() public {
+        contentUpdateTime = now;
     }
 
     /**
@@ -21,5 +25,6 @@ contract UpdatableContent is Content {
 
         ContentChanged(_contentAddress);
         contentAddress = _contentAddress;
+        contentUpdateTime = now;
     }
 }

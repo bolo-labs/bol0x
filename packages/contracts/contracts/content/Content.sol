@@ -1,6 +1,7 @@
 pragma solidity ^0.4.18;
 
 import '../utils/Ownable.sol';
+import '../utils/StringUtils.sol';
 
 /**
  * @title Content
@@ -13,17 +14,13 @@ contract Content is Ownable {
      * @dev The Content constructor sets the address of the content
      * @param _contentAddress Non empty string that represents the offchain content address
      */
-    function Content(string _contentAddress) Ownable() public {
-        require(isNotEmptyString(_contentAddress));
+    function Content(
+        string _contentAddress)
+        Ownable()
+        public
+    {
+        require(StringUtils.isNotEmpty(_contentAddress));
 
         contentAddress = _contentAddress;
-    }
-
-    /**
-     * @dev Checks if the passed in string is not empty
-     */
-    function isNotEmptyString(string memory _str) pure internal returns (bool) {
-        bytes memory strBytes = bytes(_str);
-        return strBytes.length > 0;
     }
 }

@@ -22,8 +22,8 @@ contract Content is Ownable {
     /**
      * @dev Checks if the passed in string is not empty
      */
-    function isNotEmptyString(string memory str) pure internal returns (bool) {
-        bytes memory strBytes = bytes(str);
+    function isNotEmptyString(string memory _str) pure internal returns (bool) {
+        bytes memory strBytes = bytes(_str);
         return strBytes.length > 0;
     }
 }

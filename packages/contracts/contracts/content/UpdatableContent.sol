@@ -1,6 +1,7 @@
 pragma solidity ^0.4.18;
 
 import './Content.sol';
+import '../utils/StringUtils.sol';
 
 /**
  * @title Updatable Content
@@ -12,7 +13,12 @@ contract UpdatableContent is Content {
 
     event ContentChanged(string newContent);
 
-    function UpdatableContent(string _contentAddress) Content(_contentAddress) Ownable() public {
+    function UpdatableContent(
+        string _contentAddress)
+        Content(_contentAddress)
+        Ownable()
+        public
+    {
         contentUpdateTime = now;
     }
 
@@ -20,8 +26,12 @@ contract UpdatableContent is Content {
      * @dev It changes the offchain content address
      * @param _contentAddress A non-empty string that represents offchain content address
      */
-    function changeContent(string _contentAddress) onlyOwner public {
-        require(isNotEmptyString(_contentAddress));
+    function changeContent(
+        string _contentAddress)
+        onlyOwner
+        public
+    {
+        require(StringUtils.isNotEmpty(_contentAddress));
 
         ContentChanged(_contentAddress);
         contentAddress = _contentAddress;

@@ -14,8 +14,6 @@ contract ContentOwnerEntity is Entity {
 
     using SafeMath for uint256;
 
-    uint16 constant public EXTERNAL_QUERY_GAS_LIMIT = 4999;    // Changes to state require at least 5000 gas
-
     struct OwnedContent {
         address content;
         bool deleted;
@@ -31,12 +29,6 @@ contract ContentOwnerEntity is Entity {
         uint256 index
     );
 
-    event ContentTransferred(
-        address indexed to,
-        address indexed content,
-        uint256 index
-    );
-
     modifier nonEmptyContent(address content) {
         require(content != address(0));
         _;
@@ -47,7 +39,12 @@ contract ContentOwnerEntity is Entity {
     mapping(address => uint256) private contentIndex_;
     uint256 private totalUnDeletedContent_;
 
-    function ContentOwnerEntity() Entity() public {
+    function ContentOwnerEntity(
+        string _name)
+        Entity(_name)
+        public
+    {
+        
     }
 
     /**
@@ -97,33 +94,6 @@ contract ContentOwnerEntity is Entity {
         totalUnDeletedContent_ = totalUnDeletedContent_.sub(1);
 
         ContentDeleted(_content, indexOfContent);
-    }
-
-    /**
-     * @dev Transfer the ownership of the content to some other entity
-     * @param _content The address of the content contract that needs to be transferred
-     * @param _to The entity that it needs to transfer to
-     */
-    function transferContentOwnership(
-        address _content,
-        address _to)
-        onlyOwner
-        nonEmptyContent(_content)
-        public
-    {
-        uint256 indexAhead = contentIndex_[_content];
-        require(indexAhead != 0);
-
-        deleteContent(_content);
-
-        // TODO-SECURITY: Potential of reentry issue, though would it be a problem as this function
-        // is called by owner and if they have mallicious intent, they will only effect themselves.
-        // Though it can be a problem if entity is an Organization and publishing content on behalf
-        // of its other users in which case a malicious user can mess up the content owned by Organization.
-        bool executed = _content.delegatecall(bytes4(keccak256("transferOwnership(address)")));
-
-        require(executed);
-        ContentTransferred(_to, _content, indexAhead.sub(1));
     }
 
     /**

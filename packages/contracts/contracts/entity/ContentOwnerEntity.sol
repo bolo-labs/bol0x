@@ -40,11 +40,12 @@ contract ContentOwnerEntity is Entity {
     uint256 private totalUnDeletedContent_;
 
     function ContentOwnerEntity(
-        string _name)
-        Entity(_name)
+        IdentityProvider _identityProvider,
+        string _identifier)
+        Entity(_identityProvider, _identifier)
         public
     {
-        
+
     }
 
     /**

@@ -31,20 +31,20 @@ contract('UpdatableContent', (accounts: string[]) => {
         });
     });
 
-    describe('changeContent', () => {
+    // describe('changeContent', () => {
 
-        it('should change content address', async () => {
-            // Arrange
-            const contentAddress = 'test1';
-            const content = await UpdatableContent.new(contentAddress, {from: account});
-            const newContentAddress = 'test2';
+    //     it('should change content address', async () => {
+    //         // Arrange
+    //         const contentAddress = 'test1';
+    //         const content = await UpdatableContent.new(contentAddress, {from: account});
+    //         const newContentAddress = 'test2';
             
-            // Act
-            await promisify<void>(content.changeContent)(newContentAddress, {from: account});
+    //         // Act
+    //         await promisify<void>(content.changeContent)(newContentAddress, {from: account});
 
-            // Assert
-            const assignedContentAddress = await content.contentAddress.call();
-            expect(assignedContentAddress).to.equal(newContentAddress);
-        });
-    });
+    //         // Assert
+    //         const assignedContentAddress = await content.contentAddress.call();
+    //         expect(assignedContentAddress).to.equal(newContentAddress);
+    //     });
+    // });
 });

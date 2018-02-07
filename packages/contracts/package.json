@@ -10,7 +10,8 @@
     "scripts": {
         "build": "cross-env rm -rf ./lib && cross-env copyfiles ./build/**/* ./lib && tsc",
         "compile": "cross-env rm -rf ./build && ./node_modules/.bin/truffle compile",
-        "test": "yarn compile && yarn build && ./node_modules/.bin/truffle test",
+        "compile:all": "yarn compile && yarn build",
+        "test": "yarn build && cross-env copyfiles ./contracts/**/* ./lib && cross-env copyfiles ./test/sol/**/* ./lib && ./node_modules/.bin/truffle test",
         "compile:comment": "Yarn workspaces do not link binaries correctly so we need to reference them directly https://github.com/yarnpkg/yarn/issues/3846",
         "clean": "cross-env rm -rf ./lib && cross-env rm -rf ./build",
         "migrate": "./node_modules/.bin/truffle migrate",

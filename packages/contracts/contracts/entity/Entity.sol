@@ -15,11 +15,13 @@ contract Entity is Ownable {
      * have a known identity.
      */
     enum IdentityProvider {
+        NONE,
         ETH_ADDR,
+        EMAIL,
         KEY_BASE,
         NAME,
-        OTHER,
-        TWITTER_HANDLE
+        TWITTER_HANDLE,
+        OTHER
     }
 
     /**
@@ -27,6 +29,9 @@ contract Entity is Ownable {
      */
     string public identifier;
 
+    /**
+     * @dev The identity provider associated with the identifier.
+     */
     IdentityProvider public identityProvider;
 
     function Entity(
@@ -35,9 +40,17 @@ contract Entity is Ownable {
         Ownable()
         public
     {
-        require(StringUtils.isNotEmpty(_identifier));
+        if (_identityProvider == IdentityProvider.NONE) {
+            // If the identity provider is none then set the
+            // identifier to empty string
+            identifier = "";
+        } else {
+            // If there is an identity provider then make sure
+            // some identifier is passed in
+            require(StringUtils.isNotEmpty(_identifier));
+            identifier = _identifier;
+        }
 
         identityProvider = _identityProvider;
-        identifier = _identifier;
     }
 }

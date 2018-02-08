@@ -9,6 +9,11 @@ contract UniqueIdentifierEntityDirectory is EntityDirectory {
 
     mapping(bytes32 => uint256) public uniqueIdentifier;
 
+    /**
+     * @dev Add an entity to the directory based on its identifier.
+     * No two entites with the same identifier can be added.
+     * param _entity The entity to add.
+     */
     function addEntity(
         address _entity)
         onlyOwnerOrEntityOwner(_entity)
@@ -22,6 +27,10 @@ contract UniqueIdentifierEntityDirectory is EntityDirectory {
         uniqueIdentifier[identifier] = entities.length;
     }
 
+    /**
+     * @dev Remove an existing entity from the directory.
+     * param _entity The entity to remove.
+     */
     function removeEntity(
         address _entity)
         onlyOwnerOrEntityOwner(_entity)
@@ -34,7 +43,6 @@ contract UniqueIdentifierEntityDirectory is EntityDirectory {
 
         uniqueIdentifier[identifier] = 0;
         removeEntityFromList(
-            entities[identifierIndexAhead - 1],
             identifierIndexAhead - 1);
     }
 }

@@ -28,6 +28,9 @@ library StringUtils {
         return strBytes.length == 0;
     }
 
+    /**
+     * @dev Gets the hash of the string.
+     */
     function getHash(
         string storage _str)
         pure
@@ -37,6 +40,9 @@ library StringUtils {
         return keccak256(_str);
     }
 
+    /**
+     * @dev Gets the hash of an empty string.
+     */
     function getEmptyStringHash()
         pure
         internal

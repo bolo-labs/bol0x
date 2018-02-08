@@ -51,12 +51,20 @@ contract EntityDirectory is Entity {
     {
         for (uint i = 0; i < entities.length; i++) {
             if (entities[i] == _entity) {
-                entities[i] = entities[entities.length - 1];
-                entities.length -= 1;
-
-                EntityRemoved(_entity);
+                removeEntityFromList(_entity, i);
                 break;
             }
         }
+    }
+
+    function removeEntityFromList(
+        address _entity,
+        uint _index)
+        internal
+    {
+        entities[_index] = entities[entities.length - 1];
+        entities.length -= 1;
+
+        EntityRemoved(_entity);
     }
 }

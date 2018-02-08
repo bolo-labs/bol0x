@@ -1,0 +1,30 @@
+{{!--
+Copyright 2017 ZeroEx Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+--}}
+public {{this.name}} = {
+    async callAsync(
+    {{> typed_params inputs=inputs}}
+        defaultBlock?: Web3.BlockParam,
+    ): Promise<{{> return_type outputs=outputs}}> {
+        const self = this as {{contractName}}Contract;
+        const result = await promisify<{{> return_type outputs=outputs}}>(
+            self._web3ContractInstance.{{this.name}}.call,
+            self._web3ContractInstance,
+        )(
+            {{> params inputs=inputs}}
+        );
+        return result;
+    },
+};

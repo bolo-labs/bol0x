@@ -1,0 +1,640 @@
+{
+  "contractName": "IterativeContent",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "contentAddress",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTotalIterations",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "iterations",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_contentAddress",
+          "type": "string"
+        }
+      ],
+      "name": "changeContent",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "contentUpdateTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "newContent",
+          "type": "string"
+        }
+      ],
+      "name": "ContentChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.18;\r\n\r\nimport './UpdatableContent.sol';\r\n\r\n/**\r\n * @title Iterative Content\r\n * @dev The IterativeContent along with allowing you to change offchain content address also keeps track of older content addresses\r\n */\r\ncontract IterativeContent is UpdatableContent {\r\n\r\n    string[] public iterations;\r\n\r\n    /**\r\n     * @dev It changes the offchain content address\r\n     * @param _contentAddress A non-empty string that represents offchain content address\r\n     */\r\n    function changeContent(string _contentAddress) onlyOwner public {\r\n        super.changeContent(_contentAddress);\r\n        iterations.push(_contentAddress);\r\n    }\r\n\r\n    /**\r\n     * @dev A view function that tells how many total iterations are there\r\n     */\r\n    function getTotalIterations() external view returns(uint256) {\r\n        return iterations.length;\r\n    }\r\n}",
+  "sourcePath": "H:\\Projects\\my-github\\bol0x\\packages\\contracts\\contracts\\content\\IterativeContent.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/H/Projects/my-github/bol0x/packages/contracts/contracts/content/IterativeContent.sol",
+      "exportedSymbols": {
+        "IterativeContent": [
+          122
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".18"
+          ]
+        },
+        "id": 86,
+        "name": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 178,
+          "absolutePath": "/H/Projects/my-github/bol0x/packages/contracts/contracts/content/UpdatableContent.sol",
+          "file": "./UpdatableContent.sol",
+          "scope": 123,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 87,
+        "name": "ImportDirective",
+        "src": "28:32:2"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            84,
+            177,
+            775
+          ],
+          "contractKind": "contract",
+          "documentation": "@title Iterative Content\r\n@dev The IterativeContent along with allowing you to change offchain content address also keeps track of older content addresses\r",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            122,
+            177,
+            84,
+            775
+          ],
+          "name": "IterativeContent",
+          "scope": 123
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "UpdatableContent",
+                  "referencedDeclaration": 177,
+                  "type": "contract UpdatableContent"
+                },
+                "id": 88,
+                "name": "UserDefinedTypeName",
+                "src": "265:16:2"
+              }
+            ],
+            "id": 89,
+            "name": "InheritanceSpecifier",
+            "src": "265:16:2"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "iterations",
+              "scope": 122,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "string storage ref[] storage ref",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "length": null,
+                  "type": "string storage ref[] storage pointer"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 90,
+                    "name": "ElementaryTypeName",
+                    "src": "291:6:2"
+                  }
+                ],
+                "id": 91,
+                "name": "ArrayTypeName",
+                "src": "291:8:2"
+              }
+            ],
+            "id": 92,
+            "name": "VariableDeclaration",
+            "src": "291:26:2"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "name": "changeContent",
+              "payable": false,
+              "scope": 122,
+              "stateMutability": "nonpayable",
+              "superFunction": 176,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_contentAddress",
+                      "scope": 112,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 93,
+                        "name": "ElementaryTypeName",
+                        "src": "511:6:2"
+                      }
+                    ],
+                    "id": 94,
+                    "name": "VariableDeclaration",
+                    "src": "511:22:2"
+                  }
+                ],
+                "id": 95,
+                "name": "ParameterList",
+                "src": "510:24:2"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 98,
+                "name": "ParameterList",
+                "src": "552:0:2"
+              },
+              {
+                "attributes": {
+                  "arguments": [
+                    null
+                  ]
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 749,
+                      "type": "modifier ()",
+                      "value": "onlyOwner"
+                    },
+                    "id": 96,
+                    "name": "Identifier",
+                    "src": "535:9:2"
+                  }
+                ],
+                "id": 97,
+                "name": "ModifierInvocation",
+                "src": "535:9:2"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_string_memory_ptr",
+                                  "typeString": "string memory"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "changeContent",
+                              "referencedDeclaration": 176,
+                              "type": "function (string memory)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 970,
+                                  "type": "contract super IterativeContent",
+                                  "value": "super"
+                                },
+                                "id": 99,
+                                "name": "Identifier",
+                                "src": "563:5:2"
+                              }
+                            ],
+                            "id": 101,
+                            "name": "MemberAccess",
+                            "src": "563:19:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 94,
+                              "type": "string memory",
+                              "value": "_contentAddress"
+                            },
+                            "id": 102,
+                            "name": "Identifier",
+                            "src": "583:15:2"
+                          }
+                        ],
+                        "id": 103,
+                        "name": "FunctionCall",
+                        "src": "563:36:2"
+                      }
+                    ],
+                    "id": 104,
+                    "name": "ExpressionStatement",
+                    "src": "563:36:2"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "uint256",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_string_memory_ptr",
+                                  "typeString": "string memory"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "push",
+                              "referencedDeclaration": null,
+                              "type": "function (string storage ref) returns (uint256)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 92,
+                                  "type": "string storage ref[] storage ref",
+                                  "value": "iterations"
+                                },
+                                "id": 105,
+                                "name": "Identifier",
+                                "src": "610:10:2"
+                              }
+                            ],
+                            "id": 107,
+                            "name": "MemberAccess",
+                            "src": "610:15:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 94,
+                              "type": "string memory",
+                              "value": "_contentAddress"
+                            },
+                            "id": 108,
+                            "name": "Identifier",
+                            "src": "626:15:2"
+                          }
+                        ],
+                        "id": 109,
+                        "name": "FunctionCall",
+                        "src": "610:32:2"
+                      }
+                    ],
+                    "id": 110,
+                    "name": "ExpressionStatement",
+                    "src": "610:32:2"
+                  }
+                ],
+                "id": 111,
+                "name": "Block",
+                "src": "552:98:2"
+              }
+            ],
+            "id": 112,
+            "name": "FunctionDefinition",
+            "src": "488:162:2"
+          },
+          {
+            "attributes": {
+              "constant": true,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "getTotalIterations",
+              "payable": false,
+              "scope": 122,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 113,
+                "name": "ParameterList",
+                "src": "779:2:2"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 121,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 114,
+                        "name": "ElementaryTypeName",
+                        "src": "804:7:2"
+                      }
+                    ],
+                    "id": 115,
+                    "name": "VariableDeclaration",
+                    "src": "804:7:2"
+                  }
+                ],
+                "id": 116,
+                "name": "ParameterList",
+                "src": "803:9:2"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 116
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "member_name": "length",
+                          "referencedDeclaration": null,
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 92,
+                              "type": "string storage ref[] storage ref",
+                              "value": "iterations"
+                            },
+                            "id": 117,
+                            "name": "Identifier",
+                            "src": "831:10:2"
+                          }
+                        ],
+                        "id": 118,
+                        "name": "MemberAccess",
+                        "src": "831:17:2"
+                      }
+                    ],
+                    "id": 119,
+                    "name": "Return",
+                    "src": "824:24:2"
+                  }
+                ],
+                "id": 120,
+                "name": "Block",
+                "src": "813:43:2"
+              }
+            ],
+            "id": 121,
+            "name": "FunctionDefinition",
+            "src": "752:104:2"
+          }
+        ],
+        "id": 122,
+        "name": "ContractDefinition",
+        "src": "236:623:2"
+      }
+    ],
+    "id": 123,
+    "name": "SourceUnit",
+    "src": "0:859:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-02-08T08:47:46.066Z"
+}

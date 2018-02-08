@@ -12,7 +12,6 @@ contract TestEntity {
             Entity.IdentityProvider.NONE,
             "");
 
-
         // Assert
         Assert.equal(entity.owner(), this, "The owner should be the same as the contract address");
     }

@@ -9,6 +9,7 @@ import '../utils/StringUtils.sol';
  * @dev The entity that represents a person or an organization
  */
 contract Entity is Ownable {
+    using StringUtils for string;
 
     /**
      * @dev The off chain identity provider if the entity want to
@@ -47,10 +48,19 @@ contract Entity is Ownable {
         } else {
             // If there is an identity provider then make sure
             // some identifier is passed in
-            require(StringUtils.isNotEmpty(_identifier));
+            require(_identifier.isNotEmpty());
             identifier = _identifier;
         }
 
         identityProvider = _identityProvider;
     }
+
+    function getIdentifierHash()
+        view
+        public
+        returns (bytes32)
+    {
+        return identifier.getHash();
+    }
+        
 }

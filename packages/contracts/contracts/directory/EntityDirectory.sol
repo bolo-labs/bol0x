@@ -35,6 +35,10 @@ contract EntityDirectory is Entity {
     {
     }
 
+    /**
+     * @dev Add an entity to the directory.
+     * param _entity The entity to add.
+     */
     function addEntity(
         address _entity)
         onlyOwnerOrEntityOwner(_entity)
@@ -44,6 +48,10 @@ contract EntityDirectory is Entity {
         EntityAdded(_entity);
     }
 
+    /**
+     * @dev Remove an existing entity from the directory.
+     * param _entity The entity to remove.
+     */
     function removeEntity(
         address _entity)
         onlyOwnerOrEntityOwner(_entity)
@@ -51,20 +59,24 @@ contract EntityDirectory is Entity {
     {
         for (uint i = 0; i < entities.length; i++) {
             if (entities[i] == _entity) {
-                removeEntityFromList(_entity, i);
+                removeEntityFromList(i);
                 break;
             }
         }
     }
 
+    /**
+     * @dev Remove an existing entity from the list at a particular index.
+     * param _index The index of the entity to remove from the list.
+     */
     function removeEntityFromList(
-        address _entity,
         uint _index)
         internal
     {
+        address entity = entities[_index];
         entities[_index] = entities[entities.length - 1];
         entities.length -= 1;
 
-        EntityRemoved(_entity);
+        EntityRemoved(entity);
     }
 }

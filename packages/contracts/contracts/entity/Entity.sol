@@ -55,6 +55,9 @@ contract Entity is Ownable {
         identityProvider = _identityProvider;
     }
 
+    /**
+     * @dev Gets the hash of the identifier which can be used as key.
+     */
     function getIdentifierHash()
         view
         public

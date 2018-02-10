@@ -44,7 +44,7 @@ const CONTRACT_NAME_TO_NOT_FOUND_ERROR: {
     UniqueIdentifierEntityDirectory: BoloExError.UniqueIdentifierEntityDirectoryContractDoesNotExist
 };
 
-export class ContractWrapper {
+export default abstract class ContractWrapper {
     protected _web3Wrapper: Web3Wrapper;
     protected _networkId: number;
     private _abiDecoder?: AbiDecoder;

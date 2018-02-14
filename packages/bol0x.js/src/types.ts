@@ -14,14 +14,17 @@ import { IterativeContentContractEventArgs, IterativeContentEvents } from './con
 import { UniqueIdentifierEntityDirectoryContractEventArgs, UniqueIdentifierEntityDirectoryEvents } from './contract_wrappers/generated/unique_identifier_entity_directory';
 import { UpdatableContentContractEventArgs, UpdatableContentEvents } from './contract_wrappers/generated/updatable_content';
 
-export type ArtifactContractName = 
+export type ArtifactContentContractName =
       'Content'
+    | 'IterativeContent'
+    | 'UpdatableContent';
+
+export type ArtifactContractName = 
+       ArtifactContentContractName
     | 'ContentOwnerEntity'
     | 'Entity'
     | 'EntityDirectory'
-    | 'IterativeContent'
-    | 'UniqueIdentifierEntityDirectory'
-    | 'UpdatableContent';
+    | 'UniqueIdentifierEntityDirectory';
 
 export interface Artifact {
     contractName: ArtifactContractName;
@@ -108,4 +111,11 @@ export interface MethodOpts {
 export interface TransactionOpts {
     gasPrice?: BigNumber;
     gasLimit?: number;
+}
+
+export type Web3Provider = Web3.Provider;
+
+export interface BoloExConfig {
+    networkId: number;
+    gasPrice?: BigNumber;
 }

@@ -7,7 +7,7 @@ import * as UniqueIdentifierEntityDirectoryArtifact from './artifacts/UniqueIden
 import * as UpdatableContentArtifact from './artifacts/UpdatableContent.json';
 import { Artifact } from './types';
 
-export const artifacts = {
+export default {
     Content: {
         ContentArtifact: (ContentArtifact as any) as Artifact,
         UpdatableContentArtifact: (UpdatableContentArtifact as any) as Artifact,

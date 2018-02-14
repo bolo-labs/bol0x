@@ -1,4 +1,5 @@
 import * as Web3 from 'web3';
+import { BigNumber } from '@0xproject/utils';
 import {
     BlockParam,
     BlockParamLiteral,
@@ -90,3 +91,21 @@ export type ContractEventArgs =
     | UniqueIdentifierEntityDirectoryContractEventArgs
     | UpdatableContentContractEventArgs
 
+/*
+ * defaultBlock: The block up to which to query the blockchain state. Setting this to a historical block number
+ * let's the user query the blockchain's state at an arbitrary point in time. In order for this to work, the
+ * backing  Ethereum node must keep the entire historical state of the chain (e.g setting `--pruning=archive`
+ * flag when  running Parity).
+ */
+export interface MethodOpts {
+    defaultBlock?: Web3.BlockParam;
+}
+
+/*
+ * gasPrice: Gas price in Wei to use for a transaction
+ * gasLimit: The amount of gas to send with a transaction
+ */
+export interface TransactionOpts {
+    gasPrice?: BigNumber;
+    gasLimit?: number;
+}

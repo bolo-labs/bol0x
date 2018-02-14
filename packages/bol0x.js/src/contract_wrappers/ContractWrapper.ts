@@ -136,6 +136,14 @@ export default abstract class ContractWrapper {
         } else {
             contractAddress = addressIfExists;
         }
+
+        return this._instantiateContractForAddress(artifact, contractAddress);
+    }
+
+    protected async _instantiateContractForAddress(
+        artifact: Artifact,
+        contractAddress: string
+    ): Promise<Web3.ContractInstance> {
         const doesContractExist = await this._web3Wrapper.doesContractExistAtAddressAsync(contractAddress);
         if (!doesContractExist) {
             throw new Error(CONTRACT_NAME_TO_NOT_FOUND_ERROR[artifact.contractName]);
@@ -143,6 +151,7 @@ export default abstract class ContractWrapper {
         const contractInstance = this._web3Wrapper.getContractInstance(artifact.abi, contractAddress);
         return contractInstance;
     }
+
     protected _getContractAddress(artifact: Artifact, addressIfExists?: string): string {
         if (_.isUndefined(addressIfExists)) {
             const contractAddress = artifact.networks[this._networkId].address;

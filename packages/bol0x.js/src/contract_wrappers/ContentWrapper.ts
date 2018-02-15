@@ -8,7 +8,12 @@ import { MethodOpts, TransactionOpts } from '../types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
 export interface IContentWrapper extends IOwnerWrapper {
-    getContentAddress(methodOpts?: MethodOpts): Promise<string>;
+    /**
+     * Retrieve the content address.
+     * @param methodOpts Optional argument this method accepts.
+     * @return The content address stored in the contract.
+     */
+    getContentAddressAsync(methodOpts?: MethodOpts): Promise<string>;
 }
 
 export default class ContentWrapper extends ContractWrapper implements IContentWrapper {
@@ -25,24 +30,16 @@ export default class ContentWrapper extends ContractWrapper implements IContentW
         this._contractAddress = contractAddress;
     }
 
-    /**
-     * Retrieve the owner of the contract.
-     * @param methodOpts Optional argument this method accepts.
-     * @returns The ETH address of the owner of the contract.
-     */
-    public async getOwner(methodOpts?: MethodOpts): Promise<string> {
+    /** @inheritDoc */
+    public async getOwnerAsync(methodOpts?: MethodOpts): Promise<string> {
         const contract = await this._getContractAsync();
 
         const defaultBlock = _.isUndefined(methodOpts) ? undefined : methodOpts.defaultBlock;
         return await contract.owner.callAsync(defaultBlock);
     }
 
-    /**
-     * Transfer the ownership of the contract to a new owner.
-     * @param newOwnerAddress The ETH address of the new owner.
-     * @param transactionOpts Optional argument this method accepts.
-     */
-    public async transferOwnership(
+    /** @inheritDoc */
+    public async transferOwnershipAsync(
         newOwnerAddress: string,
         transactionOpts: TransactionOpts = {}
     ): Promise<void> {
@@ -59,12 +56,8 @@ export default class ContentWrapper extends ContractWrapper implements IContentW
         );
     }
 
-    /**
-     * Retrieve the content address.
-     * @param methodOpts Optional argument this method accepts.
-     * @return The content address stored in the contract.
-     */
-    public async getContentAddress(methodOpts?: MethodOpts): Promise<string> {
+    /** @inheritDoc */
+    public async getContentAddressAsync(methodOpts?: MethodOpts): Promise<string> {
         const contract = await this._getContractAsync();
 
         const defaultBlock = _.isUndefined(methodOpts) ? undefined : methodOpts.defaultBlock;

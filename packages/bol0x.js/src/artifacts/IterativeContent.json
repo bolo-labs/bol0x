@@ -17,20 +17,6 @@
     },
     {
       "constant": true,
-      "inputs": [],
-      "name": "getTotalIterations",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
       "inputs": [
         {
           "name": "",
@@ -46,20 +32,6 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_contentAddress",
-          "type": "string"
-        }
-      ],
-      "name": "changeContent",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -132,6 +104,34 @@
       ],
       "name": "OwnershipTransferred",
       "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_contentAddress",
+          "type": "string"
+        }
+      ],
+      "name": "changeContent",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTotalIterations",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
     }
   ],
   "bytecode": "0x",
@@ -183,7 +183,7 @@
           "contractDependencies": [
             84,
             177,
-            775
+            784
           ],
           "contractKind": "contract",
           "documentation": "@title Iterative Content\r\n@dev The IterativeContent along with allowing you to change offchain content address also keeps track of older content addresses\r",
@@ -192,7 +192,7 @@
             122,
             177,
             84,
-            775
+            784
           ],
           "name": "IterativeContent",
           "scope": 123
@@ -328,7 +328,7 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 749,
+                      "referencedDeclaration": 758,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
@@ -383,7 +383,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 970,
+                                  "referencedDeclaration": 979,
                                   "type": "contract super IterativeContent",
                                   "value": "super"
                                 },
@@ -632,9 +632,9 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+    "version": "0.4.19+commit.c4cbbb05.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-02-08T08:47:46.066Z"
+  "updatedAt": "2018-02-15T07:02:26.141Z"
 }

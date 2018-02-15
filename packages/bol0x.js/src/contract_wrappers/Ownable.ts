@@ -3,8 +3,19 @@ import { MethodOpts, TransactionOpts } from '../types';
 // import { Content } from './generated/content';
 
 export interface IOwnerWrapper {
-    getOwner(methodOpts?: MethodOpts): Promise<string>;
-    transferOwnership(newOwnerAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
+    /**
+     * Retrieve the owner of the contract.
+     * @param methodOpts Optional argument this method accepts.
+     * @returns The ETH address of the owner of the contract.
+     */
+    getOwnerAsync(methodOpts?: MethodOpts): Promise<string>;
+
+    /**
+     * Transfer the ownership of the contract to a new owner.
+     * @param newOwnerAddress The ETH address of the new owner.
+     * @param transactionOpts Optional argument this method accepts.
+     */
+    transferOwnershipAsync(newOwnerAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
 }
 
 // export type Constructor<T extends OwnableContractWrapper<any>> = new(...args: any[]) => T;

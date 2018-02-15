@@ -7,8 +7,20 @@ import { UpdatableContentContract } from './generated/updatable_content';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
 export interface IUpdatableContentWrapper extends IContentWrapper {
-    getContentUpdateTime(methodOpts?: MethodOpts): Promise<Date>;
-    changeContent(newContentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
+    /**
+     * Retrieves the time when the content was last updated.
+     * @param methodOpts Optional arguments the method accepts.
+     * @returns The time when the content was last updated.
+     */
+    getContentUpdateTimeAsync(methodOpts?: MethodOpts): Promise<Date>;
+
+    /**
+     * Changes the content address of the contract. This allows the user to refer to the same contract
+     * and still be able to change the underlying content address.
+     * @param newContentAddress The new content address which should be changed to in the contract.
+     * @param transactionOpts Optional arguments the method accepts.
+     */
+    changeContentAsync(newContentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
 }
 
 export default class UpdatableContentWrapper extends ContentWrapper implements IUpdatableContentWrapper {
@@ -19,12 +31,8 @@ export default class UpdatableContentWrapper extends ContentWrapper implements I
         super(web3Wrapper, networkId, contractAddress);
     }
   
-    /**
-     * Retrieves the time when the content was last updated.
-     * @param methodOpts Optional arguments the method accepts.
-     * @returns The time when the content was last updated.
-     */
-    public async getContentUpdateTime(methodOpts?: MethodOpts): Promise<Date> {
+    /** @inheritDoc */
+    public async getContentUpdateTimeAsync(methodOpts?: MethodOpts): Promise<Date> {
         const contract = await this._getContractAsync();
 
         const defaultBlock = _.isUndefined(methodOpts) ? undefined : methodOpts.defaultBlock;
@@ -34,13 +42,8 @@ export default class UpdatableContentWrapper extends ContentWrapper implements I
         return new Date(result.toNumber());
     }
 
-    /**
-     * Changes the content address of the contract. This allows the user to refer to the same contract
-     * and still be able to change the underlying content address.
-     * @param newContentAddress The new content address which should be changed to in the contract.
-     * @param transactionOpts Optional arguments the method accepts.
-     */
-    public async changeContent(
+    /** @inheritDoc */
+    public async changeContentAsync(
         newContentAddress: string,
         transactionOpts: TransactionOpts = {}
     ): Promise<void> {

@@ -15,16 +15,22 @@ import { UniqueIdentifierEntityDirectoryContractEventArgs, UniqueIdentifierEntit
 import { UpdatableContentContractEventArgs, UpdatableContentEvents } from './contract_wrappers/generated/updatable_content';
 
 export type ArtifactContentContractName =
-      'Content'
+    | 'Content'
     | 'IterativeContent'
     | 'UpdatableContent';
 
-export type ArtifactContractName = 
-       ArtifactContentContractName
+export type ArtifactEntityContractName =
     | 'ContentOwnerEntity'
-    | 'Entity'
+    | 'Entity';
+
+export type ArtifactDirectoryContractName =
     | 'EntityDirectory'
     | 'UniqueIdentifierEntityDirectory';
+
+export type ArtifactContractName = 
+    | ArtifactContentContractName
+    | ArtifactEntityContractName
+    | ArtifactDirectoryContractName;
 
 export interface Artifact {
     contractName: ArtifactContractName;
@@ -77,7 +83,7 @@ export interface BlockRange {
 }
 
 export type ContractEvents =
-      ContentEvents
+    | ContentEvents
     | ContentOwnerEntityEvents
     | EntityDirectoryEvents
     | EntityEvents
@@ -86,7 +92,7 @@ export type ContractEvents =
     | UpdatableContentEvents
 
 export type ContractEventArgs =
-      ContentContractEventArgs
+    | ContentContractEventArgs
     | ContentOwnerEntityContractEventArgs
     | EntityAddedContractEventArgs
     | EntityContractEventArgs

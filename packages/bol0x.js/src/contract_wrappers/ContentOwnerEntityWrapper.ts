@@ -1,42 +1,12 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import EntityWrapper, { IEntityWrapper } from './EntityWrapper';
+import EntityWrapper from './EntityWrapper';
+import { BigNumber } from 'bignumber.js';
 import { ContentOwnerEntityContract } from './generated/content_owner_entity';
 import { EntityOwnedContent, MethodOpts, TransactionOpts } from '../types';
+import { IContentOwnerEntityWrapper } from './types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
-import { BigNumber } from 'bignumber.js';
-
-export interface IContentOwnerEntityWrapper extends IEntityWrapper {
-    /**
-     * Retrieves the content information at a particular index in all the content that entity has.
-     * @param index The index of the content to retireve from the array.
-     * @param methodOpts Optional argument the method accepts.
-     * @returns The `EntityOwnedContent` contains information regarding the content address and if it is deleted by user or not.
-     */
-    getContentAsync(index: number | BigNumber, methodOpts?: MethodOpts): Promise<EntityOwnedContent>;
-
-    /**
-     * Retrieves all the un-deleted content owned by the entity.
-     * @param methodOpts Optional argument the method accepts.
-     * @returns The list of address for the content that is owned by entity.
-     */
-    getAllOwnedContentAsync(methodOpts?: MethodOpts): Promise<string[]>;
-
-    /**
-     * Add the content for the entity.
-     * @param contentAddress The address of the content contract to add.
-     * @param transactionOpts Optional argument the method accepts.
-     */
-    addContentAsync(contentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
-
-    /**
-     * Marks the content as deleted.
-     * @param contentAddress The address of the content contract to delete.
-     * @param transactionOpts Optional argument the method accepts.
-     */
-    deleteContentAsync(contentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
-}
 
 export default class ContentOwnerEntityWrapper extends EntityWrapper implements IContentOwnerEntityWrapper {
 

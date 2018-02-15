@@ -1,27 +1,11 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
-import ContentWrapper, { IContentWrapper } from './ContentWrapper';
+import ContentWrapper from './ContentWrapper';
 import { BigNumber } from '@0xproject/utils';
+import { IUpdatableContentWrapper } from './types';
 import { MethodOpts, TransactionOpts } from '../types';
 import { UpdatableContentContract } from './generated/updatable_content';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
-
-export interface IUpdatableContentWrapper extends IContentWrapper {
-    /**
-     * Retrieves the time when the content was last updated.
-     * @param methodOpts Optional arguments the method accepts.
-     * @returns The time when the content was last updated.
-     */
-    getContentUpdateTimeAsync(methodOpts?: MethodOpts): Promise<Date>;
-
-    /**
-     * Changes the content address of the contract. This allows the user to refer to the same contract
-     * and still be able to change the underlying content address.
-     * @param newContentAddress The new content address which should be changed to in the contract.
-     * @param transactionOpts Optional arguments the method accepts.
-     */
-    changeContentAsync(newContentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
-}
 
 export default class UpdatableContentWrapper extends ContentWrapper implements IUpdatableContentWrapper {
 

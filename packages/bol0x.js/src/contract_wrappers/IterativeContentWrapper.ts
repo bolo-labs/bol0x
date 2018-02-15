@@ -1,29 +1,12 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import UpdatableContentWrapper, { IUpdatableContentWrapper } from './UpdatableContentWrapper';
+import UpdatableContentWrapper from './UpdatableContentWrapper';
 import { BigNumber } from '@0xproject/utils';
+import { IIterativeContentWrapper } from './types';
 import { IterativeContentContract } from './generated/iterative_content';
 import { MethodOpts, TransactionOpts } from '../types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
-
-export interface IIterativeContentWrapper extends IUpdatableContentWrapper{
-    /**
-     * Retrieve the total number of iterations of the content change. Every time a user
-     * changes the content address in the contract, that adds another iterations.
-     * @param methodOpts Optional argumnt the method accepts.
-     * @returns The total number of iterations.
-     */
-    getTotalIterationsAsync(methodOpts?: MethodOpts): Promise<BigNumber>;
-
-    /**
-     * Retrieved the contract address of the provider `index` iteration.
-     * @param index The index of iteration that should be retrieved.
-     * @param methodOpts Optional arguments that method accepts.
-     * @returns The content address of the request iterations.
-     */
-    getIterationAsync(index: number | BigNumber, methodOpts?: MethodOpts): Promise<string>;
-}
 
 export default class IterativeContentWrapper extends UpdatableContentWrapper implements IIterativeContentWrapper {
 

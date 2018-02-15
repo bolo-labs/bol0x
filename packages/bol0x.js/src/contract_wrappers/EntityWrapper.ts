@@ -2,21 +2,17 @@ import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
 import ContractWrapper from './ContractWrapper';
-import { EntityContract } from './generated/entity';
-import { EntityIdentity, EntityIdentityProvider } from '../types';
-import { IOwnerWrapper } from './Ownable';
-import { MethodOpts, TransactionOpts } from '../types';
-import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import { BigNumber } from 'bignumber.js';
-
-export interface IEntityWrapper extends IOwnerWrapper {
-    /**
-     * Retrieves the identity information of the entity.
-     * @param methodOpts Optional argument the method accepts.
-     * @returns The `EntityIdentity` which contains the identifier of the entity and its identity provider.
-     */
-    getIdentity(methodOpts?: MethodOpts): Promise<EntityIdentity>;
-}
+import { EntityContract } from './generated/entity';
+import {
+    EntityIdentity,
+    EntityIdentityProvider,
+    MethodOpts,
+    TransactionOpts
+    } from '../types';
+import { IEntityWrapper } from './types';
+import { IOwnerWrapper } from './Ownable';
+import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
 export default class EntityWrapper extends ContractWrapper implements IEntityWrapper{
 
@@ -30,6 +26,11 @@ export default class EntityWrapper extends ContractWrapper implements IEntityWra
         assert.isETHAddressHex('contractAddress', contractAddress);
 
         this._contractAddress = contractAddress;
+    }
+
+    /** @inheritDoc */
+    public getContractAddress(): string {
+        return this._contractAddress;
     }
 
     /** @inheritDoc */

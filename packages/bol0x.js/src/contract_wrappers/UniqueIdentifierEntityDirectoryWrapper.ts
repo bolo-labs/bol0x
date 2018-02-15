@@ -1,15 +1,12 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import EntityDirectoryWrapper, { IEntityDirectoryWrapper } from './EntityDirectoryWrapper';
+import EntityDirectoryWrapper from './EntityDirectoryWrapper';
 import { BigNumber } from 'bignumber.js';
+import { IUniqueIdentifierEntityDirectoryWrapper } from './types';
 import { MethodOpts, TransactionOpts } from '../types';
 import { UniqueIdentifierEntityDirectoryContract } from './generated/unique_identifier_entity_directory';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
-
-export interface IUniqueIdentifierEntityDirectoryWrapper extends IEntityDirectoryWrapper {
-
-}
 
 export default class UniqueIdentifierEntityDirectoryWrapper extends EntityDirectoryWrapper implements IUniqueIdentifierEntityDirectoryWrapper {
 

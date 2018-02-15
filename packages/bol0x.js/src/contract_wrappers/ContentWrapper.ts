@@ -3,18 +3,10 @@ import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
 import ContractWrapper from './ContractWrapper';
 import { ContentContract } from './generated/content';
+import { IContentWrapper } from './types';
 import { IOwnerWrapper } from './Ownable';
 import { MethodOpts, TransactionOpts } from '../types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
-
-export interface IContentWrapper extends IOwnerWrapper {
-    /**
-     * Retrieve the content address.
-     * @param methodOpts Optional argument this method accepts.
-     * @return The content address stored in the contract.
-     */
-    getContentAddressAsync(methodOpts?: MethodOpts): Promise<string>;
-}
 
 export default class ContentWrapper extends ContractWrapper implements IContentWrapper {
 
@@ -28,6 +20,11 @@ export default class ContentWrapper extends ContractWrapper implements IContentW
         assert.isETHAddressHex('contractAddress', contractAddress);
 
         this._contractAddress = contractAddress;
+    }
+
+    /** @inheritDoc */
+    public getContractAddress(): string {
+        return this._contractAddress;
     }
 
     /** @inheritDoc */

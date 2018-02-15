@@ -1,42 +1,12 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import EntityWrapper, { IEntityWrapper } from './EntityWrapper';
+import EntityWrapper from './EntityWrapper';
 import { BigNumber } from 'bignumber.js';
 import { EntityDirectoryContract } from './generated/entity_directory';
+import { IEntityDirectoryWrapper } from './types';
 import { MethodOpts, TransactionOpts } from '../types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
-
-export interface IEntityDirectoryWrapper extends IEntityWrapper {
-    /**
-     * Retrieve a particular entity at the `index` from the array.
-     * @param index The index of the entity to retireve from the array.
-     * @param methodOpts Optional argument the method accepts.
-     * @returns The contract address of the entity.
-     */
-    getEntityAsync(index: number | BigNumber, methodOpts?: MethodOpts): Promise<string>;
-
-    /**
-     * Retrieves all the entities in the directory.
-     * @param methodOpts Optional argument the method accepts.
-     * @returns List of all the entities in the directory.
-     */
-    getAllEntitiesAsync(methodOpts?: MethodOpts): Promise<string[]>;
-
-    /**
-     * Add an entity in the directory.
-     * @param contractAddress Address of the entity contract to add.
-     * @param transactionOpts Optional argument the method accepts.
-     */
-    addEntityAsync(contractAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
-
-    /**
-     * Remove an entity from the directory.
-     * @param contractAddress Address of the entity contract to remove.
-     * @param transactionOpts Optional argument the method accepts.
-     */
-    removeEntityAsync(contractAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
-}
 
 export default class EntityDirectoryWrapper extends EntityWrapper implements IEntityDirectoryWrapper{
 
@@ -44,6 +14,11 @@ export default class EntityDirectoryWrapper extends EntityWrapper implements IEn
 
     constructor(web3Wrapper: Web3Wrapper, networkId: number, contractAddress: string) {
         super(web3Wrapper, networkId, contractAddress);
+    }
+
+    /** @inheritDoc */
+    public getContractAddress(): string {
+        return this._contractAddress;
     }
 
     /** @inheritDoc */

@@ -119,3 +119,23 @@ export interface BoloExConfig {
     networkId: number;
     gasPrice?: BigNumber;
 }
+
+export enum EntityIdentityProvider {
+    None = 0,
+    EtherAddress = 1,
+    Email = 2,
+    KeyBase = 3,
+    Name = 4,
+    TwitterHandle = 5,
+    Other = 6
+}
+
+export interface EntityIdentity {
+    identifier: string;
+    identityProvider: EntityIdentityProvider
+}
+
+export interface EntityOwnedContent {
+    contentAddress: string;
+    isDeleted: boolean;
+}

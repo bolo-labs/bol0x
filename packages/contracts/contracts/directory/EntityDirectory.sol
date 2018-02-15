@@ -79,4 +79,15 @@ contract EntityDirectory is Entity {
 
         EntityRemoved(entity);
     }
+
+    /**
+     * @dev Get all the entities in the directory.
+     */
+    function getAllEntities()
+        external
+        view
+        returns (address[]) {
+
+        return entities;
+    }
 }

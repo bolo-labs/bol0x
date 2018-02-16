@@ -1,14 +1,14 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import EntityWrapper from './EntityWrapper';
+import { InternalEntityWrapper } from './EntityWrapper';
 import { BigNumber } from 'bignumber.js';
-import { EntityDirectoryContract } from './generated/entity_directory';
-import { IEntityDirectoryWrapper } from './types';
-import { MethodOpts, TransactionOpts } from '../types';
+import { EntityDirectoryContract, EntityDirectoryContractEventArgs, EntityDirectoryEvents } from './generated/entity_directory';
+import { IEntityDirectoryWrapper, IEntityDirectoryMethods } from './types';
+import { MethodOpts, TransactionOpts, IndexedFilterValues, EventCallback } from '../types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export default class EntityDirectoryWrapper extends EntityWrapper implements IEntityDirectoryWrapper{
+export class InternalEntityDirectoryWrapper extends InternalEntityWrapper implements IEntityDirectoryMethods {
 
     private _entityDirectoryContract: EntityDirectoryContract | null = null;
 
@@ -95,5 +95,21 @@ export default class EntityDirectoryWrapper extends EntityWrapper implements IEn
 
         this._entityDirectoryContract = contractInstance;
         return this._entityDirectoryContract;
+    }
+}
+
+export default class EntityDirectoryWrapper extends InternalEntityDirectoryWrapper implements IEntityDirectoryWrapper {
+
+    /** @inheritDoc */
+    public subscribe<ArgsType extends EntityDirectoryContractEventArgs>(
+        eventName: EntityDirectoryEvents,
+        indexFilterValues: IndexedFilterValues,
+        callback: EventCallback<ArgsType>
+    ): string {
+        return super._subscribeForInstance(
+            eventName,
+            indexFilterValues,
+            Artifacts.Directory.EntityDirectoryArtifact.abi,
+            callback);
     }
 }

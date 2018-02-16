@@ -1,20 +1,21 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import ContractWrapper from './ContractWrapper';
+import ContractInstanceWrapper from './ContractInstanceWrapper';
 import { BigNumber } from 'bignumber.js';
-import { EntityContract } from './generated/entity';
+import { EntityContract, EntityContractEventArgs, EntityEvents } from './generated/entity';
 import {
     EntityIdentity,
     EntityIdentityProvider,
+    EventCallback,
+    IndexedFilterValues,
     MethodOpts,
     TransactionOpts
     } from '../types';
-import { IEntityWrapper } from './types';
-import { IOwnerWrapper } from './Ownable';
+import { IEntityMethods, IEntityWrapper, IOwnerWrapper } from './types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export default class EntityWrapper extends ContractWrapper implements IEntityWrapper{
+export class InternalEntityWrapper extends ContractInstanceWrapper implements IEntityMethods {
 
     private _entityContract: EntityContract | null = null;
 
@@ -94,5 +95,21 @@ export default class EntityWrapper extends ContractWrapper implements IEntityWra
 
         this._entityContract = contractInstance;
         return this._entityContract;
+    }
+}
+
+export default class EntityWrapper extends InternalEntityWrapper implements IEntityWrapper {
+
+    /** @inheritDoc */
+    public subscribe<ArgsType extends EntityContractEventArgs>(
+        eventName: EntityEvents,
+        indexFilterValues: IndexedFilterValues,
+        callback: EventCallback<ArgsType>
+    ): string {
+        return super._subscribeForInstance(
+            eventName,
+            indexFilterValues,
+            Artifacts.Entity.EntityArtifact.abi,
+            callback);
     }
 }

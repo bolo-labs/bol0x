@@ -1,6 +1,20 @@
-import { MethodOpts, TransactionOpts } from '../types';
-import { EntityIdentity, EntityIdentityProvider, EntityOwnedContent } from '../types';
 import { BigNumber } from 'bignumber.js';
+import { ContentContract, ContentContractEventArgs, ContentEvents } from './generated/content';
+import { ContentOwnerEntityContractEventArgs, ContentOwnerEntityEvents } from './generated/content_owner_entity';
+import {
+    ContractEventArgs,
+    ContractEvents,
+    EventCallback,
+    IndexedFilterValues,
+    MethodOpts,
+    TransactionOpts
+    } from '../types';
+import { EntityAddedContractEventArgs, EntityDirectoryContractEventArgs, EntityDirectoryEvents } from './generated/entity_directory';
+import { EntityContractEventArgs, EntityEvents } from './generated/entity';
+import { EntityIdentity, EntityIdentityProvider, EntityOwnedContent } from '../types';
+import { IterativeContentContractEventArgs, IterativeContentEvents } from './generated/iterative_content';
+import { UniqueIdentifierEntityDirectoryContractEventArgs, UniqueIdentifierEntityDirectoryEvents } from './generated/unique_identifier_entity_directory';
+import { UpdatableContentContractEventArgs, UpdatableContentEvents } from './generated/updatable_content';
 
 export interface IOwnerWrapper {
     /**
@@ -26,7 +40,40 @@ export interface IContract {
     getContractAddress(): string;
 }
 
-export interface IContentWrapper extends IOwnerWrapper, IContract {
+export interface IContractWithEvents<ContractEventsType extends ContractEvents, ContractEventArgsType extends ContractEventArgs> {
+    /**
+     * Subscribe to an event type emitted by the contract.
+     * @param eventName The contract event you would like to subscribe to.
+     * @param indexFilterValues An object where the keys are indexed args returned by the event and
+     * the value is the value you are interested in. E.g `{_contentAddress: stringForContentAddress}`.
+     * @param callback Callback that gets called when a log is added/removed.
+     * @returns Subscription token that can be used to unsubscribe.
+     */
+    subscribe<ArgsType extends ContractEventArgsType>(
+        eventName: ContractEventsType,
+        indexFilterValues: IndexedFilterValues,
+        callback: EventCallback<ArgsType>
+    ): string;
+
+    /**
+     * Cancels a subscription.
+     * @param subscriptionToken Subscription token returned by `subscribe(...)`.
+     */
+    unsubscribe(subscriptionToken: string): void;
+
+    /**
+     * Cancels all existing subscriptions.
+     */
+    unsubscribeAll(): void;
+}
+
+/**
+ * ------------------------------------------------------------------------------
+ * Content contract interfaces
+ * ------------------------------------------------------------------------------
+*/
+
+export interface IContentMethods extends IOwnerWrapper {
     /**
      * Retrieve the content address.
      * @param methodOpts Optional argument this method accepts.
@@ -35,7 +82,19 @@ export interface IContentWrapper extends IOwnerWrapper, IContract {
     getContentAddressAsync(methodOpts?: MethodOpts): Promise<string>;
 }
 
-export interface IUpdatableContentWrapper extends IContentWrapper {
+export interface IContentWrapper 
+    extends IContract,
+            IContentMethods,
+            IContractWithEvents<ContentEvents, ContentContractEventArgs> {
+}
+
+/**
+ * ------------------------------------------------------------------------------
+ * UpdatableContent contract interfaces
+ * ------------------------------------------------------------------------------
+*/
+
+export interface IUpdatableContentMethods extends IContentMethods {
     /**
      * Retrieves the time when the content was last updated.
      * @param methodOpts Optional arguments the method accepts.
@@ -52,7 +111,19 @@ export interface IUpdatableContentWrapper extends IContentWrapper {
     changeContentAsync(newContentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
 }
 
-export interface IIterativeContentWrapper extends IUpdatableContentWrapper{
+export interface IUpdatableContentWrapper
+    extends IContract,
+            IUpdatableContentMethods,
+            IContractWithEvents<UpdatableContentEvents, UpdatableContentContractEventArgs> {
+}
+
+/**
+ * ------------------------------------------------------------------------------
+ * IterativeContent contract interfaces
+ * ------------------------------------------------------------------------------
+*/
+
+export interface IIterativeContentMethods extends IUpdatableContentMethods {
     /**
      * Retrieve the total number of iterations of the content change. Every time a user
      * changes the content address in the contract, that adds another iterations.
@@ -70,7 +141,19 @@ export interface IIterativeContentWrapper extends IUpdatableContentWrapper{
     getIterationAsync(index: number | BigNumber, methodOpts?: MethodOpts): Promise<string>;
 }
 
-export interface IEntityWrapper extends IOwnerWrapper, IContract {
+export interface IIterativeContentWrapper
+    extends IContract,
+            IIterativeContentMethods,
+            IContractWithEvents<IterativeContentEvents, IterativeContentContractEventArgs> {
+}
+
+/**
+ * ------------------------------------------------------------------------------
+ * Entity contract interfaces
+ * ------------------------------------------------------------------------------
+*/
+
+export interface IEntityMethods extends IOwnerWrapper {
     /**
      * Retrieves the identity information of the entity.
      * @param methodOpts Optional argument the method accepts.
@@ -79,7 +162,19 @@ export interface IEntityWrapper extends IOwnerWrapper, IContract {
     getIdentity(methodOpts?: MethodOpts): Promise<EntityIdentity>;
 }
 
-export interface IContentOwnerEntityWrapper extends IEntityWrapper {
+export interface IEntityWrapper
+    extends IContract,
+            IEntityMethods,
+            IContractWithEvents<EntityEvents, EntityContractEventArgs> {
+}
+
+/**
+ * ------------------------------------------------------------------------------
+ * ContentOwnerEntity contract interfaces
+ * ------------------------------------------------------------------------------
+*/
+
+export interface IContentOwnerEntityMethods extends IEntityMethods {
     /**
      * Retrieves the content information at a particular index in all the content that entity has.
      * @param index The index of the content to retireve from the array.
@@ -110,7 +205,19 @@ export interface IContentOwnerEntityWrapper extends IEntityWrapper {
     deleteContentAsync(contentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
 }
 
-export interface IEntityDirectoryWrapper extends IEntityWrapper {
+export interface IContentOwnerEntityWrapper
+    extends IContract,
+            IContentOwnerEntityMethods,
+            IContractWithEvents<ContentOwnerEntityEvents, ContentOwnerEntityContractEventArgs> {
+}
+
+/**
+ * ------------------------------------------------------------------------------
+ * EntityDirectory contract interfaces
+ * ------------------------------------------------------------------------------
+*/
+
+export interface IEntityDirectoryMethods extends IEntityMethods {
     /**
      * Retrieve a particular entity at the `index` from the array.
      * @param index The index of the entity to retireve from the array.
@@ -141,6 +248,21 @@ export interface IEntityDirectoryWrapper extends IEntityWrapper {
     removeEntityAsync(contractAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
 }
 
-export interface IUniqueIdentifierEntityDirectoryWrapper extends IEntityDirectoryWrapper {
+export interface IEntityDirectoryWrapper
+    extends IContract,
+            IEntityDirectoryMethods,
+            IContractWithEvents<EntityDirectoryEvents, EntityDirectoryContractEventArgs> {
+}
+
+/**
+ * ------------------------------------------------------------------------------
+ * UniqueIdentifierEntityDirectory contract interfaces
+ * ------------------------------------------------------------------------------
+*/
+
+export interface IUniqueIdentifierEntityDirectoryWrapper
+    extends IContract,
+            IEntityDirectoryMethods,
+            IContractWithEvents<UniqueIdentifierEntityDirectoryEvents, UniqueIdentifierEntityDirectoryContractEventArgs> {
 
 }

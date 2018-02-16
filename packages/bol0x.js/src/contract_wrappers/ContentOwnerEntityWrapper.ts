@@ -1,14 +1,20 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import EntityWrapper from './EntityWrapper';
 import { BigNumber } from 'bignumber.js';
-import { ContentOwnerEntityContract } from './generated/content_owner_entity';
-import { EntityOwnedContent, MethodOpts, TransactionOpts } from '../types';
-import { IContentOwnerEntityWrapper } from './types';
+import { ContentOwnerEntityContract, ContentOwnerEntityContractEventArgs, ContentOwnerEntityEvents } from './generated/content_owner_entity';
+import {
+    EntityOwnedContent,
+    EventCallback,
+    IndexedFilterValues,
+    MethodOpts,
+    TransactionOpts
+    } from '../types';
+import { IContentOwnerEntityMethods, IContentOwnerEntityWrapper } from './types';
+import { InternalEntityWrapper } from './EntityWrapper';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export default class ContentOwnerEntityWrapper extends EntityWrapper implements IContentOwnerEntityWrapper {
+export class InternalContentOwnerEntityWrapper extends InternalEntityWrapper implements IContentOwnerEntityMethods {
 
     private _contentOwnerEntityContract: ContentOwnerEntityContract | null = null;
 
@@ -97,5 +103,21 @@ export default class ContentOwnerEntityWrapper extends EntityWrapper implements 
 
         this._contentOwnerEntityContract = contractInstance;
         return this._contentOwnerEntityContract;
+    }
+}
+
+export default class ContentOwnerEntityWrapper extends InternalContentOwnerEntityWrapper implements IContentOwnerEntityWrapper {
+
+    /** @inheritDoc */
+    public subscribe<ArgsType extends ContentOwnerEntityContractEventArgs>(
+        eventName: ContentOwnerEntityEvents,
+        indexFilterValues: IndexedFilterValues,
+        callback: EventCallback<ArgsType>
+    ): string {
+        return super._subscribeForInstance(
+            eventName,
+            indexFilterValues,
+            Artifacts.Entity.ContentOwnerEntityArtifact.abi,
+            callback);
     }
 }

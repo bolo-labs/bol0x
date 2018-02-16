@@ -1,14 +1,19 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import UpdatableContentWrapper from './UpdatableContentWrapper';
 import { BigNumber } from '@0xproject/utils';
-import { IIterativeContentWrapper } from './types';
-import { IterativeContentContract } from './generated/iterative_content';
-import { MethodOpts, TransactionOpts } from '../types';
+import {
+    EventCallback,
+    IndexedFilterValues,
+    MethodOpts,
+    TransactionOpts
+    } from '../types';
+import { IIterativeContentMethods, IIterativeContentWrapper } from './types';
+import { InternalUpdatableContentWrapper } from './UpdatableContentWrapper';
+import { IterativeContentContract, IterativeContentContractEventArgs, IterativeContentEvents } from './generated/iterative_content';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export default class IterativeContentWrapper extends UpdatableContentWrapper implements IIterativeContentWrapper {
+export class InternalIterativeContentWrapper extends InternalUpdatableContentWrapper implements IIterativeContentMethods {
 
     private _iterativeContentContract: IterativeContentContract | null = null;
 
@@ -53,5 +58,21 @@ export default class IterativeContentWrapper extends UpdatableContentWrapper imp
 
         this._iterativeContentContract = contractInstance;
         return this._iterativeContentContract;
+    }
+}
+
+export default class IterativeContentWrapper extends InternalIterativeContentWrapper implements IIterativeContentWrapper {
+
+    /** @inheritDoc */
+    public subscribe<ArgsType extends IterativeContentContractEventArgs>(
+        eventName: IterativeContentEvents,
+        indexFilterValues: IndexedFilterValues,
+        callback: EventCallback<ArgsType>
+    ): string {
+        return super._subscribeForInstance(
+            eventName,
+            indexFilterValues,
+            Artifacts.Content.IterativeContentArtifact.abi,
+            callback);
     }
 }

@@ -1,14 +1,19 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import EntityDirectoryWrapper from './EntityDirectoryWrapper';
 import { BigNumber } from 'bignumber.js';
-import { IUniqueIdentifierEntityDirectoryWrapper } from './types';
-import { MethodOpts, TransactionOpts } from '../types';
-import { UniqueIdentifierEntityDirectoryContract } from './generated/unique_identifier_entity_directory';
+import {
+    EventCallback,
+    IndexedFilterValues,
+    MethodOpts,
+    TransactionOpts
+    } from '../types';
+import { IEntityDirectoryMethods, IUniqueIdentifierEntityDirectoryWrapper } from './types';
+import { InternalEntityDirectoryWrapper } from './EntityDirectoryWrapper';
+import { UniqueIdentifierEntityDirectoryContract, UniqueIdentifierEntityDirectoryContractEventArgs, UniqueIdentifierEntityDirectoryEvents } from './generated/unique_identifier_entity_directory';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export default class UniqueIdentifierEntityDirectoryWrapper extends EntityDirectoryWrapper implements IUniqueIdentifierEntityDirectoryWrapper {
+export class InternalUniqueIdentifierEntityDirectoryWrapper extends InternalEntityDirectoryWrapper implements IEntityDirectoryMethods {
 
     private _uniqueIdentitiferEntityDirectoryContract: UniqueIdentifierEntityDirectoryContract | null = null;
 
@@ -32,4 +37,21 @@ export default class UniqueIdentifierEntityDirectoryWrapper extends EntityDirect
         this._uniqueIdentitiferEntityDirectoryContract = contractInstance;
         return this._uniqueIdentitiferEntityDirectoryContract;
     }
+}
+
+export default class UniqueIdentifierEntityDirectoryWrapper extends InternalUniqueIdentifierEntityDirectoryWrapper implements IUniqueIdentifierEntityDirectoryWrapper {
+
+    /** @inheritDoc */
+    public subscribe<ArgsType extends UniqueIdentifierEntityDirectoryContractEventArgs>(
+        eventName: UniqueIdentifierEntityDirectoryEvents,
+        indexFilterValues: IndexedFilterValues,
+        callback: EventCallback<ArgsType>
+    ): string {
+        return super._subscribeForInstance(
+            eventName,
+            indexFilterValues,
+            Artifacts.Content.ContentArtifact.abi,
+            callback);
+    }
+
 }

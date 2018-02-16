@@ -1,13 +1,18 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
-import ContentWrapper from './ContentWrapper';
 import { BigNumber } from '@0xproject/utils';
-import { IUpdatableContentWrapper } from './types';
-import { MethodOpts, TransactionOpts } from '../types';
-import { UpdatableContentContract } from './generated/updatable_content';
+import {
+    EventCallback,
+    IndexedFilterValues,
+    MethodOpts,
+    TransactionOpts
+    } from '../types';
+import { InternalContentWrapper } from './ContentWrapper';
+import { IUpdatableContentMethods, IUpdatableContentWrapper } from './types';
+import { UpdatableContentContract, UpdatableContentContractEventArgs, UpdatableContentEvents } from './generated/updatable_content';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export default class UpdatableContentWrapper extends ContentWrapper implements IUpdatableContentWrapper {
+export class InternalUpdatableContentWrapper extends InternalContentWrapper implements IUpdatableContentMethods {
 
     private _updatableContentContract: UpdatableContentContract | null = null;
 
@@ -57,5 +62,21 @@ export default class UpdatableContentWrapper extends ContentWrapper implements I
 
         this._updatableContentContract = contractInstance;
         return this._updatableContentContract;
+    }
+}
+
+export default class UpdatableContentWrapper extends InternalUpdatableContentWrapper implements IUpdatableContentWrapper {
+
+    /** @inheritDoc */
+    public subscribe<ArgsType extends UpdatableContentContractEventArgs>(
+        eventName: UpdatableContentEvents,
+        indexFilterValues: IndexedFilterValues,
+        callback: EventCallback<ArgsType>
+    ): string {
+        return super._subscribeForInstance(
+            eventName,
+            indexFilterValues,
+            Artifacts.Content.UpdatableContentArtifact.abi,
+            callback);
     }
 }

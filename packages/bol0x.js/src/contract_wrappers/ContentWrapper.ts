@@ -1,14 +1,18 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
-import ContractWrapper from './ContractWrapper';
-import { ContentContract } from './generated/content';
-import { IContentWrapper } from './types';
-import { IOwnerWrapper } from './Ownable';
-import { MethodOpts, TransactionOpts } from '../types';
+import ContractInstanceWrapper from './ContractInstanceWrapper';
+import { ContentContract, ContentContractEventArgs, ContentEvents } from './generated/content';
+import {
+    EventCallback,
+    IndexedFilterValues,
+    MethodOpts,
+    TransactionOpts
+    } from '../types';
+import { IContentMethods, IContentWrapper, IOwnerWrapper } from './types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export default class ContentWrapper extends ContractWrapper implements IContentWrapper {
+export class InternalContentWrapper extends ContractInstanceWrapper implements IContentMethods {
 
     private _contentContract: ContentContract | null = null;
 
@@ -60,7 +64,6 @@ export default class ContentWrapper extends ContractWrapper implements IContentW
         const defaultBlock = _.isUndefined(methodOpts) ? undefined : methodOpts.defaultBlock;
         return await contract.contentAddress.callAsync(defaultBlock);
     }
-
     protected async _getContractAsync(): Promise<ContentContract> {
         if(!_.isNull(this._contentContract)) {
             return this._contentContract;
@@ -76,5 +79,21 @@ export default class ContentWrapper extends ContractWrapper implements IContentW
 
         this._contentContract = contractInstance;
         return this._contentContract;
+    }
+}
+
+export default class ContentWrapper extends InternalContentWrapper implements IContentWrapper {
+
+    /** @inheritDoc */
+    public subscribe<ArgsType extends ContentContractEventArgs>(
+        eventName: ContentEvents,
+        indexFilterValues: IndexedFilterValues,
+        callback: EventCallback<ArgsType>
+    ): string {
+        return super._subscribeForInstance(
+            eventName,
+            indexFilterValues,
+            Artifacts.Content.ContentArtifact.abi,
+            callback);
     }
 }

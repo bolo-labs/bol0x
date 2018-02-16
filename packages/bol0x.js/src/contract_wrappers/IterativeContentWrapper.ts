@@ -69,6 +69,8 @@ export default class IterativeContentWrapper extends InternalIterativeContentWra
         indexFilterValues: IndexedFilterValues,
         callback: EventCallback<ArgsType>
     ): string {
+        assert.doesBelongToStringEnum('eventName', eventName, IterativeContentEvents);
+
         return super._subscribeForInstance(
             eventName,
             indexFilterValues,

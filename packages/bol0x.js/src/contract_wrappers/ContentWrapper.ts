@@ -90,6 +90,8 @@ export default class ContentWrapper extends InternalContentWrapper implements IC
         indexFilterValues: IndexedFilterValues,
         callback: EventCallback<ArgsType>
     ): string {
+        assert.doesBelongToStringEnum('eventName', eventName, ContentEvents);
+
         return super._subscribeForInstance(
             eventName,
             indexFilterValues,

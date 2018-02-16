@@ -106,6 +106,8 @@ export default class EntityDirectoryWrapper extends InternalEntityDirectoryWrapp
         indexFilterValues: IndexedFilterValues,
         callback: EventCallback<ArgsType>
     ): string {
+        assert.doesBelongToStringEnum('eventName', eventName, EntityDirectoryEvents);
+
         return super._subscribeForInstance(
             eventName,
             indexFilterValues,

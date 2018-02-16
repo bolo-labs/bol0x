@@ -114,6 +114,8 @@ export default class ContentOwnerEntityWrapper extends InternalContentOwnerEntit
         indexFilterValues: IndexedFilterValues,
         callback: EventCallback<ArgsType>
     ): string {
+        assert.doesBelongToStringEnum('eventName', eventName, ContentOwnerEntityEvents);
+
         return super._subscribeForInstance(
             eventName,
             indexFilterValues,

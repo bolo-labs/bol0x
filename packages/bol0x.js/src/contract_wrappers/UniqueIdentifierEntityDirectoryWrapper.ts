@@ -47,10 +47,12 @@ export default class UniqueIdentifierEntityDirectoryWrapper extends InternalUniq
         indexFilterValues: IndexedFilterValues,
         callback: EventCallback<ArgsType>
     ): string {
+        assert.doesBelongToStringEnum('eventName', eventName, UniqueIdentifierEntityDirectoryEvents);
+
         return super._subscribeForInstance(
             eventName,
             indexFilterValues,
-            Artifacts.Content.ContentArtifact.abi,
+            Artifacts.Directory.UniqueIdentifierEntityDirectoryArtifact.abi,
             callback);
     }
 

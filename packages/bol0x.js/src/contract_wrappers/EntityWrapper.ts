@@ -106,6 +106,8 @@ export default class EntityWrapper extends InternalEntityWrapper implements IEnt
         indexFilterValues: IndexedFilterValues,
         callback: EventCallback<ArgsType>
     ): string {
+        assert.doesBelongToStringEnum('eventName', eventName, EntityEvents);
+
         return super._subscribeForInstance(
             eventName,
             indexFilterValues,

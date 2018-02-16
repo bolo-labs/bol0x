@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import Artifacts from '../Artifacts';
+import assert from '../utils/assert';
 import { BigNumber } from '@0xproject/utils';
 import {
     EventCallback,
@@ -73,6 +74,8 @@ export default class UpdatableContentWrapper extends InternalUpdatableContentWra
         indexFilterValues: IndexedFilterValues,
         callback: EventCallback<ArgsType>
     ): string {
+        assert.doesBelongToStringEnum('eventName', eventName, UpdatableContentEvents);
+
         return super._subscribeForInstance(
             eventName,
             indexFilterValues,

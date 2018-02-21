@@ -35,6 +35,7 @@ export type ArtifactContractName =
 export interface Artifact {
     contractName: ArtifactContractName;
     abi: Web3.ContractAbi;
+    bytecode: string;
     networks: {
         [networkId: number]: {
             address: string;

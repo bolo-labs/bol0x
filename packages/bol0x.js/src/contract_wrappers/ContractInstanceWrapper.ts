@@ -4,14 +4,13 @@ import {
     ContractEventArgs,
     ContractEvents,
     EventCallback,
-    IndexedFilterValues
-    } from '../types';
+    IndexedFilterValues,
+} from '../types';
 import { IContract, IContractWithEvents } from './types';
 import * as Web3 from 'web3';
 
-export default abstract class ContractInstanceWrapper
-    extends ContractWrapper implements IContract
-{
+export default abstract class ContractInstanceWrapper extends ContractWrapper
+    implements IContract {
     public abstract getContractAddress(): string;
 
     /** @inheritDoc */
@@ -30,10 +29,15 @@ export default abstract class ContractInstanceWrapper
         abi: Web3.AbiDefinition[],
         callback: EventCallback<ArgsType>
     ): string {
-
         assert.isFunction('callback', callback);
 
         const address = this.getContractAddress();
-        return super._subscribe(address, eventName, indexFilterValues, abi, callback);
+        return super._subscribe(
+            address,
+            eventName,
+            indexFilterValues,
+            abi,
+            callback
+        );
     }
 }

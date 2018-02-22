@@ -12,7 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { BlockParamLiteral, LogWithDecodedArgs, RawLog } from '@0xproject/types';
+import {
+    BlockParamLiteral,
+    LogWithDecodedArgs,
+    RawLog,
+} from '@0xproject/types';
 import { AbiDecoder, intervalUtils } from '@0xproject/utils';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import { Block, BlockAndLogStreamer } from 'ethereumjs-blockstream';
@@ -41,7 +45,8 @@ const CONTRACT_NAME_TO_NOT_FOUND_ERROR: {
     Entity: BoloExError.EntityContractDoesNotExist,
     ContentOwnerEntity: BoloExError.ContentOwnerEntityContractDoesNotExist,
     EntityDirectory: BoloExError.EntityDirectoryContractDoesNotExist,
-    UniqueIdentifierEntityDirectory: BoloExError.UniqueIdentifierEntityDirectoryContractDoesNotExist
+    UniqueIdentifierEntityDirectory:
+        BoloExError.UniqueIdentifierEntityDirectoryContractDoesNotExist,
 };
 
 export default abstract class ContractWrapper {
@@ -56,7 +61,11 @@ export default abstract class ContractWrapper {
     };
     private _onLogAddedSubscriptionToken: string | undefined;
     private _onLogRemovedSubscriptionToken: string | undefined;
-    constructor(web3Wrapper: Web3Wrapper, networkId: number, abiDecoder?: AbiDecoder) {
+    constructor(
+        web3Wrapper: Web3Wrapper,
+        networkId: number,
+        abiDecoder?: AbiDecoder
+    ) {
         this._web3Wrapper = web3Wrapper;
         this._networkId = networkId;
         this._abiDecoder = abiDecoder;
@@ -91,15 +100,22 @@ export default abstract class ContractWrapper {
         eventName: ContractEvents,
         indexFilterValues: IndexedFilterValues,
         abi: Web3.ContractAbi,
-        callback: EventCallback<ArgsType>,
+        callback: EventCallback<ArgsType>
     ): string {
-        const filter = filterUtils.getFilter(address, eventName, indexFilterValues, abi);
+        const filter = filterUtils.getFilter(
+            address,
+            eventName,
+            indexFilterValues,
+            abi
+        );
         if (_.isUndefined(this._blockAndLogStreamerIfExists)) {
             this._startBlockAndLogStream();
         }
         const filterToken = filterUtils.generateUUID();
         this._filters[filterToken] = filter;
-        this._filterCallbacks[filterToken] = callback as EventCallback<ContractEventArgs>;
+        this._filterCallbacks[filterToken] = callback as EventCallback<
+            ContractEventArgs
+        >;
         return filterToken;
     }
     protected async _getLogsAsync<ArgsType extends ContractEventArgs>(
@@ -107,15 +123,24 @@ export default abstract class ContractWrapper {
         eventName: ContractEvents,
         blockRange: BlockRange,
         indexFilterValues: IndexedFilterValues,
-        abi: Web3.ContractAbi,
+        abi: Web3.ContractAbi
     ): Promise<Array<LogWithDecodedArgs<ArgsType>>> {
-        const filter = filterUtils.getFilter(address, eventName, indexFilterValues, abi, blockRange);
+        const filter = filterUtils.getFilter(
+            address,
+            eventName,
+            indexFilterValues,
+            abi,
+            blockRange
+        );
         const logs = await this._web3Wrapper.getLogsAsync(filter);
-        const logsWithDecodedArguments = _.map(logs, this._tryToDecodeLogOrNoop.bind(this));
+        const logsWithDecodedArguments = _.map(
+            logs,
+            this._tryToDecodeLogOrNoop.bind(this)
+        );
         return logsWithDecodedArguments;
     }
     protected _tryToDecodeLogOrNoop<ArgsType extends ContractEventArgs>(
-        log: Web3.LogEntry,
+        log: Web3.LogEntry
     ): LogWithDecodedArgs<ArgsType> | RawLog {
         if (_.isUndefined(this._abiDecoder)) {
             throw new Error(InternalBoloExError.NoAbiDecoder);
@@ -125,14 +150,16 @@ export default abstract class ContractWrapper {
     }
     protected async _instantiateContractIfExistsAsync(
         artifact: Artifact,
-        addressIfExists?: string,
+        addressIfExists?: string
     ): Promise<Web3.ContractInstance> {
         let contractAddress: string;
         if (_.isUndefined(addressIfExists)) {
             if (_.isUndefined(artifact.networks[this._networkId])) {
                 throw new Error(BoloExError.ContractNotDeployedOnNetwork);
             }
-            contractAddress = artifact.networks[this._networkId].address.toLowerCase();
+            contractAddress = artifact.networks[
+                this._networkId
+            ].address.toLowerCase();
         } else {
             contractAddress = addressIfExists;
         }
@@ -144,15 +171,25 @@ export default abstract class ContractWrapper {
         artifact: Artifact,
         contractAddress: string
     ): Promise<Web3.ContractInstance> {
-        const doesContractExist = await this._web3Wrapper.doesContractExistAtAddressAsync(contractAddress);
+        const doesContractExist = await this._web3Wrapper.doesContractExistAtAddressAsync(
+            contractAddress
+        );
         if (!doesContractExist) {
-            throw new Error(CONTRACT_NAME_TO_NOT_FOUND_ERROR[artifact.contractName]);
+            throw new Error(
+                CONTRACT_NAME_TO_NOT_FOUND_ERROR[artifact.contractName]
+            );
         }
-        const contractInstance = this._web3Wrapper.getContractInstance(artifact.abi, contractAddress);
+        const contractInstance = this._web3Wrapper.getContractInstance(
+            artifact.abi,
+            contractAddress
+        );
         return contractInstance;
     }
 
-    protected _getContractAddress(artifact: Artifact, addressIfExists?: string): string {
+    protected _getContractAddress(
+        artifact: Artifact,
+        addressIfExists?: string
+    ): string {
         if (_.isUndefined(addressIfExists)) {
             const contractAddress = artifact.networks[this._networkId].address;
             if (_.isUndefined(contractAddress)) {
@@ -163,17 +200,25 @@ export default abstract class ContractWrapper {
             return addressIfExists;
         }
     }
-    private _onLogStateChanged<ArgsType extends ContractEventArgs>(isRemoved: boolean, log: Web3.LogEntry): void {
-        _.forEach(this._filters, (filter: Web3.FilterObject, filterToken: string) => {
-            if (filterUtils.matchesFilter(log, filter)) {
-                const decodedLog = this._tryToDecodeLogOrNoop(log) as LogWithDecodedArgs<ArgsType>;
-                const logEvent = {
-                    log: decodedLog,
-                    isRemoved,
-                };
-                this._filterCallbacks[filterToken](null, logEvent);
+    private _onLogStateChanged<ArgsType extends ContractEventArgs>(
+        isRemoved: boolean,
+        log: Web3.LogEntry
+    ): void {
+        _.forEach(
+            this._filters,
+            (filter: Web3.FilterObject, filterToken: string) => {
+                if (filterUtils.matchesFilter(log, filter)) {
+                    const decodedLog = this._tryToDecodeLogOrNoop(
+                        log
+                    ) as LogWithDecodedArgs<ArgsType>;
+                    const logEvent = {
+                        log: decodedLog,
+                        isRemoved,
+                    };
+                    this._filterCallbacks[filterToken](null, logEvent);
+                }
             }
-        });
+        );
     }
     private _startBlockAndLogStream(): void {
         if (!_.isUndefined(this._blockAndLogStreamerIfExists)) {
@@ -181,22 +226,22 @@ export default abstract class ContractWrapper {
         }
         this._blockAndLogStreamerIfExists = new BlockAndLogStreamer(
             this._web3Wrapper.getBlockAsync.bind(this._web3Wrapper),
-            this._web3Wrapper.getLogsAsync.bind(this._web3Wrapper),
+            this._web3Wrapper.getLogsAsync.bind(this._web3Wrapper)
         );
         const catchAllLogFilter = {};
         this._blockAndLogStreamerIfExists.addLogFilter(catchAllLogFilter);
         this._blockAndLogStreamIntervalIfExists = intervalUtils.setAsyncExcludingInterval(
             this._reconcileBlockAsync.bind(this),
             constants.DEFAULT_BLOCK_POLLING_INTERVAL,
-            this._onReconcileBlockError.bind(this),
+            this._onReconcileBlockError.bind(this)
         );
         let isRemoved = false;
         this._onLogAddedSubscriptionToken = this._blockAndLogStreamerIfExists.subscribeToOnLogAdded(
-            this._onLogStateChanged.bind(this, isRemoved),
+            this._onLogStateChanged.bind(this, isRemoved)
         );
         isRemoved = true;
         this._onLogRemovedSubscriptionToken = this._blockAndLogStreamerIfExists.subscribeToOnLogRemoved(
-            this._onLogStateChanged.bind(this, isRemoved),
+            this._onLogStateChanged.bind(this, isRemoved)
         );
     }
     private _onReconcileBlockError(err: Error): void {
@@ -212,17 +257,24 @@ export default abstract class ContractWrapper {
         if (_.isUndefined(this._blockAndLogStreamerIfExists)) {
             throw new Error(BoloExError.SubscriptionNotFound);
         }
-        this._blockAndLogStreamerIfExists.unsubscribeFromOnLogAdded(this._onLogAddedSubscriptionToken as string);
-        this._blockAndLogStreamerIfExists.unsubscribeFromOnLogRemoved(this._onLogRemovedSubscriptionToken as string);
-        intervalUtils.clearAsyncExcludingInterval(this._blockAndLogStreamIntervalIfExists as NodeJS.Timer);
+        this._blockAndLogStreamerIfExists.unsubscribeFromOnLogAdded(this
+            ._onLogAddedSubscriptionToken as string);
+        this._blockAndLogStreamerIfExists.unsubscribeFromOnLogRemoved(this
+            ._onLogRemovedSubscriptionToken as string);
+        intervalUtils.clearAsyncExcludingInterval(this
+            ._blockAndLogStreamIntervalIfExists as NodeJS.Timer);
         delete this._blockAndLogStreamerIfExists;
     }
     private async _reconcileBlockAsync(): Promise<void> {
-        const latestBlock = await this._web3Wrapper.getBlockAsync(BlockParamLiteral.Latest);
+        const latestBlock = await this._web3Wrapper.getBlockAsync(
+            BlockParamLiteral.Latest
+        );
         // We need to coerce to Block type cause Web3.Block includes types for mempool blocks
         if (!_.isUndefined(this._blockAndLogStreamerIfExists)) {
             // If we clear the interval while fetching the block - this._blockAndLogStreamer will be undefined
-            await this._blockAndLogStreamerIfExists.reconcileNewBlock((latestBlock as any) as Block);
+            await this._blockAndLogStreamerIfExists.reconcileNewBlock(
+                (latestBlock as any) as Block
+            );
         }
     }
 }

@@ -1,20 +1,44 @@
 import { BigNumber } from 'bignumber.js';
-import { ContentContract, ContentContractEventArgs, ContentEvents } from './generated/content';
-import { ContentOwnerEntityContractEventArgs, ContentOwnerEntityEvents } from './generated/content_owner_entity';
+import {
+    ContentContract,
+    ContentContractEventArgs,
+    ContentEvents,
+} from './generated/content';
+import {
+    ContentOwnerEntityContractEventArgs,
+    ContentOwnerEntityEvents,
+} from './generated/content_owner_entity';
 import {
     ContractEventArgs,
     ContractEvents,
     EventCallback,
     IndexedFilterValues,
     MethodOpts,
-    TransactionOpts
-    } from '../types';
-import { EntityAddedContractEventArgs, EntityDirectoryContractEventArgs, EntityDirectoryEvents } from './generated/entity_directory';
+    TransactionOpts,
+} from '../types';
+import {
+    EntityAddedContractEventArgs,
+    EntityDirectoryContractEventArgs,
+    EntityDirectoryEvents,
+} from './generated/entity_directory';
 import { EntityContractEventArgs, EntityEvents } from './generated/entity';
-import { EntityIdentity, EntityIdentityProvider, EntityOwnedContent } from '../types';
-import { IterativeContentContractEventArgs, IterativeContentEvents } from './generated/iterative_content';
-import { UniqueIdentifierEntityDirectoryContractEventArgs, UniqueIdentifierEntityDirectoryEvents } from './generated/unique_identifier_entity_directory';
-import { UpdatableContentContractEventArgs, UpdatableContentEvents } from './generated/updatable_content';
+import {
+    EntityIdentity,
+    EntityIdentityProvider,
+    EntityOwnedContent,
+} from '../types';
+import {
+    IterativeContentContractEventArgs,
+    IterativeContentEvents,
+} from './generated/iterative_content';
+import {
+    UniqueIdentifierEntityDirectoryContractEventArgs,
+    UniqueIdentifierEntityDirectoryEvents,
+} from './generated/unique_identifier_entity_directory';
+import {
+    UpdatableContentContractEventArgs,
+    UpdatableContentEvents,
+} from './generated/updatable_content';
 
 export interface IOwnerWrapper {
     /**
@@ -29,7 +53,10 @@ export interface IOwnerWrapper {
      * @param newOwnerAddress The ETH address of the new owner.
      * @param transactionOpts Optional argument this method accepts.
      */
-    transferOwnershipAsync(newOwnerAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
+    transferOwnershipAsync(
+        newOwnerAddress: string,
+        transactionOpts?: TransactionOpts
+    ): Promise<void>;
 }
 
 export interface IContract {
@@ -40,7 +67,10 @@ export interface IContract {
     getContractAddress(): string;
 }
 
-export interface IContractWithEvents<ContractEventsType extends ContractEvents, ContractEventArgsType extends ContractEventArgs> {
+export interface IContractWithEvents<
+    ContractEventsType extends ContractEvents,
+    ContractEventArgsType extends ContractEventArgs
+> {
     /**
      * Subscribe to an event type emitted by the contract.
      * @param eventName The contract event you would like to subscribe to.
@@ -71,7 +101,7 @@ export interface IContractWithEvents<ContractEventsType extends ContractEvents, 
  * ------------------------------------------------------------------------------
  * Content contract interfaces
  * ------------------------------------------------------------------------------
-*/
+ */
 
 export interface IContentMethods extends IOwnerWrapper {
     /**
@@ -82,17 +112,16 @@ export interface IContentMethods extends IOwnerWrapper {
     getContentAddressAsync(methodOpts?: MethodOpts): Promise<string>;
 }
 
-export interface IContentWrapper 
+export interface IContentWrapper
     extends IContract,
-            IContentMethods,
-            IContractWithEvents<ContentEvents, ContentContractEventArgs> {
-}
+        IContentMethods,
+        IContractWithEvents<ContentEvents, ContentContractEventArgs> {}
 
 /**
  * ------------------------------------------------------------------------------
  * UpdatableContent contract interfaces
  * ------------------------------------------------------------------------------
-*/
+ */
 
 export interface IUpdatableContentMethods extends IContentMethods {
     /**
@@ -108,20 +137,25 @@ export interface IUpdatableContentMethods extends IContentMethods {
      * @param newContentAddress The new content address which should be changed to in the contract.
      * @param transactionOpts Optional arguments the method accepts.
      */
-    changeContentAsync(newContentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
+    changeContentAsync(
+        newContentAddress: string,
+        transactionOpts?: TransactionOpts
+    ): Promise<void>;
 }
 
 export interface IUpdatableContentWrapper
     extends IContract,
-            IUpdatableContentMethods,
-            IContractWithEvents<UpdatableContentEvents, UpdatableContentContractEventArgs> {
-}
+        IUpdatableContentMethods,
+        IContractWithEvents<
+            UpdatableContentEvents,
+            UpdatableContentContractEventArgs
+        > {}
 
 /**
  * ------------------------------------------------------------------------------
  * IterativeContent contract interfaces
  * ------------------------------------------------------------------------------
-*/
+ */
 
 export interface IIterativeContentMethods extends IUpdatableContentMethods {
     /**
@@ -138,20 +172,25 @@ export interface IIterativeContentMethods extends IUpdatableContentMethods {
      * @param methodOpts Optional arguments that method accepts.
      * @returns The content address of the request iterations.
      */
-    getIterationAsync(index: number | BigNumber, methodOpts?: MethodOpts): Promise<string>;
+    getIterationAsync(
+        index: number | BigNumber,
+        methodOpts?: MethodOpts
+    ): Promise<string>;
 }
 
 export interface IIterativeContentWrapper
     extends IContract,
-            IIterativeContentMethods,
-            IContractWithEvents<IterativeContentEvents, IterativeContentContractEventArgs> {
-}
+        IIterativeContentMethods,
+        IContractWithEvents<
+            IterativeContentEvents,
+            IterativeContentContractEventArgs
+        > {}
 
 /**
  * ------------------------------------------------------------------------------
  * Entity contract interfaces
  * ------------------------------------------------------------------------------
-*/
+ */
 
 export interface IEntityMethods extends IOwnerWrapper {
     /**
@@ -164,15 +203,14 @@ export interface IEntityMethods extends IOwnerWrapper {
 
 export interface IEntityWrapper
     extends IContract,
-            IEntityMethods,
-            IContractWithEvents<EntityEvents, EntityContractEventArgs> {
-}
+        IEntityMethods,
+        IContractWithEvents<EntityEvents, EntityContractEventArgs> {}
 
 /**
  * ------------------------------------------------------------------------------
  * ContentOwnerEntity contract interfaces
  * ------------------------------------------------------------------------------
-*/
+ */
 
 export interface IContentOwnerEntityMethods extends IEntityMethods {
     /**
@@ -181,7 +219,10 @@ export interface IContentOwnerEntityMethods extends IEntityMethods {
      * @param methodOpts Optional argument the method accepts.
      * @returns The `EntityOwnedContent` contains information regarding the content address and if it is deleted by user or not.
      */
-    getContentAsync(index: number | BigNumber, methodOpts?: MethodOpts): Promise<EntityOwnedContent>;
+    getContentAsync(
+        index: number | BigNumber,
+        methodOpts?: MethodOpts
+    ): Promise<EntityOwnedContent>;
 
     /**
      * Retrieves all the un-deleted content owned by the entity.
@@ -195,27 +236,35 @@ export interface IContentOwnerEntityMethods extends IEntityMethods {
      * @param contentAddress The address of the content contract to add.
      * @param transactionOpts Optional argument the method accepts.
      */
-    addContentAsync(contentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
+    addContentAsync(
+        contentAddress: string,
+        transactionOpts?: TransactionOpts
+    ): Promise<void>;
 
     /**
      * Marks the content as deleted.
      * @param contentAddress The address of the content contract to delete.
      * @param transactionOpts Optional argument the method accepts.
      */
-    deleteContentAsync(contentAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
+    deleteContentAsync(
+        contentAddress: string,
+        transactionOpts?: TransactionOpts
+    ): Promise<void>;
 }
 
 export interface IContentOwnerEntityWrapper
     extends IContract,
-            IContentOwnerEntityMethods,
-            IContractWithEvents<ContentOwnerEntityEvents, ContentOwnerEntityContractEventArgs> {
-}
+        IContentOwnerEntityMethods,
+        IContractWithEvents<
+            ContentOwnerEntityEvents,
+            ContentOwnerEntityContractEventArgs
+        > {}
 
 /**
  * ------------------------------------------------------------------------------
  * EntityDirectory contract interfaces
  * ------------------------------------------------------------------------------
-*/
+ */
 
 export interface IEntityDirectoryMethods extends IEntityMethods {
     /**
@@ -224,7 +273,10 @@ export interface IEntityDirectoryMethods extends IEntityMethods {
      * @param methodOpts Optional argument the method accepts.
      * @returns The contract address of the entity.
      */
-    getEntityAsync(index: number | BigNumber, methodOpts?: MethodOpts): Promise<string>;
+    getEntityAsync(
+        index: number | BigNumber,
+        methodOpts?: MethodOpts
+    ): Promise<string>;
 
     /**
      * Retrieves all the entities in the directory.
@@ -238,31 +290,40 @@ export interface IEntityDirectoryMethods extends IEntityMethods {
      * @param contractAddress Address of the entity contract to add.
      * @param transactionOpts Optional argument the method accepts.
      */
-    addEntityAsync(contractAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
+    addEntityAsync(
+        contractAddress: string,
+        transactionOpts?: TransactionOpts
+    ): Promise<void>;
 
     /**
      * Remove an entity from the directory.
      * @param contractAddress Address of the entity contract to remove.
      * @param transactionOpts Optional argument the method accepts.
      */
-    removeEntityAsync(contractAddress: string, transactionOpts?: TransactionOpts): Promise<void>;
+    removeEntityAsync(
+        contractAddress: string,
+        transactionOpts?: TransactionOpts
+    ): Promise<void>;
 }
 
 export interface IEntityDirectoryWrapper
     extends IContract,
-            IEntityDirectoryMethods,
-            IContractWithEvents<EntityDirectoryEvents, EntityDirectoryContractEventArgs> {
-}
+        IEntityDirectoryMethods,
+        IContractWithEvents<
+            EntityDirectoryEvents,
+            EntityDirectoryContractEventArgs
+        > {}
 
 /**
  * ------------------------------------------------------------------------------
  * UniqueIdentifierEntityDirectory contract interfaces
  * ------------------------------------------------------------------------------
-*/
+ */
 
 export interface IUniqueIdentifierEntityDirectoryWrapper
     extends IContract,
-            IEntityDirectoryMethods,
-            IContractWithEvents<UniqueIdentifierEntityDirectoryEvents, UniqueIdentifierEntityDirectoryContractEventArgs> {
-
-}
+        IEntityDirectoryMethods,
+        IContractWithEvents<
+            UniqueIdentifierEntityDirectoryEvents,
+            UniqueIdentifierEntityDirectoryContractEventArgs
+        > {}

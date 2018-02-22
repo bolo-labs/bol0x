@@ -14,5 +14,5 @@ export default {
         sharedAssert.assert(false, message);
 
         throw new Error(message);
-    }
+    },
 };

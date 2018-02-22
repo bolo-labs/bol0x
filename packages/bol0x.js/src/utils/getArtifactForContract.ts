@@ -1,8 +1,15 @@
 import Artifacts from '../Artifacts';
 import assert from './assert';
-import { Artifact, ArtifactContentContractName, ArtifactEntityContractName, ArtifactDirectoryContractName } from '../types';
+import {
+    Artifact,
+    ArtifactContentContractName,
+    ArtifactEntityContractName,
+    ArtifactDirectoryContractName,
+} from '../types';
 
-export function getContentArtifact(contractType: ArtifactContentContractName): Artifact {
+export function getContentArtifact(
+    contractType: ArtifactContentContractName
+): Artifact {
     switch (contractType) {
         case 'Content':
             return Artifacts.Content.ContentArtifact;
@@ -15,7 +22,9 @@ export function getContentArtifact(contractType: ArtifactContentContractName): A
     }
 }
 
-export function getEntityArtifact(contractType: ArtifactEntityContractName): Artifact {
+export function getEntityArtifact(
+    contractType: ArtifactEntityContractName
+): Artifact {
     switch (contractType) {
         case 'Entity':
             return Artifacts.Entity.EntityArtifact;
@@ -26,7 +35,9 @@ export function getEntityArtifact(contractType: ArtifactEntityContractName): Art
     }
 }
 
-export function getDirectoryArtifact(contractType: ArtifactDirectoryContractName): Artifact {
+export function getDirectoryArtifact(
+    contractType: ArtifactDirectoryContractName
+): Artifact {
     switch (contractType) {
         case 'EntityDirectory':
             return Artifacts.Directory.EntityDirectoryArtifact;

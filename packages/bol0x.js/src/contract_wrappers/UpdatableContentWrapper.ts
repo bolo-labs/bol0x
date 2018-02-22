@@ -6,26 +6,38 @@ import {
     EventCallback,
     IndexedFilterValues,
     MethodOpts,
-    TransactionOpts
-    } from '../types';
+    TransactionOpts,
+} from '../types';
 import { InternalContentWrapper } from './ContentWrapper';
 import { IUpdatableContentMethods, IUpdatableContentWrapper } from './types';
-import { UpdatableContentContract, UpdatableContentContractEventArgs, UpdatableContentEvents } from './generated/updatable_content';
+import {
+    UpdatableContentContract,
+    UpdatableContentContractEventArgs,
+    UpdatableContentEvents,
+} from './generated/updatable_content';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export class InternalUpdatableContentWrapper extends InternalContentWrapper implements IUpdatableContentMethods {
-
+export class InternalUpdatableContentWrapper extends InternalContentWrapper
+    implements IUpdatableContentMethods {
     private _updatableContentContract: UpdatableContentContract | null = null;
 
-    constructor(web3Wrapper: Web3Wrapper, networkId: number, contractAddress: string) {
+    constructor(
+        web3Wrapper: Web3Wrapper,
+        networkId: number,
+        contractAddress: string
+    ) {
         super(web3Wrapper, networkId, contractAddress);
     }
-  
+
     /** @inheritDoc */
-    public async getContentUpdateTimeAsync(methodOpts?: MethodOpts): Promise<Date> {
+    public async getContentUpdateTimeAsync(
+        methodOpts?: MethodOpts
+    ): Promise<Date> {
         const contract = await this._getContractAsync();
 
-        const defaultBlock = _.isUndefined(methodOpts) ? undefined : methodOpts.defaultBlock;
+        const defaultBlock = _.isUndefined(methodOpts)
+            ? undefined
+            : methodOpts.defaultBlock;
         const result = await contract.contentUpdateTime.callAsync(defaultBlock);
 
         // TODO: Check if converting from BigNumber to number in case of time will have any issues
@@ -39,47 +51,51 @@ export class InternalUpdatableContentWrapper extends InternalContentWrapper impl
     ): Promise<void> {
         const contract = await this._getContractAsync();
 
-        await contract.changeContent.sendTransactionAsync(
-            newContentAddress,
-            {
-                gas: transactionOpts.gasLimit,
-                gasPrice: transactionOpts.gasPrice
-            }
-        );
+        await contract.changeContent.sendTransactionAsync(newContentAddress, {
+            gas: transactionOpts.gasLimit,
+            gasPrice: transactionOpts.gasPrice,
+        });
     }
 
     protected async _getContractAsync(): Promise<UpdatableContentContract> {
-        if(!_.isNull(this._updatableContentContract)) {
+        if (!_.isNull(this._updatableContentContract)) {
             return this._updatableContentContract;
         }
 
         const web3ContractInstance = await this._instantiateContractForAddress(
             Artifacts.Content.UpdatableContentArtifact,
-            this._contractAddress);
+            this._contractAddress
+        );
 
         const contractInstance = new UpdatableContentContract(
             web3ContractInstance,
-            this._web3Wrapper.getContractDefaults());
+            this._web3Wrapper.getContractDefaults()
+        );
 
         this._updatableContentContract = contractInstance;
         return this._updatableContentContract;
     }
 }
 
-export default class UpdatableContentWrapper extends InternalUpdatableContentWrapper implements IUpdatableContentWrapper {
-
+export default class UpdatableContentWrapper extends InternalUpdatableContentWrapper
+    implements IUpdatableContentWrapper {
     /** @inheritDoc */
     public subscribe<ArgsType extends UpdatableContentContractEventArgs>(
         eventName: UpdatableContentEvents,
         indexFilterValues: IndexedFilterValues,
         callback: EventCallback<ArgsType>
     ): string {
-        assert.doesBelongToStringEnum('eventName', eventName, UpdatableContentEvents);
+        assert.doesBelongToStringEnum(
+            'eventName',
+            eventName,
+            UpdatableContentEvents
+        );
 
         return super._subscribeForInstance(
             eventName,
             indexFilterValues,
             Artifacts.Content.UpdatableContentArtifact.abi,
-            callback);
+            callback
+        );
     }
 }

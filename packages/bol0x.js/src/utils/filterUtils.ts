@@ -17,12 +17,20 @@ export const filterUtils = {
         eventName: ContractEvents,
         indexFilterValues: IndexedFilterValues,
         abi: Web3.ContractAbi,
-        blockRange?: BlockRange,
+        blockRange?: BlockRange
     ): Web3.FilterObject {
         const eventAbi = _.find(abi, { name: eventName }) as Web3.EventAbi;
-        const eventSignature = filterUtils.getEventSignatureFromAbiByName(eventAbi, eventName);
-        const topicForEventSignature = ethUtil.addHexPrefix(jsSHA3.keccak256(eventSignature));
-        const topicsForIndexedArgs = filterUtils.getTopicsForIndexedArgs(eventAbi, indexFilterValues);
+        const eventSignature = filterUtils.getEventSignatureFromAbiByName(
+            eventAbi,
+            eventName
+        );
+        const topicForEventSignature = ethUtil.addHexPrefix(
+            jsSHA3.keccak256(eventSignature)
+        );
+        const topicsForIndexedArgs = filterUtils.getTopicsForIndexedArgs(
+            eventAbi,
+            indexFilterValues
+        );
         const topics = [topicForEventSignature, ...topicsForIndexedArgs];
         let filter: Web3.FilterObject = {
             address,
@@ -36,12 +44,18 @@ export const filterUtils = {
         }
         return filter;
     },
-    getEventSignatureFromAbiByName(eventAbi: Web3.EventAbi, eventName: ContractEvents): string {
+    getEventSignatureFromAbiByName(
+        eventAbi: Web3.EventAbi,
+        eventName: ContractEvents
+    ): string {
         const types = _.map(eventAbi.inputs, 'type');
         const signature = `${eventAbi.name}(${types.join(',')})`;
         return signature;
     },
-    getTopicsForIndexedArgs(abi: Web3.EventAbi, indexFilterValues: IndexedFilterValues): Array<string | null> {
+    getTopicsForIndexedArgs(
+        abi: Web3.EventAbi,
+        indexFilterValues: IndexedFilterValues
+    ): Array<string | null> {
         const topics: Array<string | null> = [];
         for (const eventInput of abi.inputs) {
             if (!eventInput.indexed) {
@@ -53,7 +67,10 @@ export const filterUtils = {
             } else {
                 const value = indexFilterValues[eventInput.name] as string;
                 const buffer = ethUtil.toBuffer(value);
-                const paddedBuffer = ethUtil.setLengthLeft(buffer, TOPIC_LENGTH);
+                const paddedBuffer = ethUtil.setLengthLeft(
+                    buffer,
+                    TOPIC_LENGTH
+                );
                 const topic = ethUtil.bufferToHex(paddedBuffer);
                 topics.push(topic);
             }
@@ -69,12 +86,22 @@ export const filterUtils = {
         }
         return true;
     },
-    matchesTopics(logTopics: string[], filterTopics: Array<string[] | string | null>): boolean {
-        const matchesTopic = _.zipWith(logTopics, filterTopics, filterUtils.matchesTopic.bind(filterUtils));
+    matchesTopics(
+        logTopics: string[],
+        filterTopics: Array<string[] | string | null>
+    ): boolean {
+        const matchesTopic = _.zipWith(
+            logTopics,
+            filterTopics,
+            filterUtils.matchesTopic.bind(filterUtils)
+        );
         const matchesTopics = _.every(matchesTopic);
         return matchesTopics;
     },
-    matchesTopic(logTopic: string, filterTopic: string[] | string | null): boolean {
+    matchesTopic(
+        logTopic: string,
+        filterTopic: string[] | string | null
+    ): boolean {
         if (_.isArray(filterTopic)) {
             return _.includes(filterTopic, logTopic);
         }

@@ -1,975 +1,1026 @@
 {
-  "contractName": "Entity",
-  "abi": [
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "identifier",
-      "outputs": [
+    "contractName": "Entity",
+    "abi": [
         {
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "owner",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "identityProvider",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint8"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "transferOwnership",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "name": "_identityProvider",
-          "type": "uint8"
+            "constant": true,
+            "inputs": [],
+            "name": "identifier",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
         },
         {
-          "name": "_identifier",
-          "type": "string"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "name": "previousOwner",
-          "type": "address"
+            "constant": true,
+            "inputs": [],
+            "name": "owner",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
         },
         {
-          "indexed": true,
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "OwnershipTransferred",
-      "type": "event"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "getIdentifierHash",
-      "outputs": [
+            "constant": true,
+            "inputs": [],
+            "name": "identityProvider",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint8"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
         {
-          "name": "",
-          "type": "bytes32"
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "transferOwnership",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "_identityProvider",
+                    "type": "uint8"
+                },
+                {
+                    "name": "_identifier",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "previousOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "OwnershipTransferred",
+            "type": "event"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "getIdentifierHash",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bytes32"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
         }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ],
-  "bytecode": "0x6060604052341561000f57600080fd5b60405161070838038061070883398101604052808051906020019091908051820191905050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000600681111561008157fe5b82600681111561008d57fe5b14156100bf576020604051908101604052806000815250600190805190602001906100b9929190610142565b506100fe565b6100db81610128640100000000026104a4176401000000009004565b15156100e657600080fd5b80600190805190602001906100fc929190610142565b505b81600260006101000a81548160ff0219169083600681111561011c57fe5b021790555050506101fb565b60006101326101c2565b8290506000815111915050919050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061018357805160ff19168380011785556101b1565b828001600101855582156101b1579182015b828111156101b0578251825591602001919060010190610195565b5b5090506101be91906101d6565b5090565b602060405190810160405280600081525090565b6101f891905b808211156101f45760008160009055506001016101dc565b5090565b90565b6104fe8061020a6000396000f30060606040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637998a1c4146100725780638da5cb5b14610100578063c573a27a14610155578063ea8e9de31461018c578063f2fde38b146101bd575b600080fd5b341561007d57600080fd5b6100856101f6565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100c55780820151818401526020810190506100aa565b50505050905090810190601f1680156100f25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561010b57600080fd5b610113610294565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561016057600080fd5b6101686102b9565b6040518082600681111561017857fe5b60ff16815260200191505060405180910390f35b341561019757600080fd5b61019f6102cc565b60405180826000191660001916815260200191505060405180910390f35b34156101c857600080fd5b6101f4600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506102dd565b005b60018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561028c5780601f106102615761010080835404028352916020019161028c565b820191906000526020600020905b81548152906001019060200180831161026f57829003601f168201915b505050505081565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260009054906101000a900460ff1681565b60006102d86001610432565b905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561033857600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff161415151561037457600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b60008160405180828054600181600116156101000203166002900480156104905780601f1061046e576101008083540402835291820191610490565b820191906000526020600020905b81548152906001019060200180831161047c575b505091505060405180910390209050919050565b60006104ae6104be565b8290506000815111915050919050565b6020604051908101604052806000815250905600a165627a7a7230582011183c27ecdeb049127cb88cc5213670c13614668ea6185d394b729d2a8177990029",
-  "deployedBytecode": "0x60606040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637998a1c4146100725780638da5cb5b14610100578063c573a27a14610155578063ea8e9de31461018c578063f2fde38b146101bd575b600080fd5b341561007d57600080fd5b6100856101f6565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100c55780820151818401526020810190506100aa565b50505050905090810190601f1680156100f25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561010b57600080fd5b610113610294565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561016057600080fd5b6101686102b9565b6040518082600681111561017857fe5b60ff16815260200191505060405180910390f35b341561019757600080fd5b61019f6102cc565b60405180826000191660001916815260200191505060405180910390f35b34156101c857600080fd5b6101f4600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506102dd565b005b60018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561028c5780601f106102615761010080835404028352916020019161028c565b820191906000526020600020905b81548152906001019060200180831161026f57829003601f168201915b505050505081565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260009054906101000a900460ff1681565b60006102d86001610432565b905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561033857600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff161415151561037457600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b60008160405180828054600181600116156101000203166002900480156104905780601f1061046e576101008083540402835291820191610490565b820191906000526020600020905b81548152906001019060200180831161047c575b505091505060405180910390209050919050565b60006104ae6104be565b8290506000815111915050919050565b6020604051908101604052806000815250905600a165627a7a7230582011183c27ecdeb049127cb88cc5213670c13614668ea6185d394b729d2a8177990029",
-  "sourceMap": "192:1468:7:-;;;806:607;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1704:10:8;1696:5;;:18;;;;;;;;;;;;;;;;;;973:21:7;952:42;;;;;;;;:17;:42;;;;;;;;;948:409;;;1116:15;;;;;;;;;;;;;:10;:15;;;;;;;;;;;;:::i;:::-;;948:409;;;1281:24;:11;:22;;;;;:24;;;:::i;:::-;1273:33;;;;;;;;1334:11;1321:10;:24;;;;;;;;;;;;:::i;:::-;;948:409;1388:17;1369:16;;:36;;;;;;;;;;;;;;;;;;;;;;;;806:607;;192:1468;;130:202:10;230:4;252:21;;:::i;:::-;282:4;252:35;;323:1;305:8;:15;:19;298:26;;130:202;;;;:::o;192:1468:7:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
-  "deployedSourceMap": "192:1468:7:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;639:24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1422:20:8;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;757:40:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1510:137;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2042:173:8;;;;;;;;;;;;;;;;;;;;;;;;;;;;639:24:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;1422:20:8:-;;;;;;;;;;;;;:::o;757:40:7:-;;;;;;;;;;;;;:::o;1510:137::-;1587:7;1619:20;:10;:18;:20::i;:::-;1612:27;;1510:137;:::o;2042:173:8:-;1855:5;;;;;;;;;;;1841:19;;:10;:19;;;1833:28;;;;;;;;2139:1;2119:22;;:8;:22;;;;2111:31;;;;;;;;2177:8;2149:37;;2170:5;;;;;;;;;;;2149:37;;;;;;;;;;;;2201:8;2193:5;;:16;;;;;;;;;;;;;;;;;;2042:173;:::o;680:153:10:-;778:7;820:4;810:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;803:22;;680:153;;;:::o;130:202::-;230:4;252:21;;:::i;:::-;282:4;252:35;;323:1;305:8;:15;:19;298:26;;130:202;;;;:::o;-1:-1:-1:-;;;;;;;;;;;;;;;:::o",
-  "source": "pragma solidity ^0.4.18;\r\n\r\n\r\nimport '../utils/Ownable.sol';\r\nimport '../utils/StringUtils.sol';\r\n\r\n/**\r\n * @title Entity\r\n * @dev The entity that represents a person or an organization\r\n */\r\ncontract Entity is Ownable {\r\n    using StringUtils for string;\r\n\r\n    /**\r\n     * @dev The off chain identity provider if the entity want to\r\n     * have a known identity.\r\n     */\r\n    enum IdentityProvider {\r\n        NONE,\r\n        ETH_ADDR,\r\n        EMAIL,\r\n        KEY_BASE,\r\n        NAME,\r\n        TWITTER_HANDLE,\r\n        OTHER\r\n    }\r\n\r\n    /**\r\n     * @dev The offchain identifier that corresponds to the identity provider.\r\n     */\r\n    string public identifier;\r\n\r\n    /**\r\n     * @dev The identity provider associated with the identifier.\r\n     */\r\n    IdentityProvider public identityProvider;\r\n\r\n    function Entity(\r\n        IdentityProvider _identityProvider,\r\n        string _identifier)\r\n        Ownable()\r\n        public\r\n    {\r\n        if (_identityProvider == IdentityProvider.NONE) {\r\n            // If the identity provider is none then set the\r\n            // identifier to empty string\r\n            identifier = \"\";\r\n        } else {\r\n            // If there is an identity provider then make sure\r\n            // some identifier is passed in\r\n            require(_identifier.isNotEmpty());\r\n            identifier = _identifier;\r\n        }\r\n\r\n        identityProvider = _identityProvider;\r\n    }\r\n\r\n    /**\r\n     * @dev Gets the hash of the identifier which can be used as key.\r\n     */\r\n    function getIdentifierHash()\r\n        view\r\n        public\r\n        returns (bytes32)\r\n    {\r\n        return identifier.getHash();\r\n    }\r\n        \r\n}",
-  "sourcePath": "H:\\Projects\\my-github\\bol0x\\packages\\contracts\\contracts\\entity\\Entity.sol",
-  "ast": {
-    "attributes": {
-      "absolutePath": "/H/Projects/my-github/bol0x/packages/contracts/contracts/entity/Entity.sol",
-      "exportedSymbols": {
-        "Entity": [
-          728
-        ]
-      }
-    },
-    "children": [
-      {
+    ],
+    "bytecode":
+        "0x6060604052341561000f57600080fd5b60405161070838038061070883398101604052808051906020019091908051820191905050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000600681111561008157fe5b82600681111561008d57fe5b14156100bf576020604051908101604052806000815250600190805190602001906100b9929190610142565b506100fe565b6100db81610128640100000000026104a4176401000000009004565b15156100e657600080fd5b80600190805190602001906100fc929190610142565b505b81600260006101000a81548160ff0219169083600681111561011c57fe5b021790555050506101fb565b60006101326101c2565b8290506000815111915050919050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061018357805160ff19168380011785556101b1565b828001600101855582156101b1579182015b828111156101b0578251825591602001919060010190610195565b5b5090506101be91906101d6565b5090565b602060405190810160405280600081525090565b6101f891905b808211156101f45760008160009055506001016101dc565b5090565b90565b6104fe8061020a6000396000f30060606040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637998a1c4146100725780638da5cb5b14610100578063c573a27a14610155578063ea8e9de31461018c578063f2fde38b146101bd575b600080fd5b341561007d57600080fd5b6100856101f6565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100c55780820151818401526020810190506100aa565b50505050905090810190601f1680156100f25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561010b57600080fd5b610113610294565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561016057600080fd5b6101686102b9565b6040518082600681111561017857fe5b60ff16815260200191505060405180910390f35b341561019757600080fd5b61019f6102cc565b60405180826000191660001916815260200191505060405180910390f35b34156101c857600080fd5b6101f4600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506102dd565b005b60018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561028c5780601f106102615761010080835404028352916020019161028c565b820191906000526020600020905b81548152906001019060200180831161026f57829003601f168201915b505050505081565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260009054906101000a900460ff1681565b60006102d86001610432565b905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561033857600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff161415151561037457600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b60008160405180828054600181600116156101000203166002900480156104905780601f1061046e576101008083540402835291820191610490565b820191906000526020600020905b81548152906001019060200180831161047c575b505091505060405180910390209050919050565b60006104ae6104be565b8290506000815111915050919050565b6020604051908101604052806000815250905600a165627a7a7230582011183c27ecdeb049127cb88cc5213670c13614668ea6185d394b729d2a8177990029",
+    "deployedBytecode":
+        "0x60606040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637998a1c4146100725780638da5cb5b14610100578063c573a27a14610155578063ea8e9de31461018c578063f2fde38b146101bd575b600080fd5b341561007d57600080fd5b6100856101f6565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100c55780820151818401526020810190506100aa565b50505050905090810190601f1680156100f25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561010b57600080fd5b610113610294565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561016057600080fd5b6101686102b9565b6040518082600681111561017857fe5b60ff16815260200191505060405180910390f35b341561019757600080fd5b61019f6102cc565b60405180826000191660001916815260200191505060405180910390f35b34156101c857600080fd5b6101f4600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506102dd565b005b60018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561028c5780601f106102615761010080835404028352916020019161028c565b820191906000526020600020905b81548152906001019060200180831161026f57829003601f168201915b505050505081565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260009054906101000a900460ff1681565b60006102d86001610432565b905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561033857600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff161415151561037457600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b60008160405180828054600181600116156101000203166002900480156104905780601f1061046e576101008083540402835291820191610490565b820191906000526020600020905b81548152906001019060200180831161047c575b505091505060405180910390209050919050565b60006104ae6104be565b8290506000815111915050919050565b6020604051908101604052806000815250905600a165627a7a7230582011183c27ecdeb049127cb88cc5213670c13614668ea6185d394b729d2a8177990029",
+    "sourceMap":
+        "192:1468:7:-;;;806:607;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1704:10:8;1696:5;;:18;;;;;;;;;;;;;;;;;;973:21:7;952:42;;;;;;;;:17;:42;;;;;;;;;948:409;;;1116:15;;;;;;;;;;;;;:10;:15;;;;;;;;;;;;:::i;:::-;;948:409;;;1281:24;:11;:22;;;;;:24;;;:::i;:::-;1273:33;;;;;;;;1334:11;1321:10;:24;;;;;;;;;;;;:::i;:::-;;948:409;1388:17;1369:16;;:36;;;;;;;;;;;;;;;;;;;;;;;;806:607;;192:1468;;130:202:10;230:4;252:21;;:::i;:::-;282:4;252:35;;323:1;305:8;:15;:19;298:26;;130:202;;;;:::o;192:1468:7:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
+    "deployedSourceMap":
+        "192:1468:7:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;639:24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1422:20:8;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;757:40:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1510:137;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2042:173:8;;;;;;;;;;;;;;;;;;;;;;;;;;;;639:24:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;1422:20:8:-;;;;;;;;;;;;;:::o;757:40:7:-;;;;;;;;;;;;;:::o;1510:137::-;1587:7;1619:20;:10;:18;:20::i;:::-;1612:27;;1510:137;:::o;2042:173:8:-;1855:5;;;;;;;;;;;1841:19;;:10;:19;;;1833:28;;;;;;;;2139:1;2119:22;;:8;:22;;;;2111:31;;;;;;;;2177:8;2149:37;;2170:5;;;;;;;;;;;2149:37;;;;;;;;;;;;2201:8;2193:5;;:16;;;;;;;;;;;;;;;;;;2042:173;:::o;680:153:10:-;778:7;820:4;810:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;803:22;;680:153;;;:::o;130:202::-;230:4;252:21;;:::i;:::-;282:4;252:35;;323:1;305:8;:15;:19;298:26;;130:202;;;;:::o;-1:-1:-1:-;;;;;;;;;;;;;;;:::o",
+    "source":
+        "pragma solidity ^0.4.18;\r\n\r\n\r\nimport '../utils/Ownable.sol';\r\nimport '../utils/StringUtils.sol';\r\n\r\n/**\r\n * @title Entity\r\n * @dev The entity that represents a person or an organization\r\n */\r\ncontract Entity is Ownable {\r\n    using StringUtils for string;\r\n\r\n    /**\r\n     * @dev The off chain identity provider if the entity want to\r\n     * have a known identity.\r\n     */\r\n    enum IdentityProvider {\r\n        NONE,\r\n        ETH_ADDR,\r\n        EMAIL,\r\n        KEY_BASE,\r\n        NAME,\r\n        TWITTER_HANDLE,\r\n        OTHER\r\n    }\r\n\r\n    /**\r\n     * @dev The offchain identifier that corresponds to the identity provider.\r\n     */\r\n    string public identifier;\r\n\r\n    /**\r\n     * @dev The identity provider associated with the identifier.\r\n     */\r\n    IdentityProvider public identityProvider;\r\n\r\n    function Entity(\r\n        IdentityProvider _identityProvider,\r\n        string _identifier)\r\n        Ownable()\r\n        public\r\n    {\r\n        if (_identityProvider == IdentityProvider.NONE) {\r\n            // If the identity provider is none then set the\r\n            // identifier to empty string\r\n            identifier = \"\";\r\n        } else {\r\n            // If there is an identity provider then make sure\r\n            // some identifier is passed in\r\n            require(_identifier.isNotEmpty());\r\n            identifier = _identifier;\r\n        }\r\n\r\n        identityProvider = _identityProvider;\r\n    }\r\n\r\n    /**\r\n     * @dev Gets the hash of the identifier which can be used as key.\r\n     */\r\n    function getIdentifierHash()\r\n        view\r\n        public\r\n        returns (bytes32)\r\n    {\r\n        return identifier.getHash();\r\n    }\r\n        \r\n}",
+    "sourcePath":
+        "H:\\Projects\\my-github\\bol0x\\packages\\contracts\\contracts\\entity\\Entity.sol",
+    "ast": {
         "attributes": {
-          "literals": [
-            "solidity",
-            "^",
-            "0.4",
-            ".18"
-          ]
-        },
-        "id": 663,
-        "name": "PragmaDirective",
-        "src": "0:24:7"
-      },
-      {
-        "attributes": {
-          "SourceUnit": 785,
-          "absolutePath": "/H/Projects/my-github/bol0x/packages/contracts/contracts/utils/Ownable.sol",
-          "file": "../utils/Ownable.sol",
-          "scope": 729,
-          "symbolAliases": [
-            null
-          ],
-          "unitAlias": ""
-        },
-        "id": 664,
-        "name": "ImportDirective",
-        "src": "30:30:7"
-      },
-      {
-        "attributes": {
-          "SourceUnit": 946,
-          "absolutePath": "/H/Projects/my-github/bol0x/packages/contracts/contracts/utils/StringUtils.sol",
-          "file": "../utils/StringUtils.sol",
-          "scope": 729,
-          "symbolAliases": [
-            null
-          ],
-          "unitAlias": ""
-        },
-        "id": 665,
-        "name": "ImportDirective",
-        "src": "62:34:7"
-      },
-      {
-        "attributes": {
-          "contractDependencies": [
-            784
-          ],
-          "contractKind": "contract",
-          "documentation": "@title Entity\r\n@dev The entity that represents a person or an organization\r",
-          "fullyImplemented": true,
-          "linearizedBaseContracts": [
-            728,
-            784
-          ],
-          "name": "Entity",
-          "scope": 729
+            "absolutePath":
+                "/H/Projects/my-github/bol0x/packages/contracts/contracts/entity/Entity.sol",
+            "exportedSymbols": {
+                "Entity": [728]
+            }
         },
         "children": [
-          {
-            "attributes": {
-              "arguments": [
-                null
-              ]
+            {
+                "attributes": {
+                    "literals": ["solidity", "^", "0.4", ".18"]
+                },
+                "id": 663,
+                "name": "PragmaDirective",
+                "src": "0:24:7"
             },
-            "children": [
-              {
+            {
                 "attributes": {
-                  "contractScope": null,
-                  "name": "Ownable",
-                  "referencedDeclaration": 784,
-                  "type": "contract Ownable"
+                    "SourceUnit": 785,
+                    "absolutePath":
+                        "/H/Projects/my-github/bol0x/packages/contracts/contracts/utils/Ownable.sol",
+                    "file": "../utils/Ownable.sol",
+                    "scope": 729,
+                    "symbolAliases": [null],
+                    "unitAlias": ""
                 },
-                "id": 666,
-                "name": "UserDefinedTypeName",
-                "src": "211:7:7"
-              }
-            ],
-            "id": 667,
-            "name": "InheritanceSpecifier",
-            "src": "211:7:7"
-          },
-          {
-            "children": [
-              {
-                "attributes": {
-                  "contractScope": null,
-                  "name": "StringUtils",
-                  "referencedDeclaration": 945,
-                  "type": "library StringUtils"
-                },
-                "id": 668,
-                "name": "UserDefinedTypeName",
-                "src": "232:11:7"
-              },
-              {
-                "attributes": {
-                  "name": "string",
-                  "type": "string storage pointer"
-                },
-                "id": 669,
-                "name": "ElementaryTypeName",
-                "src": "248:6:7"
-              }
-            ],
-            "id": 670,
-            "name": "UsingForDirective",
-            "src": "226:29:7"
-          },
-          {
-            "attributes": {
-              "canonicalName": "Entity.IdentityProvider",
-              "name": "IdentityProvider"
+                "id": 664,
+                "name": "ImportDirective",
+                "src": "30:30:7"
             },
-            "children": [
-              {
+            {
                 "attributes": {
-                  "name": "NONE"
+                    "SourceUnit": 946,
+                    "absolutePath":
+                        "/H/Projects/my-github/bol0x/packages/contracts/contracts/utils/StringUtils.sol",
+                    "file": "../utils/StringUtils.sol",
+                    "scope": 729,
+                    "symbolAliases": [null],
+                    "unitAlias": ""
                 },
-                "id": 671,
-                "name": "EnumValue",
-                "src": "412:4:7"
-              },
-              {
-                "attributes": {
-                  "name": "ETH_ADDR"
-                },
-                "id": 672,
-                "name": "EnumValue",
-                "src": "427:8:7"
-              },
-              {
-                "attributes": {
-                  "name": "EMAIL"
-                },
-                "id": 673,
-                "name": "EnumValue",
-                "src": "446:5:7"
-              },
-              {
-                "attributes": {
-                  "name": "KEY_BASE"
-                },
-                "id": 674,
-                "name": "EnumValue",
-                "src": "462:8:7"
-              },
-              {
-                "attributes": {
-                  "name": "NAME"
-                },
-                "id": 675,
-                "name": "EnumValue",
-                "src": "481:4:7"
-              },
-              {
-                "attributes": {
-                  "name": "TWITTER_HANDLE"
-                },
-                "id": 676,
-                "name": "EnumValue",
-                "src": "496:14:7"
-              },
-              {
-                "attributes": {
-                  "name": "OTHER"
-                },
-                "id": 677,
-                "name": "EnumValue",
-                "src": "521:5:7"
-              }
-            ],
-            "id": 678,
-            "name": "EnumDefinition",
-            "src": "379:154:7"
-          },
-          {
-            "attributes": {
-              "constant": false,
-              "name": "identifier",
-              "scope": 728,
-              "stateVariable": true,
-              "storageLocation": "default",
-              "type": "string storage ref",
-              "value": null,
-              "visibility": "public"
+                "id": 665,
+                "name": "ImportDirective",
+                "src": "62:34:7"
             },
-            "children": [
-              {
+            {
                 "attributes": {
-                  "name": "string",
-                  "type": "string storage pointer"
-                },
-                "id": 679,
-                "name": "ElementaryTypeName",
-                "src": "639:6:7"
-              }
-            ],
-            "id": 680,
-            "name": "VariableDeclaration",
-            "src": "639:24:7"
-          },
-          {
-            "attributes": {
-              "constant": false,
-              "name": "identityProvider",
-              "scope": 728,
-              "stateVariable": true,
-              "storageLocation": "default",
-              "type": "enum Entity.IdentityProvider",
-              "value": null,
-              "visibility": "public"
-            },
-            "children": [
-              {
-                "attributes": {
-                  "contractScope": null,
-                  "name": "IdentityProvider",
-                  "referencedDeclaration": 678,
-                  "type": "enum Entity.IdentityProvider"
-                },
-                "id": 681,
-                "name": "UserDefinedTypeName",
-                "src": "757:16:7"
-              }
-            ],
-            "id": 682,
-            "name": "VariableDeclaration",
-            "src": "757:40:7"
-          },
-          {
-            "attributes": {
-              "constant": false,
-              "implemented": true,
-              "isConstructor": true,
-              "name": "Entity",
-              "payable": false,
-              "scope": 728,
-              "stateMutability": "nonpayable",
-              "superFunction": null,
-              "visibility": "public"
-            },
-            "children": [
-              {
-                "children": [
-                  {
-                    "attributes": {
-                      "constant": false,
-                      "name": "_identityProvider",
-                      "scope": 717,
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "type": "enum Entity.IdentityProvider",
-                      "value": null,
-                      "visibility": "internal"
-                    },
-                    "children": [
-                      {
-                        "attributes": {
-                          "contractScope": null,
-                          "name": "IdentityProvider",
-                          "referencedDeclaration": 678,
-                          "type": "enum Entity.IdentityProvider"
-                        },
-                        "id": 683,
-                        "name": "UserDefinedTypeName",
-                        "src": "832:16:7"
-                      }
-                    ],
-                    "id": 684,
-                    "name": "VariableDeclaration",
-                    "src": "832:34:7"
-                  },
-                  {
-                    "attributes": {
-                      "constant": false,
-                      "name": "_identifier",
-                      "scope": 717,
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "type": "string memory",
-                      "value": null,
-                      "visibility": "internal"
-                    },
-                    "children": [
-                      {
-                        "attributes": {
-                          "name": "string",
-                          "type": "string storage pointer"
-                        },
-                        "id": 685,
-                        "name": "ElementaryTypeName",
-                        "src": "877:6:7"
-                      }
-                    ],
-                    "id": 686,
-                    "name": "VariableDeclaration",
-                    "src": "877:18:7"
-                  }
-                ],
-                "id": 687,
-                "name": "ParameterList",
-                "src": "821:75:7"
-              },
-              {
-                "attributes": {
-                  "parameters": [
-                    null
-                  ]
-                },
-                "children": [],
-                "id": 690,
-                "name": "ParameterList",
-                "src": "937:0:7"
-              },
-              {
-                "attributes": {
-                  "arguments": [
-                    null
-                  ]
+                    "contractDependencies": [784],
+                    "contractKind": "contract",
+                    "documentation":
+                        "@title Entity\r\n@dev The entity that represents a person or an organization\r",
+                    "fullyImplemented": true,
+                    "linearizedBaseContracts": [728, 784],
+                    "name": "Entity",
+                    "scope": 729
                 },
                 "children": [
-                  {
-                    "attributes": {
-                      "argumentTypes": null,
-                      "overloadedDeclarations": [
-                        null
-                      ],
-                      "referencedDeclaration": 784,
-                      "type": "type(contract Ownable)",
-                      "value": "Ownable"
-                    },
-                    "id": 688,
-                    "name": "Identifier",
-                    "src": "906:7:7"
-                  }
-                ],
-                "id": 689,
-                "name": "ModifierInvocation",
-                "src": "906:9:7"
-              },
-              {
-                "children": [
-                  {
-                    "children": [
-                      {
+                    {
                         "attributes": {
-                          "argumentTypes": null,
-                          "commonType": {
-                            "typeIdentifier": "t_enum$_IdentityProvider_$678",
-                            "typeString": "enum Entity.IdentityProvider"
-                          },
-                          "isConstant": false,
-                          "isLValue": false,
-                          "isPure": false,
-                          "lValueRequested": false,
-                          "operator": "==",
-                          "type": "bool"
+                            "arguments": [null]
                         },
                         "children": [
-                          {
-                            "attributes": {
-                              "argumentTypes": null,
-                              "overloadedDeclarations": [
-                                null
-                              ],
-                              "referencedDeclaration": 684,
-                              "type": "enum Entity.IdentityProvider",
-                              "value": "_identityProvider"
-                            },
-                            "id": 691,
-                            "name": "Identifier",
-                            "src": "952:17:7"
-                          },
-                          {
-                            "attributes": {
-                              "argumentTypes": null,
-                              "isConstant": false,
-                              "isLValue": false,
-                              "isPure": true,
-                              "lValueRequested": false,
-                              "member_name": "NONE",
-                              "referencedDeclaration": null,
-                              "type": "enum Entity.IdentityProvider"
-                            },
-                            "children": [
-                              {
+                            {
                                 "attributes": {
-                                  "argumentTypes": null,
-                                  "overloadedDeclarations": [
-                                    null
-                                  ],
-                                  "referencedDeclaration": 678,
-                                  "type": "type(enum Entity.IdentityProvider)",
-                                  "value": "IdentityProvider"
+                                    "contractScope": null,
+                                    "name": "Ownable",
+                                    "referencedDeclaration": 784,
+                                    "type": "contract Ownable"
                                 },
-                                "id": 692,
-                                "name": "Identifier",
-                                "src": "973:16:7"
-                              }
-                            ],
-                            "id": 693,
-                            "name": "MemberAccess",
-                            "src": "973:21:7"
-                          }
+                                "id": 666,
+                                "name": "UserDefinedTypeName",
+                                "src": "211:7:7"
+                            }
                         ],
-                        "id": 694,
-                        "name": "BinaryOperation",
-                        "src": "952:42:7"
-                      },
-                      {
+                        "id": 667,
+                        "name": "InheritanceSpecifier",
+                        "src": "211:7:7"
+                    },
+                    {
                         "children": [
-                          {
-                            "children": [
-                              {
+                            {
                                 "attributes": {
-                                  "argumentTypes": null,
-                                  "isConstant": false,
-                                  "isLValue": false,
-                                  "isPure": false,
-                                  "lValueRequested": false,
-                                  "operator": "=",
-                                  "type": "string storage ref"
+                                    "contractScope": null,
+                                    "name": "StringUtils",
+                                    "referencedDeclaration": 945,
+                                    "type": "library StringUtils"
                                 },
-                                "children": [
-                                  {
-                                    "attributes": {
-                                      "argumentTypes": null,
-                                      "overloadedDeclarations": [
-                                        null
-                                      ],
-                                      "referencedDeclaration": 680,
-                                      "type": "string storage ref",
-                                      "value": "identifier"
-                                    },
-                                    "id": 695,
-                                    "name": "Identifier",
-                                    "src": "1116:10:7"
-                                  },
-                                  {
-                                    "attributes": {
-                                      "argumentTypes": null,
-                                      "hexvalue": "",
-                                      "isConstant": false,
-                                      "isLValue": false,
-                                      "isPure": true,
-                                      "lValueRequested": false,
-                                      "subdenomination": null,
-                                      "token": "string",
-                                      "type": "literal_string \"\"",
-                                      "value": ""
-                                    },
-                                    "id": 696,
-                                    "name": "Literal",
-                                    "src": "1129:2:7"
-                                  }
-                                ],
-                                "id": 697,
-                                "name": "Assignment",
-                                "src": "1116:15:7"
-                              }
-                            ],
-                            "id": 698,
-                            "name": "ExpressionStatement",
-                            "src": "1116:15:7"
-                          }
+                                "id": 668,
+                                "name": "UserDefinedTypeName",
+                                "src": "232:11:7"
+                            },
+                            {
+                                "attributes": {
+                                    "name": "string",
+                                    "type": "string storage pointer"
+                                },
+                                "id": 669,
+                                "name": "ElementaryTypeName",
+                                "src": "248:6:7"
+                            }
                         ],
-                        "id": 699,
-                        "name": "Block",
-                        "src": "996:147:7"
-                      },
-                      {
+                        "id": 670,
+                        "name": "UsingForDirective",
+                        "src": "226:29:7"
+                    },
+                    {
+                        "attributes": {
+                            "canonicalName": "Entity.IdentityProvider",
+                            "name": "IdentityProvider"
+                        },
                         "children": [
-                          {
-                            "children": [
-                              {
+                            {
                                 "attributes": {
-                                  "argumentTypes": null,
-                                  "isConstant": false,
-                                  "isLValue": false,
-                                  "isPure": false,
-                                  "isStructConstructorCall": false,
-                                  "lValueRequested": false,
-                                  "names": [
-                                    null
-                                  ],
-                                  "type": "tuple()",
-                                  "type_conversion": false
+                                    "name": "NONE"
                                 },
+                                "id": 671,
+                                "name": "EnumValue",
+                                "src": "412:4:7"
+                            },
+                            {
+                                "attributes": {
+                                    "name": "ETH_ADDR"
+                                },
+                                "id": 672,
+                                "name": "EnumValue",
+                                "src": "427:8:7"
+                            },
+                            {
+                                "attributes": {
+                                    "name": "EMAIL"
+                                },
+                                "id": 673,
+                                "name": "EnumValue",
+                                "src": "446:5:7"
+                            },
+                            {
+                                "attributes": {
+                                    "name": "KEY_BASE"
+                                },
+                                "id": 674,
+                                "name": "EnumValue",
+                                "src": "462:8:7"
+                            },
+                            {
+                                "attributes": {
+                                    "name": "NAME"
+                                },
+                                "id": 675,
+                                "name": "EnumValue",
+                                "src": "481:4:7"
+                            },
+                            {
+                                "attributes": {
+                                    "name": "TWITTER_HANDLE"
+                                },
+                                "id": 676,
+                                "name": "EnumValue",
+                                "src": "496:14:7"
+                            },
+                            {
+                                "attributes": {
+                                    "name": "OTHER"
+                                },
+                                "id": 677,
+                                "name": "EnumValue",
+                                "src": "521:5:7"
+                            }
+                        ],
+                        "id": 678,
+                        "name": "EnumDefinition",
+                        "src": "379:154:7"
+                    },
+                    {
+                        "attributes": {
+                            "constant": false,
+                            "name": "identifier",
+                            "scope": 728,
+                            "stateVariable": true,
+                            "storageLocation": "default",
+                            "type": "string storage ref",
+                            "value": null,
+                            "visibility": "public"
+                        },
+                        "children": [
+                            {
+                                "attributes": {
+                                    "name": "string",
+                                    "type": "string storage pointer"
+                                },
+                                "id": 679,
+                                "name": "ElementaryTypeName",
+                                "src": "639:6:7"
+                            }
+                        ],
+                        "id": 680,
+                        "name": "VariableDeclaration",
+                        "src": "639:24:7"
+                    },
+                    {
+                        "attributes": {
+                            "constant": false,
+                            "name": "identityProvider",
+                            "scope": 728,
+                            "stateVariable": true,
+                            "storageLocation": "default",
+                            "type": "enum Entity.IdentityProvider",
+                            "value": null,
+                            "visibility": "public"
+                        },
+                        "children": [
+                            {
+                                "attributes": {
+                                    "contractScope": null,
+                                    "name": "IdentityProvider",
+                                    "referencedDeclaration": 678,
+                                    "type": "enum Entity.IdentityProvider"
+                                },
+                                "id": 681,
+                                "name": "UserDefinedTypeName",
+                                "src": "757:16:7"
+                            }
+                        ],
+                        "id": 682,
+                        "name": "VariableDeclaration",
+                        "src": "757:40:7"
+                    },
+                    {
+                        "attributes": {
+                            "constant": false,
+                            "implemented": true,
+                            "isConstructor": true,
+                            "name": "Entity",
+                            "payable": false,
+                            "scope": 728,
+                            "stateMutability": "nonpayable",
+                            "superFunction": null,
+                            "visibility": "public"
+                        },
+                        "children": [
+                            {
                                 "children": [
-                                  {
-                                    "attributes": {
-                                      "argumentTypes": [
-                                        {
-                                          "typeIdentifier": "t_bool",
-                                          "typeString": "bool"
-                                        }
-                                      ],
-                                      "overloadedDeclarations": [
-                                        null
-                                      ],
-                                      "referencedDeclaration": 960,
-                                      "type": "function (bool) pure",
-                                      "value": "require"
-                                    },
-                                    "id": 700,
-                                    "name": "Identifier",
-                                    "src": "1273:7:7"
-                                  },
-                                  {
-                                    "attributes": {
-                                      "argumentTypes": null,
-                                      "arguments": [
-                                        null
-                                      ],
-                                      "isConstant": false,
-                                      "isLValue": false,
-                                      "isPure": false,
-                                      "isStructConstructorCall": false,
-                                      "lValueRequested": false,
-                                      "names": [
-                                        null
-                                      ],
-                                      "type": "bool",
-                                      "type_conversion": false
-                                    },
-                                    "children": [
-                                      {
+                                    {
                                         "attributes": {
-                                          "argumentTypes": [
-                                            null
-                                          ],
-                                          "isConstant": false,
-                                          "isLValue": false,
-                                          "isPure": false,
-                                          "lValueRequested": false,
-                                          "member_name": "isNotEmpty",
-                                          "referencedDeclaration": 903,
-                                          "type": "function (string memory) pure returns (bool)"
+                                            "constant": false,
+                                            "name": "_identityProvider",
+                                            "scope": 717,
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "type":
+                                                "enum Entity.IdentityProvider",
+                                            "value": null,
+                                            "visibility": "internal"
                                         },
                                         "children": [
-                                          {
-                                            "attributes": {
-                                              "argumentTypes": null,
-                                              "overloadedDeclarations": [
-                                                null
-                                              ],
-                                              "referencedDeclaration": 686,
-                                              "type": "string memory",
-                                              "value": "_identifier"
-                                            },
-                                            "id": 701,
-                                            "name": "Identifier",
-                                            "src": "1281:11:7"
-                                          }
+                                            {
+                                                "attributes": {
+                                                    "contractScope": null,
+                                                    "name": "IdentityProvider",
+                                                    "referencedDeclaration": 678,
+                                                    "type":
+                                                        "enum Entity.IdentityProvider"
+                                                },
+                                                "id": 683,
+                                                "name": "UserDefinedTypeName",
+                                                "src": "832:16:7"
+                                            }
                                         ],
-                                        "id": 702,
-                                        "name": "MemberAccess",
-                                        "src": "1281:22:7"
-                                      }
-                                    ],
-                                    "id": 703,
-                                    "name": "FunctionCall",
-                                    "src": "1281:24:7"
-                                  }
+                                        "id": 684,
+                                        "name": "VariableDeclaration",
+                                        "src": "832:34:7"
+                                    },
+                                    {
+                                        "attributes": {
+                                            "constant": false,
+                                            "name": "_identifier",
+                                            "scope": 717,
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "type": "string memory",
+                                            "value": null,
+                                            "visibility": "internal"
+                                        },
+                                        "children": [
+                                            {
+                                                "attributes": {
+                                                    "name": "string",
+                                                    "type":
+                                                        "string storage pointer"
+                                                },
+                                                "id": 685,
+                                                "name": "ElementaryTypeName",
+                                                "src": "877:6:7"
+                                            }
+                                        ],
+                                        "id": 686,
+                                        "name": "VariableDeclaration",
+                                        "src": "877:18:7"
+                                    }
                                 ],
-                                "id": 704,
-                                "name": "FunctionCall",
-                                "src": "1273:33:7"
-                              }
-                            ],
-                            "id": 705,
-                            "name": "ExpressionStatement",
-                            "src": "1273:33:7"
-                          },
-                          {
-                            "children": [
-                              {
+                                "id": 687,
+                                "name": "ParameterList",
+                                "src": "821:75:7"
+                            },
+                            {
                                 "attributes": {
-                                  "argumentTypes": null,
-                                  "isConstant": false,
-                                  "isLValue": false,
-                                  "isPure": false,
-                                  "lValueRequested": false,
-                                  "operator": "=",
-                                  "type": "string storage ref"
+                                    "parameters": [null]
+                                },
+                                "children": [],
+                                "id": 690,
+                                "name": "ParameterList",
+                                "src": "937:0:7"
+                            },
+                            {
+                                "attributes": {
+                                    "arguments": [null]
                                 },
                                 "children": [
-                                  {
-                                    "attributes": {
-                                      "argumentTypes": null,
-                                      "overloadedDeclarations": [
-                                        null
-                                      ],
-                                      "referencedDeclaration": 680,
-                                      "type": "string storage ref",
-                                      "value": "identifier"
-                                    },
-                                    "id": 706,
-                                    "name": "Identifier",
-                                    "src": "1321:10:7"
-                                  },
-                                  {
-                                    "attributes": {
-                                      "argumentTypes": null,
-                                      "overloadedDeclarations": [
-                                        null
-                                      ],
-                                      "referencedDeclaration": 686,
-                                      "type": "string memory",
-                                      "value": "_identifier"
-                                    },
-                                    "id": 707,
-                                    "name": "Identifier",
-                                    "src": "1334:11:7"
-                                  }
+                                    {
+                                        "attributes": {
+                                            "argumentTypes": null,
+                                            "overloadedDeclarations": [null],
+                                            "referencedDeclaration": 784,
+                                            "type": "type(contract Ownable)",
+                                            "value": "Ownable"
+                                        },
+                                        "id": 688,
+                                        "name": "Identifier",
+                                        "src": "906:7:7"
+                                    }
                                 ],
-                                "id": 708,
-                                "name": "Assignment",
-                                "src": "1321:24:7"
-                              }
-                            ],
-                            "id": 709,
-                            "name": "ExpressionStatement",
-                            "src": "1321:24:7"
-                          }
+                                "id": 689,
+                                "name": "ModifierInvocation",
+                                "src": "906:9:7"
+                            },
+                            {
+                                "children": [
+                                    {
+                                        "children": [
+                                            {
+                                                "attributes": {
+                                                    "argumentTypes": null,
+                                                    "commonType": {
+                                                        "typeIdentifier":
+                                                            "t_enum$_IdentityProvider_$678",
+                                                        "typeString":
+                                                            "enum Entity.IdentityProvider"
+                                                    },
+                                                    "isConstant": false,
+                                                    "isLValue": false,
+                                                    "isPure": false,
+                                                    "lValueRequested": false,
+                                                    "operator": "==",
+                                                    "type": "bool"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "attributes": {
+                                                            "argumentTypes": null,
+                                                            "overloadedDeclarations": [
+                                                                null
+                                                            ],
+                                                            "referencedDeclaration": 684,
+                                                            "type":
+                                                                "enum Entity.IdentityProvider",
+                                                            "value":
+                                                                "_identityProvider"
+                                                        },
+                                                        "id": 691,
+                                                        "name": "Identifier",
+                                                        "src": "952:17:7"
+                                                    },
+                                                    {
+                                                        "attributes": {
+                                                            "argumentTypes": null,
+                                                            "isConstant": false,
+                                                            "isLValue": false,
+                                                            "isPure": true,
+                                                            "lValueRequested": false,
+                                                            "member_name":
+                                                                "NONE",
+                                                            "referencedDeclaration": null,
+                                                            "type":
+                                                                "enum Entity.IdentityProvider"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "attributes": {
+                                                                    "argumentTypes": null,
+                                                                    "overloadedDeclarations": [
+                                                                        null
+                                                                    ],
+                                                                    "referencedDeclaration": 678,
+                                                                    "type":
+                                                                        "type(enum Entity.IdentityProvider)",
+                                                                    "value":
+                                                                        "IdentityProvider"
+                                                                },
+                                                                "id": 692,
+                                                                "name":
+                                                                    "Identifier",
+                                                                "src":
+                                                                    "973:16:7"
+                                                            }
+                                                        ],
+                                                        "id": 693,
+                                                        "name": "MemberAccess",
+                                                        "src": "973:21:7"
+                                                    }
+                                                ],
+                                                "id": 694,
+                                                "name": "BinaryOperation",
+                                                "src": "952:42:7"
+                                            },
+                                            {
+                                                "children": [
+                                                    {
+                                                        "children": [
+                                                            {
+                                                                "attributes": {
+                                                                    "argumentTypes": null,
+                                                                    "isConstant": false,
+                                                                    "isLValue": false,
+                                                                    "isPure": false,
+                                                                    "lValueRequested": false,
+                                                                    "operator":
+                                                                        "=",
+                                                                    "type":
+                                                                        "string storage ref"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "attributes": {
+                                                                            "argumentTypes": null,
+                                                                            "overloadedDeclarations": [
+                                                                                null
+                                                                            ],
+                                                                            "referencedDeclaration": 680,
+                                                                            "type":
+                                                                                "string storage ref",
+                                                                            "value":
+                                                                                "identifier"
+                                                                        },
+                                                                        "id": 695,
+                                                                        "name":
+                                                                            "Identifier",
+                                                                        "src":
+                                                                            "1116:10:7"
+                                                                    },
+                                                                    {
+                                                                        "attributes": {
+                                                                            "argumentTypes": null,
+                                                                            "hexvalue":
+                                                                                "",
+                                                                            "isConstant": false,
+                                                                            "isLValue": false,
+                                                                            "isPure": true,
+                                                                            "lValueRequested": false,
+                                                                            "subdenomination": null,
+                                                                            "token":
+                                                                                "string",
+                                                                            "type":
+                                                                                "literal_string \"\"",
+                                                                            "value":
+                                                                                ""
+                                                                        },
+                                                                        "id": 696,
+                                                                        "name":
+                                                                            "Literal",
+                                                                        "src":
+                                                                            "1129:2:7"
+                                                                    }
+                                                                ],
+                                                                "id": 697,
+                                                                "name":
+                                                                    "Assignment",
+                                                                "src":
+                                                                    "1116:15:7"
+                                                            }
+                                                        ],
+                                                        "id": 698,
+                                                        "name":
+                                                            "ExpressionStatement",
+                                                        "src": "1116:15:7"
+                                                    }
+                                                ],
+                                                "id": 699,
+                                                "name": "Block",
+                                                "src": "996:147:7"
+                                            },
+                                            {
+                                                "children": [
+                                                    {
+                                                        "children": [
+                                                            {
+                                                                "attributes": {
+                                                                    "argumentTypes": null,
+                                                                    "isConstant": false,
+                                                                    "isLValue": false,
+                                                                    "isPure": false,
+                                                                    "isStructConstructorCall": false,
+                                                                    "lValueRequested": false,
+                                                                    "names": [
+                                                                        null
+                                                                    ],
+                                                                    "type":
+                                                                        "tuple()",
+                                                                    "type_conversion": false
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "attributes": {
+                                                                            "argumentTypes": [
+                                                                                {
+                                                                                    "typeIdentifier":
+                                                                                        "t_bool",
+                                                                                    "typeString":
+                                                                                        "bool"
+                                                                                }
+                                                                            ],
+                                                                            "overloadedDeclarations": [
+                                                                                null
+                                                                            ],
+                                                                            "referencedDeclaration": 960,
+                                                                            "type":
+                                                                                "function (bool) pure",
+                                                                            "value":
+                                                                                "require"
+                                                                        },
+                                                                        "id": 700,
+                                                                        "name":
+                                                                            "Identifier",
+                                                                        "src":
+                                                                            "1273:7:7"
+                                                                    },
+                                                                    {
+                                                                        "attributes": {
+                                                                            "argumentTypes": null,
+                                                                            "arguments": [
+                                                                                null
+                                                                            ],
+                                                                            "isConstant": false,
+                                                                            "isLValue": false,
+                                                                            "isPure": false,
+                                                                            "isStructConstructorCall": false,
+                                                                            "lValueRequested": false,
+                                                                            "names": [
+                                                                                null
+                                                                            ],
+                                                                            "type":
+                                                                                "bool",
+                                                                            "type_conversion": false
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "attributes": {
+                                                                                    "argumentTypes": [
+                                                                                        null
+                                                                                    ],
+                                                                                    "isConstant": false,
+                                                                                    "isLValue": false,
+                                                                                    "isPure": false,
+                                                                                    "lValueRequested": false,
+                                                                                    "member_name":
+                                                                                        "isNotEmpty",
+                                                                                    "referencedDeclaration": 903,
+                                                                                    "type":
+                                                                                        "function (string memory) pure returns (bool)"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "attributes": {
+                                                                                            "argumentTypes": null,
+                                                                                            "overloadedDeclarations": [
+                                                                                                null
+                                                                                            ],
+                                                                                            "referencedDeclaration": 686,
+                                                                                            "type":
+                                                                                                "string memory",
+                                                                                            "value":
+                                                                                                "_identifier"
+                                                                                        },
+                                                                                        "id": 701,
+                                                                                        "name":
+                                                                                            "Identifier",
+                                                                                        "src":
+                                                                                            "1281:11:7"
+                                                                                    }
+                                                                                ],
+                                                                                "id": 702,
+                                                                                "name":
+                                                                                    "MemberAccess",
+                                                                                "src":
+                                                                                    "1281:22:7"
+                                                                            }
+                                                                        ],
+                                                                        "id": 703,
+                                                                        "name":
+                                                                            "FunctionCall",
+                                                                        "src":
+                                                                            "1281:24:7"
+                                                                    }
+                                                                ],
+                                                                "id": 704,
+                                                                "name":
+                                                                    "FunctionCall",
+                                                                "src":
+                                                                    "1273:33:7"
+                                                            }
+                                                        ],
+                                                        "id": 705,
+                                                        "name":
+                                                            "ExpressionStatement",
+                                                        "src": "1273:33:7"
+                                                    },
+                                                    {
+                                                        "children": [
+                                                            {
+                                                                "attributes": {
+                                                                    "argumentTypes": null,
+                                                                    "isConstant": false,
+                                                                    "isLValue": false,
+                                                                    "isPure": false,
+                                                                    "lValueRequested": false,
+                                                                    "operator":
+                                                                        "=",
+                                                                    "type":
+                                                                        "string storage ref"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "attributes": {
+                                                                            "argumentTypes": null,
+                                                                            "overloadedDeclarations": [
+                                                                                null
+                                                                            ],
+                                                                            "referencedDeclaration": 680,
+                                                                            "type":
+                                                                                "string storage ref",
+                                                                            "value":
+                                                                                "identifier"
+                                                                        },
+                                                                        "id": 706,
+                                                                        "name":
+                                                                            "Identifier",
+                                                                        "src":
+                                                                            "1321:10:7"
+                                                                    },
+                                                                    {
+                                                                        "attributes": {
+                                                                            "argumentTypes": null,
+                                                                            "overloadedDeclarations": [
+                                                                                null
+                                                                            ],
+                                                                            "referencedDeclaration": 686,
+                                                                            "type":
+                                                                                "string memory",
+                                                                            "value":
+                                                                                "_identifier"
+                                                                        },
+                                                                        "id": 707,
+                                                                        "name":
+                                                                            "Identifier",
+                                                                        "src":
+                                                                            "1334:11:7"
+                                                                    }
+                                                                ],
+                                                                "id": 708,
+                                                                "name":
+                                                                    "Assignment",
+                                                                "src":
+                                                                    "1321:24:7"
+                                                            }
+                                                        ],
+                                                        "id": 709,
+                                                        "name":
+                                                            "ExpressionStatement",
+                                                        "src": "1321:24:7"
+                                                    }
+                                                ],
+                                                "id": 710,
+                                                "name": "Block",
+                                                "src": "1149:208:7"
+                                            }
+                                        ],
+                                        "id": 711,
+                                        "name": "IfStatement",
+                                        "src": "948:409:7"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "attributes": {
+                                                    "argumentTypes": null,
+                                                    "isConstant": false,
+                                                    "isLValue": false,
+                                                    "isPure": false,
+                                                    "lValueRequested": false,
+                                                    "operator": "=",
+                                                    "type":
+                                                        "enum Entity.IdentityProvider"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "attributes": {
+                                                            "argumentTypes": null,
+                                                            "overloadedDeclarations": [
+                                                                null
+                                                            ],
+                                                            "referencedDeclaration": 682,
+                                                            "type":
+                                                                "enum Entity.IdentityProvider",
+                                                            "value":
+                                                                "identityProvider"
+                                                        },
+                                                        "id": 712,
+                                                        "name": "Identifier",
+                                                        "src": "1369:16:7"
+                                                    },
+                                                    {
+                                                        "attributes": {
+                                                            "argumentTypes": null,
+                                                            "overloadedDeclarations": [
+                                                                null
+                                                            ],
+                                                            "referencedDeclaration": 684,
+                                                            "type":
+                                                                "enum Entity.IdentityProvider",
+                                                            "value":
+                                                                "_identityProvider"
+                                                        },
+                                                        "id": 713,
+                                                        "name": "Identifier",
+                                                        "src": "1388:17:7"
+                                                    }
+                                                ],
+                                                "id": 714,
+                                                "name": "Assignment",
+                                                "src": "1369:36:7"
+                                            }
+                                        ],
+                                        "id": 715,
+                                        "name": "ExpressionStatement",
+                                        "src": "1369:36:7"
+                                    }
+                                ],
+                                "id": 716,
+                                "name": "Block",
+                                "src": "937:476:7"
+                            }
                         ],
-                        "id": 710,
-                        "name": "Block",
-                        "src": "1149:208:7"
-                      }
-                    ],
-                    "id": 711,
-                    "name": "IfStatement",
-                    "src": "948:409:7"
-                  },
-                  {
-                    "children": [
-                      {
+                        "id": 717,
+                        "name": "FunctionDefinition",
+                        "src": "806:607:7"
+                    },
+                    {
                         "attributes": {
-                          "argumentTypes": null,
-                          "isConstant": false,
-                          "isLValue": false,
-                          "isPure": false,
-                          "lValueRequested": false,
-                          "operator": "=",
-                          "type": "enum Entity.IdentityProvider"
+                            "constant": true,
+                            "implemented": true,
+                            "isConstructor": false,
+                            "modifiers": [null],
+                            "name": "getIdentifierHash",
+                            "payable": false,
+                            "scope": 728,
+                            "stateMutability": "view",
+                            "superFunction": null,
+                            "visibility": "public"
                         },
                         "children": [
-                          {
-                            "attributes": {
-                              "argumentTypes": null,
-                              "overloadedDeclarations": [
-                                null
-                              ],
-                              "referencedDeclaration": 682,
-                              "type": "enum Entity.IdentityProvider",
-                              "value": "identityProvider"
-                            },
-                            "id": 712,
-                            "name": "Identifier",
-                            "src": "1369:16:7"
-                          },
-                          {
-                            "attributes": {
-                              "argumentTypes": null,
-                              "overloadedDeclarations": [
-                                null
-                              ],
-                              "referencedDeclaration": 684,
-                              "type": "enum Entity.IdentityProvider",
-                              "value": "_identityProvider"
-                            },
-                            "id": 713,
-                            "name": "Identifier",
-                            "src": "1388:17:7"
-                          }
-                        ],
-                        "id": 714,
-                        "name": "Assignment",
-                        "src": "1369:36:7"
-                      }
-                    ],
-                    "id": 715,
-                    "name": "ExpressionStatement",
-                    "src": "1369:36:7"
-                  }
-                ],
-                "id": 716,
-                "name": "Block",
-                "src": "937:476:7"
-              }
-            ],
-            "id": 717,
-            "name": "FunctionDefinition",
-            "src": "806:607:7"
-          },
-          {
-            "attributes": {
-              "constant": true,
-              "implemented": true,
-              "isConstructor": false,
-              "modifiers": [
-                null
-              ],
-              "name": "getIdentifierHash",
-              "payable": false,
-              "scope": 728,
-              "stateMutability": "view",
-              "superFunction": null,
-              "visibility": "public"
-            },
-            "children": [
-              {
-                "attributes": {
-                  "parameters": [
-                    null
-                  ]
-                },
-                "children": [],
-                "id": 718,
-                "name": "ParameterList",
-                "src": "1536:2:7"
-              },
-              {
-                "children": [
-                  {
-                    "attributes": {
-                      "constant": false,
-                      "name": "",
-                      "scope": 727,
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "type": "bytes32",
-                      "value": null,
-                      "visibility": "internal"
-                    },
-                    "children": [
-                      {
-                        "attributes": {
-                          "name": "bytes32",
-                          "type": "bytes32"
-                        },
-                        "id": 719,
-                        "name": "ElementaryTypeName",
-                        "src": "1587:7:7"
-                      }
-                    ],
-                    "id": 720,
-                    "name": "VariableDeclaration",
-                    "src": "1587:7:7"
-                  }
-                ],
-                "id": 721,
-                "name": "ParameterList",
-                "src": "1586:9:7"
-              },
-              {
-                "children": [
-                  {
-                    "attributes": {
-                      "functionReturnParameters": 721
-                    },
-                    "children": [
-                      {
-                        "attributes": {
-                          "argumentTypes": null,
-                          "arguments": [
-                            null
-                          ],
-                          "isConstant": false,
-                          "isLValue": false,
-                          "isPure": false,
-                          "isStructConstructorCall": false,
-                          "lValueRequested": false,
-                          "names": [
-                            null
-                          ],
-                          "type": "bytes32",
-                          "type_conversion": false
-                        },
-                        "children": [
-                          {
-                            "attributes": {
-                              "argumentTypes": [
-                                null
-                              ],
-                              "isConstant": false,
-                              "isLValue": false,
-                              "isPure": false,
-                              "lValueRequested": false,
-                              "member_name": "getHash",
-                              "referencedDeclaration": 934,
-                              "type": "function (string storage pointer) pure returns (bytes32)"
-                            },
-                            "children": [
-                              {
+                            {
                                 "attributes": {
-                                  "argumentTypes": null,
-                                  "overloadedDeclarations": [
-                                    null
-                                  ],
-                                  "referencedDeclaration": 680,
-                                  "type": "string storage ref",
-                                  "value": "identifier"
+                                    "parameters": [null]
                                 },
-                                "id": 722,
-                                "name": "Identifier",
-                                "src": "1619:10:7"
-                              }
-                            ],
-                            "id": 723,
-                            "name": "MemberAccess",
-                            "src": "1619:18:7"
-                          }
+                                "children": [],
+                                "id": 718,
+                                "name": "ParameterList",
+                                "src": "1536:2:7"
+                            },
+                            {
+                                "children": [
+                                    {
+                                        "attributes": {
+                                            "constant": false,
+                                            "name": "",
+                                            "scope": 727,
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "type": "bytes32",
+                                            "value": null,
+                                            "visibility": "internal"
+                                        },
+                                        "children": [
+                                            {
+                                                "attributes": {
+                                                    "name": "bytes32",
+                                                    "type": "bytes32"
+                                                },
+                                                "id": 719,
+                                                "name": "ElementaryTypeName",
+                                                "src": "1587:7:7"
+                                            }
+                                        ],
+                                        "id": 720,
+                                        "name": "VariableDeclaration",
+                                        "src": "1587:7:7"
+                                    }
+                                ],
+                                "id": 721,
+                                "name": "ParameterList",
+                                "src": "1586:9:7"
+                            },
+                            {
+                                "children": [
+                                    {
+                                        "attributes": {
+                                            "functionReturnParameters": 721
+                                        },
+                                        "children": [
+                                            {
+                                                "attributes": {
+                                                    "argumentTypes": null,
+                                                    "arguments": [null],
+                                                    "isConstant": false,
+                                                    "isLValue": false,
+                                                    "isPure": false,
+                                                    "isStructConstructorCall": false,
+                                                    "lValueRequested": false,
+                                                    "names": [null],
+                                                    "type": "bytes32",
+                                                    "type_conversion": false
+                                                },
+                                                "children": [
+                                                    {
+                                                        "attributes": {
+                                                            "argumentTypes": [
+                                                                null
+                                                            ],
+                                                            "isConstant": false,
+                                                            "isLValue": false,
+                                                            "isPure": false,
+                                                            "lValueRequested": false,
+                                                            "member_name":
+                                                                "getHash",
+                                                            "referencedDeclaration": 934,
+                                                            "type":
+                                                                "function (string storage pointer) pure returns (bytes32)"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "attributes": {
+                                                                    "argumentTypes": null,
+                                                                    "overloadedDeclarations": [
+                                                                        null
+                                                                    ],
+                                                                    "referencedDeclaration": 680,
+                                                                    "type":
+                                                                        "string storage ref",
+                                                                    "value":
+                                                                        "identifier"
+                                                                },
+                                                                "id": 722,
+                                                                "name":
+                                                                    "Identifier",
+                                                                "src":
+                                                                    "1619:10:7"
+                                                            }
+                                                        ],
+                                                        "id": 723,
+                                                        "name": "MemberAccess",
+                                                        "src": "1619:18:7"
+                                                    }
+                                                ],
+                                                "id": 724,
+                                                "name": "FunctionCall",
+                                                "src": "1619:20:7"
+                                            }
+                                        ],
+                                        "id": 725,
+                                        "name": "Return",
+                                        "src": "1612:27:7"
+                                    }
+                                ],
+                                "id": 726,
+                                "name": "Block",
+                                "src": "1601:46:7"
+                            }
                         ],
-                        "id": 724,
-                        "name": "FunctionCall",
-                        "src": "1619:20:7"
-                      }
-                    ],
-                    "id": 725,
-                    "name": "Return",
-                    "src": "1612:27:7"
-                  }
+                        "id": 727,
+                        "name": "FunctionDefinition",
+                        "src": "1510:137:7"
+                    }
                 ],
-                "id": 726,
-                "name": "Block",
-                "src": "1601:46:7"
-              }
-            ],
-            "id": 727,
-            "name": "FunctionDefinition",
-            "src": "1510:137:7"
-          }
+                "id": 728,
+                "name": "ContractDefinition",
+                "src": "192:1468:7"
+            }
         ],
-        "id": 728,
-        "name": "ContractDefinition",
-        "src": "192:1468:7"
-      }
-    ],
-    "id": 729,
-    "name": "SourceUnit",
-    "src": "0:1660:7"
-  },
-  "compiler": {
-    "name": "solc",
-    "version": "0.4.19+commit.c4cbbb05.Emscripten.clang"
-  },
-  "networks": {},
-  "schemaVersion": "1.0.1",
-  "updatedAt": "2018-02-15T07:02:26.144Z"
+        "id": 729,
+        "name": "SourceUnit",
+        "src": "0:1660:7"
+    },
+    "compiler": {
+        "name": "solc",
+        "version": "0.4.19+commit.c4cbbb05.Emscripten.clang"
+    },
+    "networks": {},
+    "schemaVersion": "1.0.1",
+    "updatedAt": "2018-02-15T07:02:26.144Z"
 }

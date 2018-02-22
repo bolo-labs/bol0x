@@ -46,7 +46,7 @@ export type DirectoryWrapperTypes =
     | IEntityDirectoryWrapper
     | IUniqueIdentifierEntityDirectoryWrapper;
 
-export class BoloEx {
+export default class BoloEx {
     private _web3: Web3;
 
     private _web3Wrapper: Web3Wrapper;

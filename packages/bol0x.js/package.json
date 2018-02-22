@@ -1,7 +1,8 @@
 {
     "name": "bol0x.js",
     "version": "0.1.0",
-    "description": "A javascript library for interacting with the bol0x protocol",
+    "description":
+        "A javascript library for interacting with the bol0x protocol",
     "keywords": [
         "bol0x.js",
         "bolo",
@@ -15,23 +16,35 @@
         "build:watch": "tsc -w",
         "prebuild": "run-s clean generate_contract_wrappers",
         "build": "run-p build:umd:prod build:commonjs && exit 0",
-        "docs": "typedoc --excludePrivate --excludeExternals --target ES5 --out ./docs",
-        "docs:json": "typedoc --excludePrivate --excludeExternals --target ES5 --json $JSON_FILE_PATH $PROJECT_DIR",
-        "generate_contract_wrappers": "cross-env abi-gen --abis 'src/artifacts/**/*.json' --template contract_templates/contract.handlebars --partials 'contract_templates/partials/**/*.handlebars' --output src/contract_wrappers/generated",
+        "docs":
+            "typedoc --excludePrivate --excludeExternals --target ES5 --out ./docs",
+        "docs:json":
+            "typedoc --excludePrivate --excludeExternals --target ES5 --json $JSON_FILE_PATH $PROJECT_DIR",
+        "generate_contract_wrappers":
+            "cross-env abi-gen --abis 'src/artifacts/**/*.json' --template contract_templates/contract.handlebars --partials 'contract_templates/partials/**/*.handlebars' --output src/contract_wrappers/generated",
         "test:circleci": "run-s test:coverage report_test_coverage",
         "test": "run-s clean test:commonjs",
+        "test:debug": "run-s clean test:commonjs:debug",
         "test:coverage": "nyc npm run test --all",
         "report_test_coverage": "nyc report --reporter=text-lcov | coveralls",
-        "update_contracts": "cross-env for i in ${npm_package_config_artifacts}; do copyfiles -u 4 ../contracts/build/contracts/$i.json ../bol0x.js/src/artifacts; done;",
+        "update_contracts":
+            "cross-env for i in ${npm_package_config_artifacts}; do copyfiles -u 4 ../contracts/build/contracts/$i.json ../bol0x.js/src/artifacts; done;",
         "clean": "shx rm -rf _bundles lib test_temp docs",
         "build:umd:prod": "cross-env NODE_ENV=production webpack",
-        "build:commonjs": "cross-env tsc && cross-env copyfiles -u 2 './src/artifacts/**/*.json' ./lib/src/artifacts",
+        "build:commonjs":
+            "cross-env tsc && cross-env copyfiles -u 2 './src/artifacts/**/*.json' ./lib/src/artifacts",
         "test:commonjs": "run-s build:commonjs run_mocha",
-        "run_mocha": "cross-env mocha lib/test/**/*_test.js --timeout 10000 --bail --exit",
-        "precommit": "../../node_modules/.bin/prettier --staged --write src/**/*"
+        "test:commonjs:debug": "run-s build:commonjs run_mocha:debug",
+        "run_mocha":
+            "cross-env mocha lib/test/**/*.test.js --timeout 10000 --bail --exit",
+        "run_mocha:debug":
+            "cross-env mocha lib/test/**/*.test.js --inspect-brk",
+        "precommit":
+            "../../node_modules/.bin/prettier --staged --write src/**/*"
     },
     "config": {
-        "artifacts": "Content ContentOwnerEntity Entity EntityDirectory IterativeContent UniqueIdentifierEntityDirectory UpdatableContent"
+        "artifacts":
+            "Content ContentOwnerEntity Entity EntityDirectory IterativeContent UniqueIdentifierEntityDirectory UpdatableContent"
     },
     "repository": {
         "type": "git",
@@ -44,6 +57,7 @@
     "devDependencies": {
         "@0xproject/abi-gen": "^0.2.0",
         "@0xproject/tslint-config": "^0.4.7",
+        "@0xproject/dev-utils": "^0.1.0",
         "@types/lodash": "^4.14.86",
         "@types/mocha": "^2.2.42",
         "@types/node": "^8.0.53",

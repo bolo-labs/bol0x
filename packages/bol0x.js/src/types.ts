@@ -4,30 +4,49 @@ import {
     BlockParam,
     BlockParamLiteral,
     ContractEventArg,
-    LogWithDecodedArgs
-    } from '@0xproject/types';
-import { ContentContractEventArgs, ContentEvents } from './contract_wrappers/generated/content';
-import { ContentOwnerEntityContractEventArgs, ContentOwnerEntityEvents } from './contract_wrappers/generated/content_owner_entity';
-import { EntityAddedContractEventArgs, EntityDirectoryEvents } from './contract_wrappers/generated/entity_directory';
-import { EntityContractEventArgs, EntityEvents } from './contract_wrappers/generated/entity';
-import { IterativeContentContractEventArgs, IterativeContentEvents } from './contract_wrappers/generated/iterative_content';
-import { UniqueIdentifierEntityDirectoryContractEventArgs, UniqueIdentifierEntityDirectoryEvents } from './contract_wrappers/generated/unique_identifier_entity_directory';
-import { UpdatableContentContractEventArgs, UpdatableContentEvents } from './contract_wrappers/generated/updatable_content';
+    LogWithDecodedArgs,
+} from '@0xproject/types';
+import {
+    ContentContractEventArgs,
+    ContentEvents,
+} from './contract_wrappers/generated/content';
+import {
+    ContentOwnerEntityContractEventArgs,
+    ContentOwnerEntityEvents,
+} from './contract_wrappers/generated/content_owner_entity';
+import {
+    EntityAddedContractEventArgs,
+    EntityDirectoryEvents,
+} from './contract_wrappers/generated/entity_directory';
+import {
+    EntityContractEventArgs,
+    EntityEvents,
+} from './contract_wrappers/generated/entity';
+import {
+    IterativeContentContractEventArgs,
+    IterativeContentEvents,
+} from './contract_wrappers/generated/iterative_content';
+import {
+    UniqueIdentifierEntityDirectoryContractEventArgs,
+    UniqueIdentifierEntityDirectoryEvents,
+} from './contract_wrappers/generated/unique_identifier_entity_directory';
+import {
+    UpdatableContentContractEventArgs,
+    UpdatableContentEvents,
+} from './contract_wrappers/generated/updatable_content';
 
 export type ArtifactContentContractName =
     | 'Content'
     | 'IterativeContent'
     | 'UpdatableContent';
 
-export type ArtifactEntityContractName =
-    | 'ContentOwnerEntity'
-    | 'Entity';
+export type ArtifactEntityContractName = 'ContentOwnerEntity' | 'Entity';
 
 export type ArtifactDirectoryContractName =
     | 'EntityDirectory'
     | 'UniqueIdentifierEntityDirectory';
 
-export type ArtifactContractName = 
+export type ArtifactContractName =
     | ArtifactContentContractName
     | ArtifactEntityContractName
     | ArtifactDirectoryContractName;
@@ -47,7 +66,10 @@ export interface DecodedLogEvent<ArgsType> {
     isRemoved: boolean;
     log: LogWithDecodedArgs<ArgsType>;
 }
-export type EventCallback<ArgsType> = (err: null | Error, log?: DecodedLogEvent<ArgsType>) => void;
+export type EventCallback<ArgsType> = (
+    err: null | Error,
+    log?: DecodedLogEvent<ArgsType>
+) => void;
 
 export interface IndexedFilterValues {
     [index: string]: ContractEventArg;
@@ -90,7 +112,7 @@ export type ContractEvents =
     | EntityEvents
     | IterativeContentEvents
     | UniqueIdentifierEntityDirectoryEvents
-    | UpdatableContentEvents
+    | UpdatableContentEvents;
 
 export type ContractEventArgs =
     | ContentContractEventArgs
@@ -99,7 +121,7 @@ export type ContractEventArgs =
     | EntityContractEventArgs
     | IterativeContentContractEventArgs
     | UniqueIdentifierEntityDirectoryContractEventArgs
-    | UpdatableContentContractEventArgs
+    | UpdatableContentContractEventArgs;
 
 /*
  * defaultBlock: The block up to which to query the blockchain state. Setting this to a historical block number
@@ -134,12 +156,12 @@ export enum EntityIdentityProvider {
     KeyBase = 3,
     Name = 4,
     TwitterHandle = 5,
-    Other = 6
+    Other = 6,
 }
 
 export interface EntityIdentity {
     identifier: string;
-    identityProvider: EntityIdentityProvider
+    identityProvider: EntityIdentityProvider;
 }
 
 export interface EntityOwnedContent {

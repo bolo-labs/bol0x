@@ -1,68 +1,73 @@
 {
-    "private": true,
-    "name": "contracts",
-    "version": "0.1.0",
-    "description": "Smart contract components of bol0x protocol",
-    "main": "index.js",
-    "directories": {
-        "test": "test"
-    },
-    "scripts": {
-        "build": "cross-env rm -rf ./lib && cross-env copyfiles ./build/**/* ./lib && tsc",
-        "compile": "cross-env rm -rf ./build && ./node_modules/.bin/truffle compile",
-        "compile:all": "yarn compile && yarn build",
-        "test": "yarn build && cross-env copyfiles ./contracts/**/* ./lib && cross-env copyfiles ./test/sol/**/* ./lib && ./node_modules/.bin/truffle test",
-        "compile:comment": "Yarn workspaces do not link binaries correctly so we need to reference them directly https://github.com/yarnpkg/yarn/issues/3846",
-        "clean": "cross-env rm -rf ./lib && cross-env rm -rf ./build",
-        "migrate": "./node_modules/.bin/truffle migrate",
-        "lint": "cross-env tslint --project . 'migrations/**/*.ts' 'test/**/*.ts' 'util/**/*.ts' 'deploy/**/*.ts'",
-        "test:circleci": "yarn test"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/zabirauf/bol0x.git"
-    },
-    "author": "Zohaib Rauf",
-    "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/zabirauf/bol0x/issues"
-    },
-    "homepage": "https://github.com/zabirauf/bol0x/packages/contracts/README.md",
-    "devDependencies": {
-        "@types/bluebird": "^3.5.3",
-        "@types/lodash": "^4.14.86",
-        "@types/node": "^8.0.53",
-        "@types/request-promise-native": "^1.0.2",
-        "@types/yargs": "^10.0.0",
-        "chai": "^4.0.1",
-        "chai-as-promised": "^7.1.0",
-        "chai-as-promised-typescript-typings": "^0.0.7",
-        "chai-bignumber": "^2.0.1",
-        "chai-typescript-typings": "^0.0.2",
-        "copyfiles": "^1.2.0",
-        "cross-env": "^5.1.3",
-        "dirty-chai": "^2.0.1",
-        "mocha": "^4.0.1",
-        "solc": "^0.4.18",
-        "truffle": "^4.0.5",
-        "tslint": "5.8.0",
-        "types-bn": "^0.0.1",
-        "types-ethereumjs-util": "0xProject/types-ethereumjs-util",
-        "typescript": "~2.6.1",
-        "web3-typescript-typings": "^0.9.7",
-        "yargs": "^10.0.3"
-    },
-    "dependencies": {
-        "@0xproject/utils": "^0.2.3",
-        "bluebird": "^3.5.0",
-        "bn.js": "^4.11.8",
-        "ethereumjs-abi": "^0.6.4",
-        "ethereumjs-util": "^5.1.1",
-        "isomorphic-fetch": "^2.2.1",
-        "lodash": "^4.17.4",
-        "request": "^2.81.0",
-        "truffle-contract": "^3.0.3",
-        "web3": "^0.20.0",
-        "web3-eth-abi": "^1.0.0-beta.24"
-    }
+  "private": true,
+  "name": "contracts",
+  "version": "0.1.0",
+  "description": "Smart contract components of bol0x protocol",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build":
+      "cross-env rm -rf ./lib && cross-env copyfiles ./build/**/* ./lib && tsc",
+    "compile":
+      "cross-env rm -rf ./build && ./node_modules/.bin/truffle compile",
+    "compile:all": "yarn compile && yarn build",
+    "test":
+      "yarn build && cross-env copyfiles ./contracts/**/* ./lib && cross-env copyfiles ./test/sol/**/* ./lib && ./node_modules/.bin/truffle test",
+    "compile:comment":
+      "Yarn workspaces do not link binaries correctly so we need to reference them directly https://github.com/yarnpkg/yarn/issues/3846",
+    "clean": "cross-env rm -rf ./lib && cross-env rm -rf ./build",
+    "migrate": "./node_modules/.bin/truffle migrate",
+    "lint":
+      "cross-env tslint --project . 'migrations/**/*.ts' 'test/**/*.ts' 'util/**/*.ts' 'deploy/**/*.ts'",
+    "test:circleci": "yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zabirauf/bol0x.git"
+  },
+  "author": "Zohaib Rauf",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/zabirauf/bol0x/issues"
+  },
+  "homepage": "https://github.com/zabirauf/bol0x/packages/contracts/README.md",
+  "devDependencies": {
+    "@types/bluebird": "^3.5.3",
+    "@types/lodash": "^4.14.86",
+    "@types/node": "^8.0.53",
+    "@types/request-promise-native": "^1.0.2",
+    "@types/yargs": "^10.0.0",
+    "chai": "^4.0.1",
+    "chai-as-promised": "^7.1.0",
+    "chai-as-promised-typescript-typings": "^0.0.7",
+    "chai-bignumber": "^2.0.1",
+    "chai-typescript-typings": "^0.0.2",
+    "copyfiles": "^1.2.0",
+    "cross-env": "^5.1.3",
+    "dirty-chai": "^2.0.1",
+    "mocha": "^4.0.1",
+    "solc": "^0.4.18",
+    "truffle": "^4.0.5",
+    "tslint": "5.8.0",
+    "types-bn": "^0.0.1",
+    "types-ethereumjs-util": "0xProject/types-ethereumjs-util",
+    "typescript": "~2.6.1",
+    "web3-typescript-typings": "^0.9.7",
+    "yargs": "^10.0.3"
+  },
+  "dependencies": {
+    "@0xproject/utils": "^0.2.3",
+    "bluebird": "^3.5.0",
+    "bn.js": "^4.11.8",
+    "ethereumjs-abi": "^0.6.4",
+    "ethereumjs-util": "^5.1.1",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.4",
+    "request": "^2.81.0",
+    "truffle-contract": "^3.0.3",
+    "web3": "^0.20.0",
+    "web3-eth-abi": "^1.0.0-beta.24"
+  }
 }

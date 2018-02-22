@@ -33,7 +33,7 @@ import {
     InternalBoloExError,
     BoloExError,
 } from '../types';
-import { constants } from '../utils/constants';
+import constants from '../utils/constants';
 import { filterUtils } from '../utils/filterUtils';
 
 const CONTRACT_NAME_TO_NOT_FOUND_ERROR: {

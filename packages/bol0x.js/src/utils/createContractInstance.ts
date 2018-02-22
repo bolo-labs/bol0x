@@ -13,7 +13,7 @@ export default async function createContractInstance(
 ): Promise<Web3.ContractInstance> {
     const contract = ethApi.contract(artifact.abi);
     const promisifiedContractCreator = await promisify<Web3.ContractInstance>(
-        ethApi.contract(artifact.abi).new
+        ethApi.contract(artifact.abi).new.bind(contract)
     );
     const txDataWithDefaults = await applyDefaultsToTxDataAsync(
         txData,

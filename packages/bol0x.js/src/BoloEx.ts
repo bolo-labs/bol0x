@@ -17,9 +17,13 @@ import {
     BoloExConfig,
     EntityIdentityProvider,
     TransactionOpts,
-    Web3Provider
-    } from './types';
-import { getContentArtifact, getDirectoryArtifact, getEntityArtifact } from './utils/getArtifactForContract';
+    Web3Provider,
+} from './types';
+import {
+    getContentArtifact,
+    getDirectoryArtifact,
+    getEntityArtifact,
+} from './utils/getArtifactForContract';
 import {
     IContentOwnerEntityWrapper,
     IContentWrapper,
@@ -27,8 +31,8 @@ import {
     IEntityWrapper,
     IIterativeContentWrapper,
     IUniqueIdentifierEntityDirectoryWrapper,
-    IUpdatableContentWrapper
-    } from './contract_wrappers/types';
+    IUpdatableContentWrapper,
+} from './contract_wrappers/types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
 export type ContentWrapperTypes =
@@ -36,19 +40,16 @@ export type ContentWrapperTypes =
     | IUpdatableContentWrapper
     | IIterativeContentWrapper;
 
-export type EntityWrapperTypes =
-    | IEntityWrapper
-    | IContentOwnerEntityWrapper;
+export type EntityWrapperTypes = IEntityWrapper | IContentOwnerEntityWrapper;
 
 export type DirectoryWrapperTypes =
     | IEntityDirectoryWrapper
     | IUniqueIdentifierEntityDirectoryWrapper;
 
 export class BoloEx {
-
     private _web3: Web3;
 
-    private _web3Wrapper : Web3Wrapper;
+    private _web3Wrapper: Web3Wrapper;
 
     private _config: BoloExConfig;
 
@@ -57,7 +58,7 @@ export class BoloEx {
 
         this._config = config;
         this._web3Wrapper = new Web3Wrapper(provider, {
-            gasPrice: config.gasPrice
+            gasPrice: config.gasPrice,
         });
         this._web3 = new Web3(provider);
     }
@@ -163,7 +164,8 @@ export class BoloEx {
             this._web3.eth,
             artifact,
             [contentAddress],
-            transactionOpts);
+            transactionOpts
+        );
 
         return this._getContentWrapper(contractType, contractInstance.address);
     }
@@ -197,7 +199,8 @@ export class BoloEx {
         assert.doesBelongToStringEnum(
             'identityProvider',
             identityProvider.toString(),
-            EntityIdentityProvider);
+            EntityIdentityProvider
+        );
 
         assert.isString('identifier', identifier);
         this._validateIdentityArgs(identityProvider, identifier);
@@ -242,7 +245,8 @@ export class BoloEx {
         assert.doesBelongToStringEnum(
             'identityProvider',
             identityProvider.toString(),
-            EntityIdentityProvider);
+            EntityIdentityProvider
+        );
 
         assert.isString('identifier', identifier);
         this._validateIdentityArgs(identityProvider, identifier);
@@ -255,28 +259,42 @@ export class BoloEx {
             transactionOpts
         );
 
-        return this._getDirectoryWrapper(contractType, contractInstance.address);
+        return this._getDirectoryWrapper(
+            contractType,
+            contractInstance.address
+        );
     }
 
     /**
      * ------------------------------------------------------------------------------
      * Private methods
      * ------------------------------------------------------------------------------
-    */
+     */
     private _getContentWrapper(
         contractType: ArtifactContentContractName,
         contractAddress: string
     ): ContentWrapperTypes {
-
         assert.isETHAddressHex('contractAddress', contractAddress);
 
         switch (contractType) {
             case 'Content':
-                return new ContentWrapper(this._web3Wrapper, this._config.networkId, contractAddress);
+                return new ContentWrapper(
+                    this._web3Wrapper,
+                    this._config.networkId,
+                    contractAddress
+                );
             case 'UpdatableContent':
-                return new UpdatableContentWrapper(this._web3Wrapper, this._config.networkId, contractAddress);
+                return new UpdatableContentWrapper(
+                    this._web3Wrapper,
+                    this._config.networkId,
+                    contractAddress
+                );
             case 'IterativeContent':
-                return new IterativeContentWrapper(this._web3Wrapper, this._config.networkId, contractAddress);
+                return new IterativeContentWrapper(
+                    this._web3Wrapper,
+                    this._config.networkId,
+                    contractAddress
+                );
             default:
                 return assert.isNever('contractType', contractType);
         }
@@ -290,9 +308,17 @@ export class BoloEx {
 
         switch (contractType) {
             case 'Entity':
-                return new EntityWrapper(this._web3Wrapper, this._config.networkId, contractAddress);
+                return new EntityWrapper(
+                    this._web3Wrapper,
+                    this._config.networkId,
+                    contractAddress
+                );
             case 'ContentOwnerEntity':
-                return new ContentOwnerEntityWrapper(this._web3Wrapper, this._config.networkId, contractAddress);
+                return new ContentOwnerEntityWrapper(
+                    this._web3Wrapper,
+                    this._config.networkId,
+                    contractAddress
+                );
             default:
                 return assert.isNever('contractType', contractType);
         }
@@ -306,17 +332,31 @@ export class BoloEx {
 
         switch (contractType) {
             case 'EntityDirectory':
-                return new EntityDirectoryWrapper(this._web3Wrapper, this._config.networkId, contractAddress);
+                return new EntityDirectoryWrapper(
+                    this._web3Wrapper,
+                    this._config.networkId,
+                    contractAddress
+                );
             case 'UniqueIdentifierEntityDirectory':
-                return new UniqueIdentifierEntityDirectoryWrapper(this._web3Wrapper, this._config.networkId, contractAddress);
+                return new UniqueIdentifierEntityDirectoryWrapper(
+                    this._web3Wrapper,
+                    this._config.networkId,
+                    contractAddress
+                );
             default:
                 return assert.isNever('contractType', contractType);
         }
     }
 
-    private _validateIdentityArgs(identityProvider: EntityIdentityProvider, identifier: string) {
+    private _validateIdentityArgs(
+        identityProvider: EntityIdentityProvider,
+        identifier: string
+    ) {
         if (identityProvider === EntityIdentityProvider.None) {
-            assert.assert(identifier === '', `The identifier should be empty string when provider is ${identityProvider.toString()}`);
+            assert.assert(
+                identifier === '',
+                `The identifier should be empty string when provider is ${identityProvider.toString()}`
+            );
         } else if (identityProvider === EntityIdentityProvider.EtherAddress) {
             assert.isETHAddressHex('identifier', identifier);
         }

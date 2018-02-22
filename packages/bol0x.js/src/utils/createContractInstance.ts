@@ -9,12 +9,20 @@ export default async function createContractInstance(
     ethApi: Web3.EthApi,
     artifact: Artifact,
     contractArgs: any[],
-    txData: Partial<TxData>): Promise<Web3.ContractInstance> {
-
+    txData: Partial<TxData>
+): Promise<Web3.ContractInstance> {
     const contract = ethApi.contract(artifact.abi);
-    const promisifiedContractCreator = await promisify<Web3.ContractInstance>(ethApi.contract(artifact.abi).new);
-    const txDataWithDefaults = await applyDefaultsToTxDataAsync(txData, estimateGasAsync.bind(void 0, ethApi, artifact));
-    const contractInstance = await promisifiedContractCreator(...contractArgs, txDataWithDefaults);
+    const promisifiedContractCreator = await promisify<Web3.ContractInstance>(
+        ethApi.contract(artifact.abi).new
+    );
+    const txDataWithDefaults = await applyDefaultsToTxDataAsync(
+        txData,
+        estimateGasAsync.bind(void 0, ethApi, artifact)
+    );
+    const contractInstance = await promisifiedContractCreator(
+        ...contractArgs,
+        txDataWithDefaults
+    );
 
     return contractInstance;
 }
@@ -22,13 +30,15 @@ export default async function createContractInstance(
 async function estimateGasAsync(
     ethApi: Web3.EthApi,
     artifact: Artifact,
-    txData: TxData = {}): Promise<number>
-{
-    const txDataWithByteCode: Web3.CallData = _.merge(txData, { data: artifact.bytecode });
+    txData: TxData = {}
+): Promise<number> {
+    const txDataWithByteCode: Web3.CallData = _.merge(txData, {
+        data: artifact.bytecode,
+    });
 
-    const gas = await promisify<number>(
-        ethApi.estimateGas.bind(ethApi)
-    )(txDataWithByteCode);
+    const gas = await promisify<number>(ethApi.estimateGas.bind(ethApi))(
+        txDataWithByteCode
+    );
 
     return gas;
 }

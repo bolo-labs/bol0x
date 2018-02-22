@@ -3,25 +3,33 @@ import Artifacts from '../Artifacts';
 import assert from '../utils/assert';
 import ContractInstanceWrapper from './ContractInstanceWrapper';
 import { BigNumber } from 'bignumber.js';
-import { EntityContract, EntityContractEventArgs, EntityEvents } from './generated/entity';
+import {
+    EntityContract,
+    EntityContractEventArgs,
+    EntityEvents,
+} from './generated/entity';
 import {
     EntityIdentity,
     EntityIdentityProvider,
     EventCallback,
     IndexedFilterValues,
     MethodOpts,
-    TransactionOpts
-    } from '../types';
+    TransactionOpts,
+} from '../types';
 import { IEntityMethods, IEntityWrapper, IOwnerWrapper } from './types';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-export class InternalEntityWrapper extends ContractInstanceWrapper implements IEntityMethods {
-
+export class InternalEntityWrapper extends ContractInstanceWrapper
+    implements IEntityMethods {
     private _entityContract: EntityContract | null = null;
 
     protected _contractAddress: string;
 
-    constructor(web3Wrapper: Web3Wrapper, networkId: number, contractAddress: string) {
+    constructor(
+        web3Wrapper: Web3Wrapper,
+        networkId: number,
+        contractAddress: string
+    ) {
         super(web3Wrapper, networkId);
 
         assert.isETHAddressHex('contractAddress', contractAddress);
@@ -38,15 +46,26 @@ export class InternalEntityWrapper extends ContractInstanceWrapper implements IE
     public async getIdentity(methodOpts?: MethodOpts): Promise<EntityIdentity> {
         const contract = await this._getContractAsync();
 
-        const defaultBlock = _.isUndefined(methodOpts) ? undefined : methodOpts.defaultBlock;
-        const getIdentifierPromise = contract.identifier.callAsync(defaultBlock);
-        const getIdentityProviderPromise = contract.identityProvider.callAsync(defaultBlock);
+        const defaultBlock = _.isUndefined(methodOpts)
+            ? undefined
+            : methodOpts.defaultBlock;
+        const getIdentifierPromise = contract.identifier.callAsync(
+            defaultBlock
+        );
+        const getIdentityProviderPromise = contract.identityProvider.callAsync(
+            defaultBlock
+        );
 
-        const [identifier, identityProvider] = await Promise.all([getIdentifierPromise, getIdentityProviderPromise]);
+        const [identifier, identityProvider] = await Promise.all([
+            getIdentifierPromise,
+            getIdentityProviderPromise,
+        ]);
 
         return {
             identifier: identifier,
-            identityProvider: this.convertNumberToIdentityProvider(identityProvider)
+            identityProvider: this.convertNumberToIdentityProvider(
+                identityProvider
+            ),
         };
     }
 
@@ -54,7 +73,9 @@ export class InternalEntityWrapper extends ContractInstanceWrapper implements IE
     public async getOwnerAsync(methodOpts?: MethodOpts): Promise<string> {
         const contract = await this._getContractAsync();
 
-        const defaultBlock = _.isUndefined(methodOpts) ? undefined : methodOpts.defaultBlock;
+        const defaultBlock = _.isUndefined(methodOpts)
+            ? undefined
+            : methodOpts.defaultBlock;
         return await contract.owner.callAsync(defaultBlock);
     }
 
@@ -67,39 +88,40 @@ export class InternalEntityWrapper extends ContractInstanceWrapper implements IE
 
         const contract = await this._getContractAsync();
 
-        await contract.transferOwnership.sendTransactionAsync(
-            newOwnerAddress,
-            {
-                gas: transactionOpts.gasLimit,
-                gasPrice: transactionOpts.gasPrice
-            }
-        );
+        await contract.transferOwnership.sendTransactionAsync(newOwnerAddress, {
+            gas: transactionOpts.gasLimit,
+            gasPrice: transactionOpts.gasPrice,
+        });
     }
 
-    protected convertNumberToIdentityProvider(num: BigNumber): EntityIdentityProvider {
+    protected convertNumberToIdentityProvider(
+        num: BigNumber
+    ): EntityIdentityProvider {
         return num.toNumber() as EntityIdentityProvider;
     }
 
     protected async _getContractAsync(): Promise<EntityContract> {
-        if(!_.isNull(this._entityContract)) {
+        if (!_.isNull(this._entityContract)) {
             return this._entityContract;
         }
 
         const web3ContractInstance = await this._instantiateContractForAddress(
             Artifacts.Entity.EntityArtifact,
-            this._contractAddress);
+            this._contractAddress
+        );
 
         const contractInstance = new EntityContract(
             web3ContractInstance,
-            this._web3Wrapper.getContractDefaults());
+            this._web3Wrapper.getContractDefaults()
+        );
 
         this._entityContract = contractInstance;
         return this._entityContract;
     }
 }
 
-export default class EntityWrapper extends InternalEntityWrapper implements IEntityWrapper {
-
+export default class EntityWrapper extends InternalEntityWrapper
+    implements IEntityWrapper {
     /** @inheritDoc */
     public subscribe<ArgsType extends EntityContractEventArgs>(
         eventName: EntityEvents,
@@ -112,6 +134,7 @@ export default class EntityWrapper extends InternalEntityWrapper implements IEnt
             eventName,
             indexFilterValues,
             Artifacts.Entity.EntityArtifact.abi,
-            callback);
+            callback
+        );
     }
 }

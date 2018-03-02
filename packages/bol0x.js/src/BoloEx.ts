@@ -59,6 +59,7 @@ export default class BoloEx {
         this._config = config;
         this._web3Wrapper = new Web3Wrapper(provider, {
             gasPrice: config.gasPrice,
+            from: config.from,
         });
         this._web3 = new Web3(provider);
     }

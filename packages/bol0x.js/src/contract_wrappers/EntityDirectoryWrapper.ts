@@ -75,6 +75,7 @@ export class InternalEntityDirectoryWrapper extends InternalEntityWrapper
         await contract.addEntity.sendTransactionAsync(contractAddress, {
             gas: transactionOpts.gasLimit,
             gasPrice: transactionOpts.gasPrice,
+            from: transactionOpts.from,
         });
     }
 
@@ -90,6 +91,7 @@ export class InternalEntityDirectoryWrapper extends InternalEntityWrapper
         await contract.removeEntity.sendTransactionAsync(contractAddress, {
             gas: transactionOpts.gasLimit,
             gasPrice: transactionOpts.gasPrice,
+            from: transactionOpts.from,
         });
     }
 

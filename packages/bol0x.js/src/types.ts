@@ -140,6 +140,7 @@ export interface MethodOpts {
 export interface TransactionOpts {
     gasPrice?: BigNumber;
     gasLimit?: number;
+    from?: string;
 }
 
 export type Web3Provider = Web3.Provider;
@@ -147,6 +148,7 @@ export type Web3Provider = Web3.Provider;
 export interface BoloExConfig {
     networkId: number;
     gasPrice?: BigNumber;
+    from?: string;
 }
 
 export enum EntityIdentityProvider {

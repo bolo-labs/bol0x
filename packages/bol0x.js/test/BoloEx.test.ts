@@ -15,17 +15,37 @@ describe('BoloEx library', () => {
         networkId: constants.TESTRPC_NETWORK_ID,
     };
 
-    it('test for true', async () => {
+    it('creates the "Content" contract', async () => {
+        // Arrange
         const boloEx = new BoloEx(web3.currentProvider, config);
+
+        // Act
         const contentContract = await boloEx.createContentWrapperAsync(
             'Content',
-            'test',
-            {
-                gasPrice: new BigNumber(9000000000),
-                gasLimit: 385126,
-            }
+            'test'
         );
 
+        // Assert
         expect(contentContract).not.to.be.null();
+    });
+
+    it('gets the contract wrapper', async () => {
+        // Arrange
+        const boloEx = new BoloEx(web3.currentProvider, config);
+        const contentAddress = 'test address';
+        const contentContract = await boloEx.createContentWrapperAsync(
+            'Content',
+            contentAddress
+        );
+
+        // Act
+        const contractWrapper = boloEx.getContentWrapper(
+            'Content',
+            contentContract.getContractAddress()
+        );
+
+        // Assert
+        const address = await contractWrapper.getContentAddressAsync();
+        expect(address).to.be.equal(contentAddress);
     });
 });

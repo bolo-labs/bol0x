@@ -54,6 +54,7 @@ export class InternalUpdatableContentWrapper extends InternalContentWrapper
         await contract.changeContent.sendTransactionAsync(newContentAddress, {
             gas: transactionOpts.gasLimit,
             gasPrice: transactionOpts.gasPrice,
+            from: transactionOpts.from,
         });
     }
 

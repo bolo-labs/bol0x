@@ -61,6 +61,7 @@ export class InternalContentWrapper extends ContractInstanceWrapper
         await contract.transferOwnership.sendTransactionAsync(newOwnerAddress, {
             gas: transactionOpts.gasLimit,
             gasPrice: transactionOpts.gasPrice,
+            from: transactionOpts.from,
         });
     }
 

@@ -83,6 +83,7 @@ export class InternalContentOwnerEntityWrapper extends InternalEntityWrapper
         await contract.addContent.sendTransactionAsync(contentAddress, {
             gas: transactionOpts.gasLimit,
             gasPrice: transactionOpts.gasPrice,
+            from: transactionOpts.from,
         });
     }
 
@@ -98,6 +99,7 @@ export class InternalContentOwnerEntityWrapper extends InternalEntityWrapper
         await contract.deleteContent.sendTransactionAsync(contentAddress, {
             gas: transactionOpts.gasLimit,
             gasPrice: transactionOpts.gasPrice,
+            from: transactionOpts.from,
         });
     }
 

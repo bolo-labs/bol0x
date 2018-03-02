@@ -4,7 +4,7 @@
     "workspaces": ["packages/*"],
     "scripts": {
         "testrpc":
-            "testrpc -p 8545 --networkId 50 -m \"${npm_package_config_mnemonic}\"",
+            "ganache-cli -p 8545 --networkId 50 -e 1000 -m 'kidney recipe motion annual total whale just exhaust evoke badge curtain lunch'",
         "lerna:run": "lerna run",
         "lerna:rebuild": "lerna run clean; lerna run build",
         "lerna:publish":
@@ -12,9 +12,10 @@
     },
     "config": {
         "mnemonic":
-            "concert load couple harbor equip island argue ramp clarify fence smart topic"
+            "kidney recipe motion annual total whale just exhaust evoke badge curtain lunch"
     },
     "devDependencies": {
-        "lerna": "^2.8.0"
+        "lerna": "^2.8.0",
+        "ganache-cli": "~6.0.3"
     }
 }

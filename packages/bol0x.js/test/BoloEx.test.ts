@@ -4,6 +4,7 @@ import chaiSetup from '../src/utils/chaiSetup';
 import { BigNumber } from '@0xproject/utils';
 import { web3Factory } from '@0xproject/dev-utils';
 import constants from '../src/utils/constants';
+import { TransactionOpts } from '../src/types';
 
 chaiSetup.configure();
 const expect = chai.expect;
@@ -18,7 +19,11 @@ describe('BoloEx library', () => {
         const boloEx = new BoloEx(web3.currentProvider, config);
         const contentContract = await boloEx.createContentWrapperAsync(
             'Content',
-            'test'
+            'test',
+            {
+                gasPrice: new BigNumber(9000000000),
+                gasLimit: 385126,
+            }
         );
 
         expect(contentContract).not.to.be.null();

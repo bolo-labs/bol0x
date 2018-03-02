@@ -45,10 +45,12 @@ function promisifyContractCreator<A extends Web3.ContractInstance>(
             contractCreator(...callArgs, (err: any, result: A) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
 
                 if (result.address) {
                     resolve(result);
+                    return;
                 }
             });
         });

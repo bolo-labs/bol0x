@@ -26,9 +26,14 @@ export default async function createContractInstance(
     };
     const txDataWithDefaults = await applyDefaultsToTxDataAsync(
         txData,
-        { ...web3Wrapper.getContractDefaults(), from: accounts[0] },
+        {
+            ...web3Wrapper.getContractDefaults(),
+            from: accounts[0],
+            data: artifact.bytecode,
+        } as any,
         estimateGasAsync.bind(void 0, ethApi, artifact)
     );
+
     const contractInstance = await promisifiedContractCreator(
         ...contractArgs,
         txDataWithDefaults

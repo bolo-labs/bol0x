@@ -162,6 +162,7 @@ export default class BoloEx {
         const artifact: Artifact = getContentArtifact(contractType);
         const contractInstance = await createContractInstance(
             this._web3.eth,
+            this._web3Wrapper,
             artifact,
             [contentAddress],
             transactionOpts
@@ -208,6 +209,7 @@ export default class BoloEx {
         const artifact: Artifact = getEntityArtifact(contractType);
         const contractInstance = await createContractInstance(
             this._web3.eth,
+            this._web3Wrapper,
             artifact,
             [identityProvider, identifier],
             transactionOpts
@@ -254,6 +256,7 @@ export default class BoloEx {
         const artifact: Artifact = getDirectoryArtifact(contractType);
         const contractInstance = await createContractInstance(
             this._web3.eth,
+            this._web3Wrapper,
             artifact,
             [identityProvider, identifier],
             transactionOpts

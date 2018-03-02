@@ -3,20 +3,30 @@ import * as Web3 from 'web3';
 import applyDefaultsToTxDataAsync from './applyDefaultsToTxDataAsync';
 import { Artifact, TransactionOpts } from '../types';
 import { promisify } from '@0xproject/utils';
+import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import { TxData } from '@0xproject/types';
 
 export default async function createContractInstance(
     ethApi: Web3.EthApi,
+    web3Wrapper: Web3Wrapper,
     artifact: Artifact,
     contractArgs: any[],
-    txData: Partial<TxData>
+    transactionOpts: TransactionOpts = {}
 ): Promise<Web3.ContractInstance> {
     const contract = ethApi.contract(artifact.abi);
-    const promisifiedContractCreator = await promisify<Web3.ContractInstance>(
-        ethApi.contract(artifact.abi).new.bind(contract)
-    );
+    const promisifiedContractCreator = promisifyContractCreator<
+        Web3.ContractInstance
+    >(ethApi.contract(artifact.abi).new.bind(contract));
+
+    const accounts = await promisify<string[]>(ethApi.getAccounts)();
+
+    const txData: TxData = {
+        gas: transactionOpts.gasLimit,
+        gasPrice: transactionOpts.gasPrice,
+    };
     const txDataWithDefaults = await applyDefaultsToTxDataAsync(
         txData,
+        { ...web3Wrapper.getContractDefaults(), from: accounts[0] },
         estimateGasAsync.bind(void 0, ethApi, artifact)
     );
     const contractInstance = await promisifiedContractCreator(
@@ -25,6 +35,24 @@ export default async function createContractInstance(
     );
 
     return contractInstance;
+}
+
+function promisifyContractCreator<A extends Web3.ContractInstance>(
+    contractCreator: (...callArgs: any[]) => A
+): (...callArgs: any[]) => Promise<A> {
+    return (...callArgs: any[]) => {
+        return new Promise<A>((resolve, reject) => {
+            contractCreator(...callArgs, (err: any, result: A) => {
+                if (err) {
+                    reject(err);
+                }
+
+                if (result.address) {
+                    resolve(result);
+                }
+            });
+        });
+    };
 }
 
 async function estimateGasAsync(

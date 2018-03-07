@@ -10,6 +10,16 @@ contract IterativeContent is UpdatableContent {
 
     string[] public iterations;
 
+    function IterativeContent(
+        string _contentAddress)
+        UpdatableContent(_contentAddress)
+        public
+    {
+        // Add the first content as iteration as well
+        iterations.push(_contentAddress);
+    }
+
+
     /**
      * @dev It changes the offchain content address
      * @param _contentAddress A non-empty string that represents offchain content address

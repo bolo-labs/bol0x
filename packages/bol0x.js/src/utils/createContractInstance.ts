@@ -20,6 +20,12 @@ export default async function createContractInstance(
 
     const accounts = await promisify<string[]>(ethApi.getAccounts)();
 
+    const gasEst = await promisify<number>(ethApi.estimateGas.bind(ethApi))({
+        data: artifact.bytecode,
+        from: accounts[0],
+    });
+    console.log(`TBD:=================> ${artifact.contractName}: ${gasEst}`);
+
     const txData: TxData = {
         gas: transactionOpts.gasLimit,
         gasPrice: transactionOpts.gasPrice,
@@ -28,7 +34,7 @@ export default async function createContractInstance(
         txData,
         {
             ...web3Wrapper.getContractDefaults(),
-            from: accounts[0],
+            from: transactionOpts.from || accounts[0],
             data: artifact.bytecode,
         } as any,
         estimateGasAsync.bind(void 0, ethApi, artifact)

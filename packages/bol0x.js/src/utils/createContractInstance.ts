@@ -24,7 +24,6 @@ export default async function createContractInstance(
         data: artifact.bytecode,
         from: accounts[0],
     });
-    console.log(`TBD:=================> ${artifact.contractName}: ${gasEst}`);
 
     const txData: TxData = {
         gas: transactionOpts.gasLimit,

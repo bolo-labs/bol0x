@@ -1,0 +1,53 @@
+{
+    "name": "@bol0x/website",
+    "version": "0.1.0",
+    "description": "Bol0x website about the protocol",
+    "main": "index.js",
+    "scripts": {
+        "build": "cross-env webpack",
+        "dev": "cross-env webpack-dev-server --progress --colors",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "cross-env webpack --watch"
+    },
+    "keywords": [],
+    "author": "Zohaib Rauf",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/material-ui": "^0.21.1",
+        "@types/node": "^9.3.0",
+        "@types/react": "^16.0.40",
+        "@types/react-dom": "^16.0.4",
+        "@types/react-router": "^4.0.22",
+        "@types/react-router-dom": "^4.2.4",
+        "awesome-typescript-loader": "^3.2.3",
+        "cross-env": "^5.0.5",
+        "css-loader": "^0.28.7",
+        "extract-text-webpack-plugin": "^3.0.0",
+        "file-loader": "^0.11.2",
+        "install": "^0.8.8",
+        "json-loader": "^0.5.7",
+        "node-sass": "^4.5.3",
+        "npm": "^4.4.4",
+        "sass-loader": "^6.0.6",
+        "source-map-loader": "^0.2.1",
+        "style-loader": "^0.18.2",
+        "ts-loader": "^2.3.7",
+        "tslint": "^5.7.0",
+        "tslint-eslint-rules": "^4.1.1",
+        "tslint-loader": "^3.5.3",
+        "tslint-microsoft-contrib": "^5.0.1",
+        "typescript": "^2.7.2",
+        "uglifyjs-webpack-plugin": "^1.1.6",
+        "url-loader": "^0.5.9",
+        "webpack": "^3.6.0",
+        "webpack-dev-server": "^2.8.2",
+        "whatwg-fetch": "^2.0.3"
+    },
+    "dependencies": {
+        "material-ui": "^0.20.0",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-router": "^4.2.0",
+        "react-router-dom": "^4.2.2"
+    }
+}

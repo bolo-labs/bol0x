@@ -1,5 +1,5 @@
 {
-    "name": "bol0x.js",
+    "name": "@bol0x/bol0x.js",
     "version": "0.1.0",
     "description":
         "A javascript library for interacting with the bol0x protocol",

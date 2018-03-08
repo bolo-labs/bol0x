@@ -1,6 +1,6 @@
 {
     "private": true,
-    "name": "contracts",
+    "name": "@bol0x/contracts",
     "version": "0.1.0",
     "description": "Smart contract components of bol0x protocol",
     "main": "index.js",

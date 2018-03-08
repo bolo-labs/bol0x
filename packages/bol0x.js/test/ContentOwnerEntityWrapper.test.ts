@@ -11,7 +11,7 @@ chaiSetup.configure();
 const expect = chai.expect;
 
 const TRANSACTION_DEFAULTS = {
-    gasLimit: 2_000_000,
+    gasLimit: constants.MAX_CONTENT_OWNER_ENTITY_CREATION_GAS,
 };
 
 describe('ContentOwnerEntityWrapper', () => {

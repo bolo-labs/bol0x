@@ -8,6 +8,14 @@ import '../utils/StringUtils.sol';
 contract UniqueIdentifierEntityDirectory is EntityDirectory {
 
     mapping(bytes32 => uint256) public uniqueIdentifier;
+    
+    function UniqueIdentifierEntityDirectory(
+        IdentityProvider _identityProvider,
+        string _identifier)
+        EntityDirectory(_identityProvider, _identifier)
+        public
+    {
+    }
 
     /**
      * @dev Add an entity to the directory based on its identifier.
@@ -22,6 +30,9 @@ contract UniqueIdentifierEntityDirectory is EntityDirectory {
         Entity entity = Entity(_entity);
         bytes32 identifier = entity.getIdentifierHash();
         require(identifier != StringUtils.getEmptyStringHash());
+
+        // Check if the identifier was not already added
+        require(uniqueIdentifier[identifier] == 0);
 
         super.addEntity(_entity);
         uniqueIdentifier[identifier] = entities.length;

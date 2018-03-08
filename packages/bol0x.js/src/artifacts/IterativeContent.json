@@ -194,7 +194,7 @@
           "contractDependencies": [
             84,
             192,
-            799
+            819
           ],
           "contractKind": "contract",
           "documentation": "@title Iterative Content\r\n@dev The IterativeContent along with allowing you to change offchain content address also keeps track of older content addresses\r",
@@ -203,7 +203,7 @@
             137,
             192,
             84,
-            799
+            819
           ],
           "name": "IterativeContent",
           "scope": 138
@@ -520,7 +520,7 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 773,
+                      "referencedDeclaration": 793,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
@@ -575,7 +575,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 994,
+                                  "referencedDeclaration": 1014,
                                   "type": "contract super IterativeContent",
                                   "value": "super"
                                 },
@@ -828,5 +828,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-03-07T07:06:45.056Z"
+  "updatedAt": "2018-03-08T06:27:29.792Z"
 }

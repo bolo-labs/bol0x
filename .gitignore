@@ -46,3 +46,6 @@ generated_docs/
 
 # generated binaries
 bin/
+
+# Mac file
+.DS_Store

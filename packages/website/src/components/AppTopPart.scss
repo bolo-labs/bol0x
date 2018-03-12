@@ -1,0 +1,22 @@
+.container {
+    width: 100%;
+
+    .appBar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .title {
+            flex: 4;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+
+        .menuContainer {
+            float: right;
+            flex: 4;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

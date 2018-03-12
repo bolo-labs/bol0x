@@ -9,7 +9,7 @@
         "devserver": "cross-env webpack-dev-server --progress --colors",
         "test": "echo \"Error: no test specified\" && exit 1",
         "watch": "cross-env webpack --watch",
-        "update_docs": "copyfiles -u 3 ../bol0x.js/docs/* ../bol0x.js/docs/**/* ./static/docs"
+        "update_docs": "copyfiles -u 3 ../bol0x.js/docs/* ../bol0x.js/docs/**/* ../bol0x.js/docs/assets/**/* ./static/docs"
     },
     "keywords": [],
     "author": "Zohaib Rauf",

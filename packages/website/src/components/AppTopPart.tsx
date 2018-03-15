@@ -12,21 +12,23 @@ export interface AppTopPartState {
     developerMenuAnchorElem: HTMLElement;
 }
 
-class AppTopPart extends React.Component<RouteComponentProps<void>, AppTopPartState> {
-
+class AppTopPart extends React.Component<
+    RouteComponentProps<void>,
+    AppTopPartState
+> {
     constructor(props: RouteComponentProps<void>) {
         super(props);
 
         this.state = {
-            developerMenuAnchorElem: null
+            developerMenuAnchorElem: null,
         };
     }
 
     render() {
         return (
             <div className={styles.container}>
-                <AppBar position="static" className={styles.appBar}>
-                    <Link to='/' className={styles.title}>
+                <AppBar position="fixed" className={styles.appBar}>
+                    <Link to="/" className={styles.title}>
                         <Typography variant="title" color="inherit">
                             bol0x
                         </Typography>
@@ -44,16 +46,20 @@ class AppTopPart extends React.Component<RouteComponentProps<void>, AppTopPartSt
         return (
             <Button
                 color="inherit"
-                aria-owns={this.state.developerMenuAnchorElem ? 'simple-menu' : null}
+                aria-owns={
+                    this.state.developerMenuAnchorElem ? 'simple-menu' : null
+                }
                 aria-haspopup="true"
-                onMouseOver={this.openDeveloperMenu}>
+                onMouseOver={this.openDeveloperMenu}
+            >
                 Developer
                 <Menu
                     id="simple-menu"
                     anchorEl={this.state.developerMenuAnchorElem}
                     open={!!this.state.developerMenuAnchorElem}
-                    onClose={this.closeDeveloperMenu}>
-                    <Link to='/docs'>
+                    onClose={this.closeDeveloperMenu}
+                >
+                    <Link to="/docs">
                         <MenuItem>bol0x.js</MenuItem>
                     </Link>
                     <MenuItem onClick={this.navigate.toGithub}>Github</MenuItem>
@@ -63,17 +69,20 @@ class AppTopPart extends React.Component<RouteComponentProps<void>, AppTopPartSt
     }
 
     private openDeveloperMenu = (event: React.MouseEvent<HTMLElement>) => {
-        this.setState({ ...this.state, developerMenuAnchorElem: event.currentTarget });
-    }
+        this.setState({
+            ...this.state,
+            developerMenuAnchorElem: event.currentTarget,
+        });
+    };
 
     private closeDeveloperMenu = (event: React.MouseEvent<HTMLElement>) => {
         this.setState({ ...this.state, developerMenuAnchorElem: null });
-    }
+    };
 
     private navigate = {
         toGithub: () => {
             window.open('https://github.com/zabirauf/bol0x', '_blank');
-        }
+        },
     };
 }
 

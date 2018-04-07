@@ -38,10 +38,10 @@ If you are creating a video publishing platform on bol0x it will include the fol
 
 ![Example dapp using bol0x](https://raw.githubusercontent.com/bol0x/bol0x/master/packages/website/assets/images/example_bol0x.jpg)
 
-1- Create an Entity for the user (if not already created). This will track all the content published under one user on the Ethereum blockchain.
-2- Register the user entity with the directory. This will make all the users discoverable.
-3- Your DApp publishes the video on IPFS.
-4- Publish the metadata about the content on Ethereum.
+1. Create an Entity for the user (if not already created). This will track all the content published under one user on the Ethereum blockchain.
+2. Register the user entity with the directory. This will make all the users discoverable.
+3. Your DApp publishes the video on IPFS.
+4. Publish the metadata about the content on Ethereum.
 
 ## Where we are
 We have just started building the protocol with some Ethereum contracts and Javascript APIs to use those contracts. We are nowhere near to being production ready so please don't use it on Ethereum main net. 

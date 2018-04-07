@@ -28,13 +28,16 @@ One reason to have an open protocol is that public content of user should not be
 
 ## What
 We are starting with IPFS as decentralized storage and Ethereum as the decentralized compute, but out aim is to use other technologies and blockchains in future.
+
 ![What is bol0x](https://raw.githubusercontent.com/bol0x/bol0x/master/packages/website/assets/images/what_bol0x.jpg)
+
 We are building set of contracts for Ethereum to make discovery and maintenance of content easier. The contracts will also come with Javascript APIs that can be used by developers in DApps to use the bol0x protocol. We will also be building some common content models and APIs to publish on IPFS.
 
 ### Example
 If you are creating a video publishing platform on bol0x it will include the following steps
 
-![](https://raw.githubusercontent.com/bol0x/bol0x/master/packages/website/assets/images/example_bol0x.jpg)
+![Example dapp using bol0x](https://raw.githubusercontent.com/bol0x/bol0x/master/packages/website/assets/images/example_bol0x.jpg)
+
 1- Create an Entity for the user (if not already created). This will track all the content published under one user on the Ethereum blockchain.
 2- Register the user entity with the directory. This will make all the users discoverable.
 3- Your DApp publishes the video on IPFS.

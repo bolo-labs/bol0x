@@ -44,14 +44,14 @@ If you are creating a video publishing platform on bol0x it will include the fol
 4- Publish the metadata about the content on Ethereum.
 
 ## Where we are
-We have just started building the protocol with some Ethereum contracts and Javascript APIs to use those contracts. We are no where near to being production ready so please don't use it on Ethereum main net. 
+We have just started building the protocol with some Ethereum contracts and Javascript APIs to use those contracts. We are nowhere near to being production ready so please don't use it on Ethereum main net. 
 As more people start contributing we are planning to build APIs and common models to publish various content on IPFS. We will also be building DApps using the bol0x.
 
 ## How can you help
 We need all the help we can get. If you are onboard the vision of building the bol0x protocol you can contribute various ways
 
 * If you are a developer interested in building the protocol start contributing.
-* If you are interested in building DApps, lets start the conversation of what you are building and how can the protocol evolve to support your application. Feel free to create issues discussing your scenarios.
+* If you are interested in building DApps, let's start the conversation of what you are building and how can the protocol evolve to support your application. Feel free to create issues discussing your scenarios.
 * If you are a designer we need help with a website.
 * If you are content writer you can help with writing guides and tutorials to use the protocol.
 * If you are not any of it but still want to contribute, jump onto [gitter](https://gitter.im/bol0x/Lobby)

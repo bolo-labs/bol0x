@@ -46,3 +46,5 @@ generated_docs/
 
 # generated binaries
 bin/
+
+.DS_Store

@@ -27,7 +27,7 @@ We believe there should be an open protocol to handle scenarios surrounding cont
 One reason to have an open protocol is that public content of user should not be owned by one application but should be usable by other applications. This enables a market of applications for users to pick from without worrying about repopulating content on the new web application. If you use one DApp for publishing blogs but there is another DApp in the market which has better features you should be able to move to that DApp immediately as it would be built on the same open protocol.
 
 ## What
-We are starting with IPFS as decentralized storage and Ethereum as the decentralized compute, but out aim is to use other technologies and blockchains in future.
+We are starting with IPFS as decentralized storage and Ethereum as the decentralized compute, but our aim is to make it agnostic to the underlying technologies as we move forward and see what the community needs.
 
 ![What is bol0x](https://raw.githubusercontent.com/bol0x/bol0x/master/packages/website/assets/images/what_bol0x.jpg)
 
@@ -54,7 +54,7 @@ We need all the help we can get. If you are onboard the vision of building the b
 * If you are interested in building DApps, let's start the conversation of what you are building and how can the protocol evolve to support your application. Feel free to create issues discussing your scenarios.
 * If you are a designer we need help with a website.
 * If you are content writer you can help with writing guides and tutorials to use the protocol.
-* If you are not any of it but still want to contribute, jump onto [gitter](https://gitter.im/bol0x/Lobby)
+* If you are not any of it but still want to contribute, jump onto [gitter](https://gitter.im/bol0x/Lobby).
 
 ## Contributing
 
